@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="nodejs,web,作业," />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web编程大作业(六)桌面直播+人脸识别+总结(ffmpeg,jsmpeg,jquery.facedetection)">
+<meta property="og:url" content="http://example.com/2020/06/30/Web%E7%BC%96%E7%A8%8B%E5%A4%A7%E4%BD%9C%E4%B8%9A(%E5%85%AD)%E6%A1%8C%E9%9D%A2%E7%9B%B4%E6%92%AD+%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB+%E6%80%BB%E7%BB%93(ffmpeg,jsmpeg,jquery.facedetection)/index.html">
+<meta property="og:site_name" content="MorphLing&#39;s Blog">
+<meta property="og:locale">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200630184833718.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200630184841231.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200630184902574.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200630184907706.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2020-06-30T11:15:58.000Z">
+<meta property="article:modified_time" content="2021-01-29T13:30:29.119Z">
+<meta property="article:author" content="Yunfan Li">
+<meta property="article:tag" content="nodejs">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="作业">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200630184833718.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2020/06/30/Web编程大作业(六)桌面直播+人脸识别+总结(ffmpeg,jsmpeg,jquery.facedetection)/"/>
+
+
+
+
+
+  <title>Web编程大作业(六)桌面直播+人脸识别+总结(ffmpeg,jsmpeg,jquery.facedetection) | MorphLing's Blog</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MorphLing's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">GLHF!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/06/30/Web%E7%BC%96%E7%A8%8B%E5%A4%A7%E4%BD%9C%E4%B8%9A(%E5%85%AD)%E6%A1%8C%E9%9D%A2%E7%9B%B4%E6%92%AD+%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB+%E6%80%BB%E7%BB%93(ffmpeg,jsmpeg,jquery.facedetection)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MorphLing's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web编程大作业(六)桌面直播+人脸识别+总结(ffmpeg,jsmpeg,jquery.facedetection)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-30T19:15:58+08:00">
+                2020-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><br><br><a id="more"></a></p>
+<h2 id="桌面直播"><a href="#桌面直播" class="headerlink" title="桌面直播"></a>桌面直播</h2><p>只能算是一个基于ffmpeg和jsmpeg的应用。</p>
+<p>首先需要安装的内容有：ffmpeg、jsmpeg、ws模块</p>
+<p>安装过程reference:<a target="_blank" rel="noopener" href="https://my.oschina.net/chengpengvb/blog/1832469">https://my.oschina.net/chengpengvb/blog/1832469</a> （ffmpeg建议在官网装最新的可执行版本）</p>
+<p>直接把下载下来的jsmpeg的代码引入网站后端<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> STREAM_SECRET = <span class="string">&#x27;supersecret&#x27;</span>,</span><br><span class="line">	STREAM_PORT = <span class="number">8081</span>,</span><br><span class="line">	WEBSOCKET_PORT = <span class="number">8082</span>,</span><br><span class="line">	RECORD_STREAM = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Websocket Server</span></span><br><span class="line"><span class="keyword">var</span> socketServer = <span class="keyword">new</span> WebSocket.Server(&#123;<span class="attr">port</span>: WEBSOCKET_PORT, <span class="attr">perMessageDeflate</span>: <span class="literal">false</span>&#125;);</span><br><span class="line">socketServer.connectionCount = <span class="number">0</span>;</span><br><span class="line">socketServer.on(<span class="string">&#x27;connection&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">socket, upgradeReq</span>) </span>&#123;</span><br><span class="line">	socketServer.connectionCount++;</span><br><span class="line">	<span class="built_in">console</span>.log(</span><br><span class="line">		<span class="string">&#x27;New WebSocket Connection: &#x27;</span>,</span><br><span class="line">		(upgradeReq || socket.upgradeReq).socket.remoteAddress,</span><br><span class="line">		(upgradeReq || socket.upgradeReq).headers[<span class="string">&#x27;user-agent&#x27;</span>],</span><br><span class="line">		<span class="string">&#x27;(&#x27;</span>+socketServer.connectionCount+<span class="string">&#x27; total)&#x27;</span></span><br><span class="line">	);</span><br><span class="line">	socket.on(<span class="string">&#x27;close&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">code, message</span>)</span>&#123;</span><br><span class="line">		socketServer.connectionCount--;</span><br><span class="line">		<span class="built_in">console</span>.log(</span><br><span class="line">			<span class="string">&#x27;Disconnected WebSocket (&#x27;</span>+socketServer.connectionCount+<span class="string">&#x27; total)&#x27;</span></span><br><span class="line">		);</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br><span class="line">socketServer.broadcast = <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">	socketServer.clients.forEach(<span class="function"><span class="keyword">function</span> <span class="title">each</span>(<span class="params">client</span>) </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (client.readyState === WebSocket.OPEN) &#123;</span><br><span class="line">			client.send(data);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// HTTP Server to accept incomming MPEG-TS Stream from ffmpeg</span></span><br><span class="line"><span class="keyword">var</span> streamServer = http.createServer( <span class="function"><span class="keyword">function</span>(<span class="params">request, response</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> params = request.url.substr(<span class="number">1</span>).split(<span class="string">&#x27;/&#x27;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (params[<span class="number">0</span>] !== STREAM_SECRET) &#123;</span><br><span class="line">		<span class="built_in">console</span>.log(</span><br><span class="line">			<span class="string">&#x27;Failed Stream Connection: &#x27;</span>+ request.socket.remoteAddress + <span class="string">&#x27;:&#x27;</span> +</span><br><span class="line">			request.socket.remotePort + <span class="string">&#x27; - wrong secret.&#x27;</span></span><br><span class="line">		);</span><br><span class="line">		response.end();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	response.connection.setTimeout(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">console</span>.log(</span><br><span class="line">		<span class="string">&#x27;Stream Connected: &#x27;</span> +</span><br><span class="line">		request.socket.remoteAddress + <span class="string">&#x27;:&#x27;</span> +</span><br><span class="line">		request.socket.remotePort</span><br><span class="line">	);</span><br><span class="line">	request.on(<span class="string">&#x27;data&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">		socketServer.broadcast(data);</span><br><span class="line">		<span class="keyword">if</span> (request.socket.recording) &#123;</span><br><span class="line">			request.socket.recording.write(data);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line">	request.on(<span class="string">&#x27;end&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&#x27;close&#x27;</span>);</span><br><span class="line">		<span class="keyword">if</span> (request.socket.recording) &#123;</span><br><span class="line">			request.socket.recording.close();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Record the stream to a local file?</span></span><br><span class="line">	<span class="keyword">if</span> (RECORD_STREAM) &#123;</span><br><span class="line">		<span class="keyword">var</span> path = <span class="string">&#x27;recordings/&#x27;</span> + <span class="built_in">Date</span>.now() + <span class="string">&#x27;.ts&#x27;</span>;</span><br><span class="line">		request.socket.recording = fs.createWriteStream(path);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// Keep the socket open for streaming</span></span><br><span class="line">streamServer.headersTimeout = <span class="number">0</span>;</span><br><span class="line">streamServer.listen(STREAM_PORT);</span><br></pre></td></tr></table></figure><br>这段代码大概就是创建了用于接收视频流的服务器和推送视频流的websocket服务器。</p>
+<p>把一些需要输入的参数直接给出定值。也就是把接受视频流端口设为8081，把ws服务器端口设为8082，密码设为supersecret。</p>
+<p>然后教师端先要安装ffmpeg，通过ffmpeg把桌面视频流推送至8081<br>推流的ffmpeg命令参数如下：(参数含义基本可以从录制信息里面反推出来，比如分辨率和码率之类的，虽然很多还是不太理解<del>但是能用就行</del>)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -f gdigrab -framerate 30 -i desktop -f mpegts -codec:v mpeg1video -s 2560x1440 -b:v 150k -r 30 -bf 0 -ac 1 -b:a 128k http:&#x2F;&#x2F;127.0.0.1:8081&#x2F;supersecret</span><br></pre></td></tr></table></figure><br>（需要注意将最后的ip地址改为网站所在的ip地址）</p>
+<p>学生端通过8082端口获取视频流。（在一个html页面中实现）<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>JSMpeg Stream Client<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span></span><br><span class="line">		html, body &#123;</span><br><span class="line"><span class="css">			<span class="selector-tag">background-color</span>: <span class="selector-id">#111</span>;</span></span><br><span class="line">			text-align: center;</span><br><span class="line">		&#125;</span><br><span class="line"><span class="css">		<span class="selector-class">.return_index</span>&#123;</span></span><br><span class="line"><span class="css">			<span class="selector-tag">color</span><span class="selector-pseudo">:white</span>;</span></span><br><span class="line">		&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">	</span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">&quot;video-canvas&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/jsmpeg-master/jsmpeg.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span></span><br><span class="line"><span class="javascript">		<span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;video-canvas&#x27;</span>);</span></span><br><span class="line"><span class="javascript">		<span class="keyword">var</span> url = <span class="string">&#x27;ws://&#x27;</span>+<span class="built_in">window</span>.location.hostname+<span class="string">&#x27;:8082/&#x27;</span>;</span></span><br><span class="line"><span class="javascript">		<span class="keyword">var</span> player = <span class="keyword">new</span> JSMpeg.Player(url, &#123;<span class="attr">canvas</span>: canvas&#125;);</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&#x27;return_index&#x27;</span> <span class="attr">href</span>=<span class="string">&#x27;/&#x27;</span>&gt;</span>返回首页<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure><br>然后把这个页面作为“直播间”做到自己的网站里就算是实现了。<br><img src="https://img-blog.csdnimg.cn/20200630184833718.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200630184841231.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="人脸识别"><a href="#人脸识别" class="headerlink" title="人脸识别"></a>人脸识别</h2><p>网上绝大多数人脸识别功能的教程都是用OpenCV+python来实现的。找了半天终于发现一个比较简单而且js能用的插件：jquery.facedetection。不过功能确实也相对比较简单。</p>
+<p>通过npm install jquery.facedetection就能完成安装。通过script标签引入。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://code.jquery.com/jquery-3.2.1.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;node_modules/jquery.facedetection/src/ccv.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;node_modules/jquery.facedetection/src/jquery.facedetection.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;node_modules/jquery.facedetection/src/cascade.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span></span><br><span class="line">        html,body&#123;</span><br><span class="line">            margin: 0;</span><br><span class="line"><span class="css">            <span class="selector-tag">padding</span><span class="selector-pseudo">:0</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="css">        <span class="selector-class">.drawDiv</span>&#123;</span></span><br><span class="line">            position: absolute;</span><br><span class="line">            border: 3px solid yellow;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="css">        <span class="selector-id">#image</span>&#123;</span></span><br><span class="line">            float: left;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="css">        <span class="selector-class">.imgDiv</span>&#123;</span></span><br><span class="line">            float: left;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">&quot;image&quot;</span> <span class="attr">src</span>=<span class="string">&quot;&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;imgDiv&quot;</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;draw&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;开始识别&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;identifyFace()&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span><span class="attr">onchange</span>=<span class="string">&quot;selectImage(this);&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&#x27;return_index&#x27;</span> <span class="attr">href</span>=<span class="string">&#x27;/&#x27;</span>&gt;</span>返回首页<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://code.jquery.com/jquery-3.2.1.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;jquery.facedetection/src/ccv.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;jquery.facedetection/src/jquery.facedetection.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;jquery.facedetection/src/cascade.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//识别框样式</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> str=<span class="string">&#x27;&#x27;</span>;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//上传图片，使用文件流</span></span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> <span class="title">selectImage</span>(<span class="params">file</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span>(!file.files || !file.files[<span class="number">0</span>])&#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span>;</span></span><br><span class="line">            &#125;</span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</span></span><br><span class="line"><span class="javascript">            reader.onload = <span class="function"><span class="keyword">function</span>(<span class="params">evt</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(evt);</span></span><br><span class="line"><span class="javascript">                $(<span class="string">&#x27;#image&#x27;</span>).attr(<span class="string">&#x27;src&#x27;</span>, evt.target.result);</span></span><br><span class="line">            &#125;</span><br><span class="line"><span class="javascript">            str = <span class="string">&#x27;&#x27;</span>;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">document</span>.getElementsByClassName(<span class="string">&#x27;draw&#x27;</span>)[<span class="number">0</span>].innerHTML = <span class="string">&#x27;&#x27;</span>;</span></span><br><span class="line">            reader.readAsDataURL(file.files[0]);</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line"><span class="javascript">        <span class="comment">//开始识别</span></span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> <span class="title">identifyFace</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            str=<span class="string">&#x27;&#x27;</span>;</span></span><br><span class="line"><span class="javascript">            $(<span class="string">&#x27;#image&#x27;</span>).faceDetection(</span></span><br><span class="line"><span class="javascript">                <span class="function"><span class="keyword">function</span> (<span class="params">faces</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> faces) &#123;</span></span><br><span class="line"><span class="javascript">                        <span class="comment">//识别结果循环传入方法drawFace</span></span></span><br><span class="line"><span class="javascript">                        <span class="built_in">console</span>.log(faces[i]);</span></span><br><span class="line">                        drawFace(faces[i].x, faces[i].y, faces[i].width, faces[i].height,faces[i].confidence);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            );</span><br><span class="line">        &#125;</span><br><span class="line"><span class="javascript">        <span class="comment">//图片识别区的x,y轴以及宽高,confidence表示自信程度</span></span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> <span class="title">drawFace</span>(<span class="params">x,y,width,height,confidence</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> confidenceStr=<span class="string">&#x27;&#x27;</span>;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span>(confidence&lt;<span class="number">0</span>)&#123;</span></span><br><span class="line"><span class="javascript">                confidenceStr=<span class="string">&#x27;自信满满&#x27;</span></span></span><br><span class="line"><span class="javascript">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(confidence&gt;<span class="number">2</span>)&#123;</span></span><br><span class="line"><span class="javascript">                confidenceStr=<span class="string">&#x27;很不自信啊&#x27;</span></span></span><br><span class="line"><span class="javascript">            &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="javascript">                confidenceStr=<span class="string">&#x27;一般般&#x27;</span></span></span><br><span class="line">            &#125;</span><br><span class="line"><span class="javascript">            <span class="comment">//将框框套上去</span></span></span><br><span class="line"><span class="javascript">            str+=<span class="string">&#x27;&lt;div class=&quot;drawDiv&quot; style=&quot;left:&#x27;</span>+x+<span class="string">&#x27;px;top:&#x27;</span>+y+<span class="string">&#x27;px;width:&#x27;</span>+width+<span class="string">&#x27;px;height:&#x27;</span>+height+<span class="string">&#x27;px;&quot;&gt;&#x27;</span>+confidenceStr+<span class="string">&#x27;&lt;/div&gt;&#x27;</span></span></span><br><span class="line"><span class="javascript">            <span class="built_in">document</span>.getElementsByClassName(<span class="string">&#x27;draw&#x27;</span>)[<span class="number">0</span>].innerHTML=str</span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>效果大概是这样<br><img src="https://img-blog.csdnimg.cn/20200630184902574.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>看一下识别后的对象属性<br><img src="https://img-blog.csdnimg.cn/20200630184907706.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>除了“脸部区域”的x坐标、y坐标和长宽这些比较基本的信息之外，比较有意思的是还有一个confidence属性来描述这张脸的自信程度。。然后根据自信程度可以给出一个简单的评价，比如“自信”、“一般般”、“不自信”（这个准确度有多少就不知道啦）</p>
+<p>有了这个之后也可以把它做进网站里面，但是很明显这个插件只能检测到图像中“是否有人脸”，但不能识别出“这张脸是谁”，所以离实现“人脸识别签到”这个功能肯定还是有距离的。</p>
+<p>另一个问题是如何用js控制树莓派的摄像头模块。同样，网上的博客教程基本都是用python实现的。。用js实现的我也没找到。。于是我只能想到一个笨办法，就是让树莓派摄像头定时拍摄，将图片存到一个指定的地址，让网页读取固定地址的图片进行识别。</p>
+<p>raspistill在终端控制摄像头 2秒拍摄一次（时间设置一个很大的数，让它一直拍）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">raspistill -o Web_v5&#x2F;public&#x2F;images&#x2F;now.jpg -tl 2000 -t 9999999999</span><br></pre></td></tr></table></figure></p>
+<p>然而这个最后实现的效果。。有点一言难尽。首先是树莓派拍出来照片大小的问题，一张照片大概2-3M，做一次识别要花很长时间，其次虽然照片占的空间很大，但是清晰度又很差，导致很难识别出人脸（这个可能是因为没有把摄像头固定起来导致的）。最后摄像头稍微拍了一分多钟就有点开始发烫了。。应该是我让它拍的太频繁的问题。</p>
+<p>总之这个功能实现的比较失败吧。。以后真的要做人脸识别类似的功能可能还是用OpenCV+python之类的比较好，回头研究了。。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><a target="_blank" rel="noopener" href="https://github.com/liyunfan1223/Web">代码</a></p>
+<p>以上就是这个项目的全部内容。。之前总结的比较多，后面做的这些感觉也没啥好总结的。。</p>
+<p>前半部分从无到有，自己用express和angular写框架和前后端交互的时候花的力气比较多，应该收获也是比较大的。最后做的几个要求比如视频推流和人脸识别这些就稍显敷衍，毕竟以前也没有接触过，主要就是想把这些功能都尝试一下。</p>
+<p>一个感觉就是，整个项目做下来之后在计算机网络方面的知识确实是学到很多，但是好像对于javascript代码本身还是掌握的比较差，比方说如果拿到一个新的模块，基本上只能通过别人的代码来了解具体的用法、写法，很难通过官方文档来直接理解并构建代码。。（说白了就是只能做做增删改查，但是对底层原理一头雾水吧）</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nodejs/" rel="tag"># nodejs</a>
+          
+            <a href="/tags/web/" rel="tag"># web</a>
+          
+            <a href="/tags/%E4%BD%9C%E4%B8%9A/" rel="tag"># 作业</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/30/Web%E7%BC%96%E7%A8%8B%E5%A4%A7%E4%BD%9C%E4%B8%9A(%E5%9B%9B)%E9%AB%98%E6%B8%85%E9%87%8D%E5%88%B6+%E5%9C%A8%E7%BA%BF%E6%B5%8B%E9%AA%8C+%E7%83%AD%E7%82%B9%E5%B9%BF%E6%92%AD(angular%E6%A1%86%E6%9E%B6,websocket,%E6%A0%91%E8%8E%93%E6%B4%BE)%20copy/" rel="next" title="Web编程大作业(五)在线黑板&弹幕功能(canvas+websocket)">
+                <i class="fa fa-chevron-left"></i> Web编程大作业(五)在线黑板&弹幕功能(canvas+websocket)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/09/CDQ%E5%88%86%E6%B2%BB%E5%92%8C%E5%A4%9A%E7%BB%B4%E5%81%8F%E5%BA%8F%E9%97%AE%E9%A2%98/" rel="prev" title="CDQ分治和多维偏序问题">
+                CDQ分治和多维偏序问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%8C%E9%9D%A2%E7%9B%B4%E6%92%AD"><span class="nav-number">1.</span> <span class="nav-text">桌面直播</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB"><span class="nav-number">2.</span> <span class="nav-text">人脸识别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yunfan Li</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
