@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="作业,python,数据分析," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="基于自然语言处理的游戏媒体可信度分析与预测">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据科学导论期末大作业">
+<meta property="og:url" content="http://example.com/2021/01/29/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E5%AF%BC%E8%AE%BA%E6%9C%9F%E6%9C%AB%E5%A4%A7%E4%BD%9C%E4%B8%9A/index.html">
+<meta property="og:site_name" content="MorphLing&#39;s Blog">
+<meta property="og:description" content="基于自然语言处理的游戏媒体可信度分析与预测">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/img/image-20210129224933600.png">
+<meta property="og:image" content="http://example.com/img/bar_tags.png">
+<meta property="og:image" content="http://example.com/img/plot_date_rate_price.png">
+<meta property="og:image" content="http://example.com/img/scatter_date_price.png">
+<meta property="og:image" content="http://example.com/img/wc_tags.bmp">
+<meta property="og:image" content="http://example.com/img/image-20210129230102409.png">
+<meta property="og:image" content="http://example.com/img/image-20210129230800041.png">
+<meta property="og:image" content="http://example.com/img/image-20210130000237843.png">
+<meta property="og:image" content="http://example.com/img/result2.png">
+<meta property="og:image" content="http://example.com/img/句子长度频数统计图.png">
+<meta property="og:image" content="http://example.com/img/句子长度频数累积统计图.png">
+<meta property="og:image" content="http://example.com/img/句子长度频数累积统计图_large.png">
+<meta property="og:image" content="http://example.com/img/result3.png">
+<meta property="og:image" content="http://example.com/img/result4.png">
+<meta property="og:image" content="http://example.com/img/image-20210130001018630.png">
+<meta property="og:image" content="http://example.com/img/image-20210130001051550.png">
+<meta property="og:image" content="http://example.com/img/image-20210130001057786.png">
+<meta property="og:image" content="http://example.com/img/image-20210130001209409.png">
+<meta property="og:image" content="http://example.com/img/image-20210130001214427.png">
+<meta property="og:image" content="http://example.com/img/image-20210130001335214.png">
+<meta property="og:image" content="http://example.com/img/image-20210130002014712.png">
+<meta property="og:image" content="http://example.com/img/image-20210130002121807.png">
+<meta property="article:published_time" content="2021-01-29T14:04:13.000Z">
+<meta property="article:modified_time" content="2021-01-29T16:50:35.446Z">
+<meta property="article:author" content="Yunfan Li">
+<meta property="article:tag" content="作业">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="数据分析">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/image-20210129224933600.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2021/01/29/数据科学导论期末大作业/"/>
+
+
+
+
+
+  <title>数据科学导论期末大作业 | MorphLing's Blog</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MorphLing's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">GLHF!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/29/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E5%AF%BC%E8%AE%BA%E6%9C%9F%E6%9C%AB%E5%A4%A7%E4%BD%9C%E4%B8%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MorphLing's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据科学导论期末大作业</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-29T22:04:13+08:00">
+                2021-01-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  基于自然语言处理的游戏媒体可信度分析与预测
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>毕竟也是投入了期末绝大部分精力和一个多月时间完成的大作业，还是值得回顾和梳理一下的。</p>
+<h1 id="选题和灵感"><a href="#选题和灵感" class="headerlink" title="选题和灵感"></a>选题和灵感</h1><p>因为要和机器学习挂钩，同时也希望多少能提前接触一些未来可能的发展内容，考虑要在机器学习的几个比较热门大方向比如推荐系统、机器视觉，自然语言处理里选一个，最终决定选择自然语言处理，也就是NLP。其实这也跟我一直以来都对“让机器代替自己说话来避免无意义的闲聊”这样的事比较感兴趣有关=_=</p>
+<p>大方向确定了，经过反复的思考和尝试，我首先在kaggle上找到一个nlp入门的contest，参考了很多现成代码和文章，对nlp有了一个基本概念，接着决定然后自己爬一些游戏评测的数据，稍加改动，得出一些尽可能有趣的结论。</p>
+<p>作业在难度和工作量上弹性还是给的很足，按最低要求来说只要在kaggle上找一个数据集做些可视化就算完成了，但出于自我要求，还是决定尽可能加大工作量。</p>
+<p>当然，即使花了不少时间，由于对机器学习底层模型本身一无所知，整个项目过程中几乎不涉及模型本身的时间，主要通过sklearn和keras这两个现成的包来实现模型，把主要的精力放在了数据集的选择以及对自然语言处理整体方法的了解上。</p>
+<h1 id="发散尝试阶段"><a href="#发散尝试阶段" class="headerlink" title="发散尝试阶段"></a>发散尝试阶段</h1><p>最开始关注的是一个kaggle上的数据比赛，只需要通过机器学习模型，判断一句话是否与自然灾害有关，并根据预测的准确率估分，确实是非常基础非常入门的比赛。但通过这个比赛我也基本明确了我在整个项目中所将采用的模型和实现方法。</p>
+<p>慢慢开始有了几个比较关注的模型和方法：Tf-idf，LSTM，还包括一些经过预训练的模型，比如BERT，但由于使用tensorflow版本问题没有进一步尝试。逐渐把重心放在sklearn和keras上。</p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://www.kaggle.com/c/nlp-getting-started">contest链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1W7411j7bX">Tf-idf模型实现</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chen8023miss/p/11447034.html">LSTM情感分析</a></p>
+<h1 id="游戏数据获取"><a href="#游戏数据获取" class="headerlink" title="游戏数据获取"></a>游戏数据获取</h1><p>首先想到的是steam市场，毕竟我也是老steam用户了，运气比较好的是steam对爬虫还是比较友好的，也算是个不错的用来熟悉怎么写python的练手任务。</p>
+<p>爬取steam热销榜，获取商店页面链接</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 用于获取steam中游戏商店页面的链接，为进一步爬取评测数据做准备</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">page = <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getGameList</span>(<span class="params">page</span>):</span></span><br><span class="line">    linkList = []</span><br><span class="line">    IDList = []</span><br><span class="line">    nameList = []</span><br><span class="line">    print(<span class="string">&quot;正在爬取第 &#123;&#125; 页... 共 &#123;&#125; 页&quot;</span>.<span class="built_in">format</span>(page, totpage))</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        req = requests.get(<span class="string">&#x27;https://store.steampowered.com/search/?ignore_preferences=1&amp;category1=998&amp;os=win&amp;filter=globaltopsellers&amp;page=%d&#x27;</span>%page, timeout = <span class="number">10</span>)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        print(<span class="string">&quot;again-1&quot;</span>)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            req = requests.get(<span class="string">&#x27;https://store.steampowered.com/search/?ignore_preferences=1&amp;category1=998&amp;os=win&amp;filter=globaltopsellers&amp;page=%d&#x27;</span>%page, timeout = <span class="number">10</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            print(<span class="string">&quot;again-2&quot;</span>)</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                req = requests.get(<span class="string">&#x27;https://store.steampowered.com/search/?ignore_preferences=1&amp;category1=998&amp;os=win&amp;filter=globaltopsellers&amp;page=%d&#x27;</span>%page, timeout = <span class="number">10</span>)</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                print(<span class="string">&quot;again-3&quot;</span>)</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    req = requests.get(<span class="string">&#x27;https://store.steampowered.com/search/?ignore_preferences=1&amp;category1=998&amp;os=win&amp;filter=globaltopsellers&amp;page=%d&#x27;</span>%page, timeout = <span class="number">10</span>)</span><br><span class="line">                <span class="keyword">except</span>:</span><br><span class="line">                    print(<span class="string">&quot;FAULT!&quot;</span>)</span><br><span class="line">    soup = BeautifulSoup(req.text, <span class="string">&#x27;lxml&#x27;</span>)</span><br><span class="line">    soups = soup.find_all(href=re.<span class="built_in">compile</span>(<span class="string">r&quot;https://store.steampowered.com/app/&quot;</span>),class_=<span class="string">&quot;search_result_row ds_collapse_flag&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> soups:</span><br><span class="line">        i = i.attrs</span><br><span class="line">        i = i[<span class="string">&#x27;href&#x27;</span>]</span><br><span class="line">        link = re.match(<span class="string">&#x27;https://store.steampowered.com/app/(\d*?)/&#x27;</span>,i).group()</span><br><span class="line">        ID = re.match(<span class="string">&#x27;https://store.steampowered.com/app/(\d*?)/(.*?)/&#x27;</span>, i).group(<span class="number">1</span>)</span><br><span class="line">        name = re.match(<span class="string">&#x27;https://store.steampowered.com/app/(\d*?)/(.*?)/&#x27;</span>, i).group(<span class="number">2</span>)</span><br><span class="line">        linkList.append(link)</span><br><span class="line">        IDList.append(ID)</span><br><span class="line">    <span class="keyword">return</span> linkList, IDList</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getdf</span>(<span class="params">page</span>):</span></span><br><span class="line">    linkList, IDList = getGameList(page)</span><br><span class="line">    df = pd.DataFrame(<span class="built_in">list</span>(<span class="built_in">zip</span>(IDList, linkList)),</span><br><span class="line">            columns = [<span class="string">&#x27;ID&#x27;</span>, <span class="string">&#x27;Link&#x27;</span>])</span><br><span class="line">    <span class="keyword">return</span> df</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    pagestart = <span class="number">1</span></span><br><span class="line">    totpage = pageend = <span class="number">500</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(pagestart, pageend + <span class="number">1</span>):</span><br><span class="line">        path = <span class="string">&#x27;raw_data/steam_link/page%s.csv&#x27;</span> % <span class="built_in">str</span>(i)</span><br><span class="line">        df = getdf(i)</span><br><span class="line">        df.to_csv(path, index=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>爬取商店页面内容并保存 见./crawler/crawler_st.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 爬取steam商店页面数据</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getName</span>(<span class="params">soup</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        i = soup.find(class_ = <span class="string">&quot;apphub_AppName&quot;</span>).text</span><br><span class="line">        name = i</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        name = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> name</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getScores</span>(<span class="params">soup</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        i = soup.find(class_ = <span class="string">&quot;score high&quot;</span>).text</span><br><span class="line">        scores = re.search(<span class="string">r&#x27;(\d+)&#x27;</span>, i).group(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        scores = np.nan</span><br><span class="line">    <span class="keyword">return</span> scores</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getComments_30days</span>(<span class="params">soup</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        i = soup.find_all(class_ = <span class="string">&quot;nonresponsive_hidden responsive_reviewdesc&quot;</span>)[<span class="number">0</span>].text</span><br><span class="line">        comments = re.search(<span class="string">r&#x27;(\S+) 篇用户&#x27;</span>, i).group(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        comments = np.nan</span><br><span class="line">    <span class="keyword">return</span> comments</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getRate_30days</span>(<span class="params">soup</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        i = soup.find_all(class_ = <span class="string">&quot;nonresponsive_hidden responsive_reviewdesc&quot;</span>)[<span class="number">0</span>].text</span><br><span class="line">        rate = re.search(<span class="string">r&#x27;有 (\d+)% 为好评&#x27;</span>, i).group(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        rate = np.nan</span><br><span class="line">    <span class="keyword">return</span> rate</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getComments</span>(<span class="params">soup</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        i = soup.find_all(class_ = <span class="string">&quot;nonresponsive_hidden responsive_reviewdesc&quot;</span>)[<span class="number">1</span>].text</span><br><span class="line">        comments = re.search(<span class="string">r&#x27;(\S+) 篇用户&#x27;</span>, i).group(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        comments = np.nan</span><br><span class="line">    <span class="keyword">return</span> comments</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getRate</span>(<span class="params">soup</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        i = soup.find_all(class_ = <span class="string">&quot;nonresponsive_hidden responsive_reviewdesc&quot;</span>)[<span class="number">1</span>].text</span><br><span class="line">        rate = re.search(<span class="string">r&#x27;有 (\d+)% 为好评&#x27;</span>, i).group(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        rate = np.nan</span><br><span class="line">    <span class="keyword">return</span> rate</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getDate</span>(<span class="params">soup</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        i = soup.find(class_ = <span class="string">&quot;date&quot;</span>).text</span><br><span class="line">        date = i</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        date = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> date</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getDeveloper</span>(<span class="params">soup</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        i = soup.find(class_ = <span class="string">&quot;dev_row&quot;</span>).find(<span class="string">&#x27;a&#x27;</span>).text</span><br><span class="line">        developer = i</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        developer = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> developer</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getLanguages</span>(<span class="params">soup</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        i = soup.find(class_ = <span class="string">&quot;all_languages&quot;</span>).text</span><br><span class="line">        language = re.search(<span class="string">r&#x27;查看所有 (\d*?) 种已支持语言&#x27;</span>, i).group(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        language = np.nan</span><br><span class="line">    <span class="keyword">return</span> language</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getPrice</span>(<span class="params">soup</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        i = soup.find(class_ = <span class="string">&quot;game_purchase_price price&quot;</span>).text</span><br><span class="line">        <span class="keyword">if</span> re.search(<span class="string">r&#x27;免费&#x27;</span>, i) != <span class="literal">None</span>:</span><br><span class="line">            price = <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            price = re.search(<span class="string">r&#x27;¥ (\d*)&#x27;</span>, i).group(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            i = soup.find(class_ = <span class="string">&quot;discount_original_price&quot;</span>).text</span><br><span class="line">            <span class="keyword">if</span> re.search(<span class="string">r&#x27;免费&#x27;</span>, i) != <span class="literal">None</span>:</span><br><span class="line">                price = <span class="number">0</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                price = re.search(<span class="string">r&#x27;¥ (\d*)&#x27;</span>, i).group(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            price = np.nan</span><br><span class="line">    <span class="keyword">return</span> price</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getMetalink</span>(<span class="params">soup</span>):</span></span><br><span class="line">    <span class="comment"># try:</span></span><br><span class="line">    i = soup.find(href=re.<span class="built_in">compile</span>(<span class="string">r&quot;https://www.metacritic.com/&quot;</span>))</span><br><span class="line">    <span class="keyword">if</span> i != <span class="literal">None</span>:</span><br><span class="line">        i = i.attrs</span><br><span class="line">        link = i[<span class="string">&#x27;href&#x27;</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        link = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="comment"># except:</span></span><br><span class="line">    <span class="comment">#     link = &#x27;&#x27;</span></span><br><span class="line">    print(link)</span><br><span class="line">    <span class="keyword">return</span> link</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getTags</span>(<span class="params">soup</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        tagList = []</span><br><span class="line">        a = soup.find_all(class_ =<span class="string">&quot;app_tag&quot;</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> a:</span><br><span class="line">            i = i.text</span><br><span class="line">            i = i.replace(<span class="string">&#x27;\r&#x27;</span>,<span class="string">&#x27;&#x27;</span>).replace(<span class="string">&#x27;\t&#x27;</span>,<span class="string">&#x27;&#x27;</span>).replace(<span class="string">&#x27;\n&#x27;</span>,<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> i == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                <span class="keyword">pass</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                tagList.append(i)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        tagList = []</span><br><span class="line">    <span class="keyword">return</span> tagList</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getContent</span>(<span class="params">url, timeout, headers</span>):</span></span><br><span class="line">    r = requests.get(url, timeout = timeout)</span><br><span class="line">    soup = BeautifulSoup(r.text, <span class="string">&quot;lxml&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> soup</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    pagestart = <span class="number">14</span></span><br><span class="line">    pageend = <span class="number">500</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(pagestart, pageend + <span class="number">1</span>):</span><br><span class="line">        print(<span class="string">&quot;正在进行第 %d 轮。&quot;</span> % i)</span><br><span class="line">        path = <span class="string">&#x27;raw_data/steam_link/page%s.csv&#x27;</span> % <span class="built_in">str</span>(i)</span><br><span class="line">        output_path = <span class="string">&#x27;raw_data/games_data%s.csv&#x27;</span> % <span class="built_in">str</span>(i)</span><br><span class="line">        timeout = <span class="number">10</span></span><br><span class="line">        headers = &#123;</span><br><span class="line">            <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(path, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">            df = pd.read_csv(file)</span><br><span class="line">        name = []</span><br><span class="line">        scores = []</span><br><span class="line">        comments_30days = []</span><br><span class="line">        rate_30days = []</span><br><span class="line">        comments = []</span><br><span class="line">        rate = []</span><br><span class="line">        date = []</span><br><span class="line">        developer = []</span><br><span class="line">        languages = []</span><br><span class="line">        price = []</span><br><span class="line">        tags = []</span><br><span class="line">        metalink = []</span><br><span class="line">        error_id = []</span><br><span class="line">        cnt = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">id</span> <span class="keyword">in</span> df[<span class="string">&#x27;ID&#x27;</span>]:</span><br><span class="line">            cnt += <span class="number">1</span></span><br><span class="line">            print(<span class="string">&quot;正在爬取第 &#123;&#125; 项... 共 &#123;&#125; 项&quot;</span>.<span class="built_in">format</span>(cnt, <span class="built_in">len</span>(df[<span class="string">&#x27;ID&#x27;</span>])))</span><br><span class="line">            url = <span class="string">&#x27;https://store.steampowered.com/app/%s/?l=schinese&#x27;</span> % <span class="built_in">id</span></span><br><span class="line">            print(url)</span><br><span class="line">            <span class="keyword">try</span>: </span><br><span class="line">                soup = getContent(url, timeout, headers)</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                print(<span class="string">&quot;服务器响应出错。再次尝试-1。&quot;</span>)</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    soup = getContent(url, timeout, headers)</span><br><span class="line">                <span class="keyword">except</span>:</span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                        soup = getContent(url, timeout, headers)</span><br><span class="line">                    <span class="keyword">except</span>:</span><br><span class="line">                        print(<span class="string">&quot;服务器响应出错。再次尝试-2。&quot;</span>)</span><br><span class="line">                        <span class="keyword">try</span>:</span><br><span class="line">                            soup = getContent(url, timeout, headers)</span><br><span class="line">                        <span class="keyword">except</span>:</span><br><span class="line">                            print(<span class="string">&quot;服务器响应出错。再次尝试-3。&quot;</span>)</span><br><span class="line">                            <span class="keyword">try</span>:</span><br><span class="line">                                soup = getContent(url, timeout, headers)</span><br><span class="line">                            <span class="keyword">except</span>:</span><br><span class="line">                                soup = <span class="string">&#x27;&#x27;</span></span><br><span class="line">                                print(<span class="string">&quot;服务器响应出错。跳过该项并记录id。&quot;</span>)</span><br><span class="line">                                error_id.append(<span class="built_in">id</span>)</span><br><span class="line">            name.append(getName(soup))</span><br><span class="line">            scores.append(getScores(soup))</span><br><span class="line">            comments_30days.append(getComments_30days(soup))</span><br><span class="line">            rate_30days.append(getRate_30days(soup))</span><br><span class="line">            comments.append(getComments(soup))</span><br><span class="line">            rate.append(getRate(soup))</span><br><span class="line">            date.append(getDate(soup))</span><br><span class="line">            developer.append(getDeveloper(soup))</span><br><span class="line">            languages.append(getLanguages(soup))</span><br><span class="line">            price.append(getPrice(soup))</span><br><span class="line">            tags.append(getTags(soup))</span><br><span class="line">            metalink.append(getMetalink(soup))</span><br><span class="line">        df[<span class="string">&#x27;name&#x27;</span>] = name</span><br><span class="line">        df[<span class="string">&#x27;scores&#x27;</span>] = scores</span><br><span class="line">        df[<span class="string">&#x27;comments_30days&#x27;</span>] = comments_30days</span><br><span class="line">        df[<span class="string">&#x27;rate_30days&#x27;</span>] = rate_30days</span><br><span class="line">        df[<span class="string">&#x27;comments&#x27;</span>] = comments</span><br><span class="line">        df[<span class="string">&#x27;rate&#x27;</span>] = rate</span><br><span class="line">        df[<span class="string">&#x27;date&#x27;</span>] = date</span><br><span class="line">        df[<span class="string">&#x27;developer&#x27;</span>] = developer</span><br><span class="line">        df[<span class="string">&#x27;languages&#x27;</span>] = languages</span><br><span class="line">        df[<span class="string">&#x27;price&#x27;</span>] = price</span><br><span class="line">        df[<span class="string">&#x27;tags&#x27;</span>] = tags</span><br><span class="line">        df[<span class="string">&#x27;metalink&#x27;</span>] = metalink</span><br><span class="line">        print(error_id)</span><br><span class="line"></span><br><span class="line">        df.to_csv(output_path, encoding=<span class="string">&#x27;utf-8_sig&#x27;</span>, index=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/img/image-20210129224933600.png" alt=""></p>
+<p>简单浏览一下可以发现steam商店页面可爬取的数据还是不少的。好评率，销量，近30天的好评率，近30天的销量，标签，价格，支持的语言数，等等，参考了另一个steam游戏市场分析的文章，把爬取下来的数据做一下可视化，视觉效果似乎还行。</p>
+<p><img src="/img/bar_tags.png" alt="bar_tags"></p>
+<p><img src="/img/plot_date_rate_price.png" alt="plot_date_rate_price"></p>
+<p><img src="/img/scatter_date_price.png" alt="scatter_date_price"></p>
+<p><img src="/img/wc_tags.bmp" alt="wc_tags"></p>
+<p>图很好看，爬虫写的很舒服，然后问题来了，这跟NLP有啥关系？而且这好像也不太容易带进机器学习模型吧？</p>
+<p>没关系不要紧，我们可以想办法找一些关系嘛。（实际上，整个项目过程中我都在为了把各个一拍脑袋做出来的部分强行勾连上关系而费尽心机）</p>
+<p><img src="/img/image-20210129230102409.png" alt="image-20210129230102409"></p>
+<p>注意到一部分游戏的steam商店里有一个metacritic评分，坦白讲我之前都不知道metacritic是个啥，点进去一看才直到原来是一个专门做游戏和电影评测的网站，而且很容易就找到大量<strong>用语规范</strong>的英文游戏评测内容。到这时候，我终于知道我该选什么数据集了。</p>
+<p>接下来就是爬取metacritic的数据集了，相比较而言，这在时间和精力上都比steam数据爬取要困难得多。心疼我为了爬数据几天晚上都没关过机的电脑（以及等它爬了一整夜后发现爬虫报错的我）</p>
+<p>总之它最后的形态大概是这样的。</p>
+<p><img src="/img/image-20210129230800041.png" alt="image-20210129230800041"></p>
+<p>这部分的参考：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/103742708">用python对steam一万个游戏的数据分析- 知乎</a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1085988">STEAM游戏评测爬虫- 云+社区</a></p>
+<h1 id="机器学习模型"><a href="#机器学习模型" class="headerlink" title="机器学习模型"></a>机器学习模型</h1><p>有数据就可以把数据带进模型里尝试了。这里我首先对问题进行了一次相当大的简化，虽然爬到的评测都有具体的分数，但我并不关心它具体多少分，而是把超过一定分数的都标为正面样本，低于一定分数的都标为负面样本，至于在平均分附近的数据就直接剔除。</p>
+<p>还有一些其他的处理，这一部分可以总结如下图。</p>
+<p><img src="/img/image-20210130000237843.png" alt="image-20210130000237843"></p>
+<p>简而言之，我把它转化为了一个二分类问题。这符合我在发散阶段所尝试过的问题形式，而我对此也已找到一种求解方式。</p>
+<p>为什么呢？从计算思维的角度来说，问题<strong>规约</strong>是相当重要的。</p>
+<p>即使文本内容不同，数据内容不同，但保证所有输入的<strong>形式</strong>一致，就保证了过程的正确性。</p>
+<p>毕竟，在创造有价值的代码之前，第一步先要让它能够<strong>运行</strong>。一段不能<strong>运行</strong>的代码是没有任何价值的！</p>
+<p>以LSTM模型构建为例，详见./main.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置和训练模型</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dataLoader</span>(<span class="params">data, Dict, maxWords</span>):</span></span><br><span class="line">    X = []</span><br><span class="line">    Y = []</span><br><span class="line">    <span class="keyword">for</span> index, row <span class="keyword">in</span> data.iterrows():</span><br><span class="line">        review = row[textstr]</span><br><span class="line">        score = row[scorestr]</span><br><span class="line">        <span class="keyword">if</span> score &lt;= bounddn:</span><br><span class="line">            X.append(review)</span><br><span class="line">            Y.append(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">if</span> score &gt;= boundup:</span><br><span class="line">            X.append(review)</span><br><span class="line">            Y.append(<span class="number">1</span>)</span><br><span class="line">    vocab_size = <span class="built_in">len</span>(Dict)</span><br><span class="line">    label_size = <span class="number">2</span></span><br><span class="line">    x = [[Dict[word] <span class="keyword">for</span> word <span class="keyword">in</span> sent.split()] <span class="keyword">for</span> sent <span class="keyword">in</span> X]</span><br><span class="line">    X = sequence.pad_sequences(x, maxlen = maxWords)</span><br><span class="line">    Y = np_utils.to_categorical(Y)</span><br><span class="line">    train_x, test_x, train_y, test_y = train_test_split(X, Y, test_size = <span class="number">0.4</span>, random_state = <span class="number">242</span>)</span><br><span class="line">    test_x, valid_x, test_y, valid_y = train_test_split(test_x, test_y, test_size = <span class="number">0.5</span>, random_state = <span class="number">242</span>)</span><br><span class="line">    <span class="keyword">return</span> train_x, test_x, valid_x, train_y, test_y, valid_y, vocab_size, label_size</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createModel_LSTM</span>(<span class="params">units, input_shape, output_dim, maxWords, vocab_size, label_size</span>):</span></span><br><span class="line">    model = Sequential()</span><br><span class="line">    model.add(Embedding(input_dim = vocab_size + <span class="number">1</span>,</span><br><span class="line">                        output_dim = output_dim,</span><br><span class="line">                        input_length = maxWords,</span><br><span class="line">                        mask_zero = <span class="literal">True</span>))</span><br><span class="line">    model.add(LSTM(units, return_sequences=<span class="literal">True</span>))</span><br><span class="line">    model.add(Dropout(<span class="number">0.2</span>))</span><br><span class="line">    model.add(LSTM(units, return_sequences=<span class="literal">True</span>))</span><br><span class="line">    model.add(Dropout(<span class="number">0.2</span>))</span><br><span class="line">    model.add(LSTM(units, input_shape = input_shape))</span><br><span class="line">    model.add(Dropout(<span class="number">0.2</span>))</span><br><span class="line">    model.add(Dense(label_size, activation=<span class="string">&#x27;softmax&#x27;</span>))</span><br><span class="line">    model.<span class="built_in">compile</span>(loss=<span class="string">&#x27;binary_crossentropy&#x27;</span>, optimizer=<span class="string">&#x27;adam&#x27;</span>, metrics=[<span class="string">&#x27;accuracy&#x27;</span>])</span><br><span class="line">    model.summary()</span><br><span class="line">    <span class="keyword">return</span> model</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">modelTrain_LSTM</span>(<span class="params">data, Dict</span>):</span></span><br><span class="line">    maxWords = <span class="number">1000</span></span><br><span class="line">    train_x, test_x, valid_x, train_y, test_y, valid_y, vocab_size, label_size= dataLoader(data, Dict, maxWords)</span><br><span class="line">    input_shape = (train_x[<span class="number">0</span>], train_x[<span class="number">1</span>])</span><br><span class="line">    print(input_shape)</span><br><span class="line">    print(train_y)</span><br><span class="line">    units = <span class="number">100</span></span><br><span class="line">    batch_size = <span class="number">32</span></span><br><span class="line">    output_dim = <span class="number">20</span></span><br><span class="line">    epochs = <span class="number">5</span></span><br><span class="line">    model = createModel_LSTM(units, input_shape, output_dim, maxWords, vocab_size, label_size)</span><br><span class="line">    getMeanScore(test_x, test_y)</span><br><span class="line">    print(train_y)</span><br><span class="line">    model.fit(train_x, train_y, epochs = epochs, batch_size = batch_size, validation_data=(valid_x, valid_y))</span><br><span class="line">    print(model.evaluate(test_x, test_y))</span><br><span class="line">    <span class="keyword">return</span> model</span><br></pre></td></tr></table></figure>
+<p>如上，我尝试了大约四种模型，自然的，带入了我自己爬取的评测文本后，顺利得到了结果。</p>
+<p>但正确率却只有60%。</p>
+<p>60%是什么概念呢，就是如果这个模型把每个样本都预测为正样本，它就已经有50%正确率了。</p>
+<p>乐观的说，it does work! 它当然是有在进行预测的。但和IMDb的电影评论数据集接近90%的正确率相比，显然并不理想。</p>
+<p><img src="/img/result2.png" alt="result2"></p>
+<p>嗯，只是能运行起来而已，这要求未免也太低了吧。</p>
+<h1 id="数据预处理和清洗"><a href="#数据预处理和清洗" class="headerlink" title="数据预处理和清洗"></a>数据预处理和清洗</h1><p>想必此时是最迷茫与沮丧的时刻，通过保证<strong>形式</strong>的一致来确保<strong>过程</strong>无误的取巧方式在这种时候已经排不上用场了。已知领域已被探索得七七八八，若想再进一步，就不得不迈向未知。</p>
+<p>我不能说最后的解决方案有多么巧妙，甚至这样的解决方法是相当显然，且又不够严谨的。但这个凭借自我探究并取得成功的过程，于我个人来说意义非凡。</p>
+<p>通过可视化，分析我爬取的数据集和IMDb数据集的不同之处。</p>
+<p><img src="/img/句子长度频数统计图.png" alt="句子长度频数统计图"></p>
+<p><img src="/img/句子长度频数累积统计图.png" alt="句子长度频数累积统计图"></p>
+<p>一个很明显的问题是，我爬的句子太短了，大概长度只有电影评论的十分之一不到。</p>
+<p>其实我没有花太多时间就意识到了。这很显然，事实上，这也的确是问题所在。</p>
+<p>但是当时的我根本不敢确定这是否就是导致正确率低的原因，因为未知因素太多。会不会是模型写错了，多加一层少加一层，改一改参数，对模型的结果有多大影响？会不会是因为游戏评测的用词和评分根本就没有多少因果关系，语料本身就不适合做情感分析？</p>
+<p>不知道，只有一个一个解决了之后才能排除掉。太短了怎么办呢，拼起来不就长了吗。把同一个游戏下多条评测合并成一句话，然后评分取平均值。</p>
+<p>只是运气比较好，很快就找到了问题所在。</p>
+<p>确实，不那么严谨，但逻辑上讲得通，这就够了。</p>
+<p><img src="/img/句子长度频数累积统计图_large.png" alt="句子长度频数累积统计图_large"></p>
+<p>准确率的提升是明显的，但明显结果不够问题，准确率波动很大，不仅体现在不同模型的准确率差异大，即使同一模型同一参数，多次运行的结果差距也相当大，尤其是LSTM模型，准确率相差可达20%。</p>
+<p><img src="/img/result3.png" alt="result3"></p>
+<p>这一步的解决对我来说并不需要花太多时间思考，但不幸的是，对我的电脑来说就不一样了。</p>
+<p>花了将近一天一夜时间，把metacritic上几乎所有游戏评测都爬取了下来。接近20000个游戏，每条游戏平均有30多条评测文本。</p>
+<p>不过结果很满意就是了。</p>
+<p><img src="/img/result4.png" alt="result4"></p>
+<h1 id="可信度分析"><a href="#可信度分析" class="headerlink" title="可信度分析"></a>可信度分析</h1><p>至此，从我的角度来说，这个项目已经可以临近尾声了，但从一个作业的角度来说，恐怕只是刚刚开始。</p>
+<p>原因也很简单，几乎所有预先需要的问题在技术层面都已经打通了，无论是NLP的模型还是适合做NLP二分类模型的数据集特点，我都有了一个大致的认识和了解，这是我想到达到的目标。但作业总是希望你有头有尾，介绍你的起因和动机，最后再配一个看上去有创新点的结论（无论它是否真的有趣），过程呢反而没有那么重要。</p>
+<p>所以，我要把我零零散散做过的东西勾连起来，构建一个相对完整的项目。这是个比较痛苦的过程，类似于总结归纳，但其实也还是挺有意义的，这会让我觉得自己好像真的做了些有实际意义的东西出来似的。</p>
+<p>那么就开始吧，其实要构建联系并不是很困难的，最简单的方法回到了之前反复提到的，<strong>保持形式一致</strong>这个万能方法上。于是我觉得用二分类的方式思考，把可信度转化成可信和不可信。</p>
+<p>当然这里用“可信”这个说法还是容易引起歧义的，我认为评测媒体评分高于实际表现为<strong>不可信</strong>，反之，为<strong>可信</strong>。</p>
+<p>（我知道这个说法肯定和可信这个词本身是不太符合的，但是作为玩家来说我只想知道我如果信了评测买了这个游戏会不会被坑对不对，如果我发现这游戏比评测说的还要好玩那我偷着乐都来不及，怎么会觉得评测不可信呢=_=，主要是找不到另一个恰当的词来表述了，姑且认为这个<strong>可信</strong>是被我重载过的吧！）</p>
+<p>怎么标签呢，我觉得这个过程是非常适合可视化的，也是我在做这个项目过程中感觉为数不多的，真的在为了表达而做的可视化。</p>
+<p>step 1: 多项式回归拟合均值曲线pred_score，引入参数偏差值 x = score - pred_score</p>
+<p><img src="/img/image-20210130001018630.png" alt="image-20210130001018630"></p>
+<p>step 2: 移除x的绝对值较小的数据点</p>
+<p><img src="/img/image-20210130001051550.png" alt="image-20210130001051550"></p>
+<p><img src="/img/image-20210130001057786.png" alt="image-20210130001057786"></p>
+<p>step 3: 根据x的正负进行染色，红色表示不可信，为负样本，蓝色表示可信，为正样本</p>
+<p><img src="/img/image-20210130001209409.png" alt="image-20210130001209409"></p>
+<p><img src="/img/image-20210130001214427.png" alt="image-20210130001214427"></p>
+<p>标签打好了，有了文本有了标签，代入二分类模型跑就完事了。</p>
+<p><img src="/img/image-20210130001335214.png" alt="image-20210130001335214"></p>
+<h1 id="数据融合"><a href="#数据融合" class="headerlink" title="数据融合"></a>数据融合</h1><p>这时候我终于想起了那些从steam爬来的，不知丢到哪个文件夹的数据，并开始思考怎么把它们和metacritics评测文本结合起来。</p>
+<p>可信度，当然不只和评测者的一家之言有关，游戏的定价和本身的品质高低必然也是有影响的。</p>
+<p>比如某个价格段的游戏可能更容易令玩家感到失望。这是非常有可能的。</p>
+<p>那就把所有可能有关的，都放在一起逻辑回归一下咯。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 结合游戏数据带入逻辑回归模型</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;datasets/combined.csv&#x27;</span>,<span class="string">&#x27;r&#x27;</span>,encoding=<span class="string">&#x27;utf-8-sig&#x27;</span>)<span class="keyword">as</span> f:</span><br><span class="line">    data = pd.read_csv(f)</span><br><span class="line"></span><br><span class="line"><span class="comment"># X = data[[&#x27;price&#x27;, &#x27;param1&#x27;, &#x27;param2&#x27;, &#x27;criticScore&#x27;]]</span></span><br><span class="line">X = data[[<span class="string">&#x27;param1&#x27;</span>,<span class="string">&#x27;param2&#x27;</span>,<span class="string">&#x27;price&#x27;</span>,<span class="string">&#x27;criticScore&#x27;</span>]]</span><br><span class="line">Y = data[<span class="string">&#x27;status&#x27;</span>]</span><br><span class="line"></span><br><span class="line">X = np.asarray(X)</span><br><span class="line">Y = np.asarray(Y)</span><br><span class="line"></span><br><span class="line">print(X)</span><br><span class="line"></span><br><span class="line">print(Y)</span><br><span class="line"></span><br><span class="line">train_x, test_x, train_y, test_y = train_test_split(X, Y, test_size = <span class="number">0.1</span>, random_state = <span class="number">242</span>)</span><br><span class="line"></span><br><span class="line">model = LogisticRegression()</span><br><span class="line">model.fit(train_x, train_y)</span><br><span class="line"></span><br><span class="line">pred_y = model.predict(test_x)</span><br><span class="line"></span><br><span class="line">print(pred_y)</span><br><span class="line"></span><br><span class="line">pred_y2 = []</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> test_x:</span><br><span class="line">    p1 = line[<span class="number">0</span>]</span><br><span class="line">    p2 = line[<span class="number">1</span>]</span><br><span class="line">    pred_y2.append(<span class="number">1</span> <span class="keyword">if</span> p2 &gt; p1 <span class="keyword">else</span> <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">score = accuracy_score(pred_y2, test_y)</span><br><span class="line"></span><br><span class="line">print(<span class="string">&#x27;仅根据文本预测的准确率: &#123;&#125; %&#x27;</span>.<span class="built_in">format</span>(score * <span class="number">100</span>))</span><br><span class="line"></span><br><span class="line">score = accuracy_score(pred_y, test_y)</span><br><span class="line"></span><br><span class="line">print(<span class="string">&#x27;结合评分和定价后的准确率: &#123;&#125; %&#x27;</span>.<span class="built_in">format</span>(score * <span class="number">100</span>))</span><br></pre></td></tr></table></figure>
+<p><img src="/img/image-20210130002014712.png" alt="image-20210130002014712"></p>
+<p>即使数据量较小，结果不太稳定，但可以看出的确有效。</p>
+<h1 id="结果和分析"><a href="#结果和分析" class="headerlink" title="结果和分析"></a>结果和分析</h1><p>懒得说了，直接抄PPT吧</p>
+<p><img src="/img/image-20210130002121807.png" alt="image-20210130002121807"></p>
+<h1 id="思考和拓展"><a href="#思考和拓展" class="headerlink" title="思考和拓展"></a>思考和拓展</h1><p>实话说整个项目虽然工作量不小，但是回头仔细一看根本没啥深度，甚至有的地方也不够严谨。只能说还算是个合格的入门项目吧。</p>
+<p>而且值得思考和拓展的地方其实相当多。</p>
+<p>首先，回到问题的第一步，可以发现第一步我就把它做了巨大的简化，即评测和评分其实是一个量化的指标，但我直接简化成了二分类。其实把所有的数据都量化，然后最后得到的可信度也是一个量化的指数，这听上去完全可行。</p>
+<p>其次，由于对模型底层原理一无所知，我忽略了绝大多数参数的调试，包括模型的损失函数、评估函数等等的选择，也是按照其他人常用的来的，因此造成了不少困扰，也是我进一步完善项目最大的阻碍。还是希望下学期可以好好学底层算法，该会造的轮子还是要自己造一遍。</p>
+<p>最后，虽然并不指望现在就能派上什么用场，但不得不说整个可信度评估框架起码还是合理的，没有非常大的逻辑漏洞，而且其实也不仅仅适用于游戏，各种商品的评测和评论也是能在<strong>形式</strong>一致的情况下套用上去的。当然，<strong>结果</strong>的正确性还是有待进一步研究。个人感觉还是值得再反复琢磨一下，在此基础上结合以后学到的东西，做一些真正有实用价值的东西也是有可能的。</p>
+<p>话说回来，最重要的当然还是靠写项目多写了一点python，比如一些常用的包、爬虫和可视化工具之类的，以后总算也可以说自己会写python了=_=</p>
+<p>最后附github链接 <a target="_blank" rel="noopener" href="https://github.com/liyunfan1223/DaSE_Final">https://github.com/liyunfan1223/DaSE_Final</a></p>
+<p>嗯。。希望下一次写项目可以把代码写的整洁一点，这次过程中写的很多代码因为太乱都已经找不到了，而且确实非常影响后期的整合工作。这次的话看在是第一次写python项目的份上就算啦。~</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E4%BD%9C%E4%B8%9A/" rel="tag"># 作业</a>
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag"># 数据分析</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/01/29/%E6%9D%82%E8%AE%B0/" rel="next" title="杂记1">
+                <i class="fa fa-chevron-left"></i> 杂记1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%89%E9%A2%98%E5%92%8C%E7%81%B5%E6%84%9F"><span class="nav-number">1.</span> <span class="nav-text">选题和灵感</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%91%E6%95%A3%E5%B0%9D%E8%AF%95%E9%98%B6%E6%AE%B5"><span class="nav-number">2.</span> <span class="nav-text">发散尝试阶段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96"><span class="nav-number">3.</span> <span class="nav-text">游戏数据获取</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.</span> <span class="nav-text">机器学习模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E5%92%8C%E6%B8%85%E6%B4%97"><span class="nav-number">5.</span> <span class="nav-text">数据预处理和清洗</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%AF%E4%BF%A1%E5%BA%A6%E5%88%86%E6%9E%90"><span class="nav-number">6.</span> <span class="nav-text">可信度分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%9E%8D%E5%90%88"><span class="nav-number">7.</span> <span class="nav-text">数据融合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E5%92%8C%E5%88%86%E6%9E%90"><span class="nav-number">8.</span> <span class="nav-text">结果和分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E5%92%8C%E6%8B%93%E5%B1%95"><span class="nav-number">9.</span> <span class="nav-text">思考和拓展</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yunfan Li</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
