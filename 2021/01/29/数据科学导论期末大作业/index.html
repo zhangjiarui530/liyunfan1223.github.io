@@ -94,12 +94,12 @@
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/image-20210129230102409.png">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/image-20210129230800041.png">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/image-20210130000237843.png">
-<meta property="og:image" content="http://example.com/img/result2.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/result2.png">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/%E5%8F%A5%E5%AD%90%E9%95%BF%E5%BA%A6%E9%A2%91%E6%95%B0%E7%BB%9F%E8%AE%A1%E5%9B%BE.png">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/%E5%8F%A5%E5%AD%90%E9%95%BF%E5%BA%A6%E9%A2%91%E6%95%B0%E7%B4%AF%E7%A7%AF%E7%BB%9F%E8%AE%A1%E5%9B%BE.png">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/%E5%8F%A5%E5%AD%90%E9%95%BF%E5%BA%A6%E9%A2%91%E6%95%B0%E7%B4%AF%E7%A7%AF%E7%BB%9F%E8%AE%A1%E5%9B%BE_large.png">
-<meta property="og:image" content="http://example.com/img/result3.png">
-<meta property="og:image" content="http://example.com/img/result4.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/result3.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/result4.png">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/image-20210130001018630.png">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/image-20210130001051550.png">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/image-20210130001057786.png">
@@ -109,7 +109,7 @@
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/image-20210130002014712.png">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/image-20210130002121807.png">
 <meta property="article:published_time" content="2021-01-29T14:04:13.000Z">
-<meta property="article:modified_time" content="2021-01-29T17:38:13.896Z">
+<meta property="article:modified_time" content="2021-01-29T17:40:29.458Z">
 <meta property="article:author" content="Yunfan Li">
 <meta property="article:tag" content="作业">
 <meta property="article:tag" content="python">
@@ -397,7 +397,7 @@
 <p>但正确率却只有60%。</p>
 <p>60%是什么概念呢，就是如果这个模型把每个样本都预测为正样本，它就已经有50%正确率了。</p>
 <p>乐观的说，it does work! 它当然是有在进行预测的。但和IMDb的电影评论数据集接近90%的正确率相比，显然并不理想。</p>
-<p><img src="/img/result2.png" alt="result2"></p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/result2.png" alt="result2"></p>
 <p>嗯，只是能运行起来而已，这要求未免也太低了吧。</p>
 <h1 id="数据预处理和清洗"><a href="#数据预处理和清洗" class="headerlink" title="数据预处理和清洗"></a>数据预处理和清洗</h1><p>想必此时是最迷茫与沮丧的时刻，通过保证<strong>形式</strong>的一致来确保<strong>过程</strong>无误的取巧方式在这种时候已经派不上用场了。已知领域已被探索得七七八八，若想再进一步，就不得不迈向未知。</p>
 <p>我不能说最后的解决方案有多么巧妙，甚至这样的解决方法是相当显然，且又不够严谨的。但这个凭借自我探究并取得成功的过程，于我个人来说意义非凡。</p>
@@ -412,11 +412,11 @@
 <p>确实，不那么严谨，但逻辑上讲得通，这就够了。</p>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/%E5%8F%A5%E5%AD%90%E9%95%BF%E5%BA%A6%E9%A2%91%E6%95%B0%E7%B4%AF%E7%A7%AF%E7%BB%9F%E8%AE%A1%E5%9B%BE_large.png" alt="句子长度频数累积统计图_large"></p>
 <p>准确率的提升是明显的，但明显结果不够稳定，准确率波动很大，不仅体现在不同模型的准确率差异大，即使同一模型同一参数，多次运行的结果差距也相当大，尤其是LSTM模型，准确率相差可达20%。</p>
-<p><img src="/img/result3.png" alt="result3"></p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/result3.png" alt="result3"></p>
 <p>这一步的解决对我来说并不需要花太多时间思考，但不幸的是，对我的电脑来说就不一样了。</p>
 <p>花了将近一天一夜时间，把metacritic上几乎所有游戏评测都爬取了下来。接近20000个游戏，每条游戏平均有30多条评测文本。</p>
 <p>不过结果很满意就是了。</p>
-<p><img src="/img/result4.png" alt="result4"></p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/result4.png" alt="result4"></p>
 <h1 id="可信度分析"><a href="#可信度分析" class="headerlink" title="可信度分析"></a>可信度分析</h1><p>至此，从我的角度来说，这个项目已经可以临近尾声了，但从一个作业的角度来说，恐怕只是刚刚开始。</p>
 <p>原因也很简单，几乎所有预先需要的问题在技术层面都已经打通了，无论是NLP的模型还是适合做NLP二分类模型的数据集特点，我都有了一个大致的认识和了解，这是我想到达到的目标。但作业总是希望你有头有尾，介绍你的起因和动机，最后再配一个看上去有创新点的结论（无论它是否真的有趣），过程呢反而没有那么重要。</p>
 <p>所以，我要把我零零散散做过的东西勾连起来，构建一个相对完整的项目。这是个比较痛苦的过程，类似于总结归纳，但其实也还是挺有意义的，这会让我觉得自己好像真的做了些有实际意义的东西出来似的。</p>
