@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="c++," />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于c++内存回收（delete）对程序整体运行时间影响的疑问">
+<meta property="og:url" content="http://example.com/2020/11/16/asdf/%E5%85%B3%E4%BA%8Ec-%E5%86%85%E5%AD%98%E5%9B%9E%E6%94%B6%EF%BC%88delete%EF%BC%89%E5%AF%B9%E7%A8%8B%E5%BA%8F%E6%95%B4%E4%BD%93%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4%E5%BD%B1%E5%93%8D%E7%9A%84%E7%96%91%E9%97%AE/index.html">
+<meta property="og:site_name" content="MorphLing&#39;s Blog">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-11-16T15:03:53.000Z">
+<meta property="article:modified_time" content="2021-01-30T09:37:34.511Z">
+<meta property="article:author" content="Yunfan Li">
+<meta property="article:tag" content="c++">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2020/11/16/asdf/关于c-内存回收（delete）对程序整体运行时间影响的疑问/"/>
+
+
+
+
+
+  <title>关于c++内存回收（delete）对程序整体运行时间影响的疑问 | MorphLing's Blog</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MorphLing's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">存在感是自我意识的基石</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/16/asdf/%E5%85%B3%E4%BA%8Ec-%E5%86%85%E5%AD%98%E5%9B%9E%E6%94%B6%EF%BC%88delete%EF%BC%89%E5%AF%B9%E7%A8%8B%E5%BA%8F%E6%95%B4%E4%BD%93%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4%E5%BD%B1%E5%93%8D%E7%9A%84%E7%96%91%E9%97%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MorphLing's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于c++内存回收（delete）对程序整体运行时间影响的疑问</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-16T23:03:53+08:00">
+                2020-11-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><br><br><a id="more"></a><br>起因是这样的，最近算法课在上红黑树，写红黑树的时候肯定涉及一些内存管理的问题，主要是在插入结点的时候要用new分配一个新的结点，并在清空红黑树的时候把这些结点delete释放掉。</p>
+<p>算法导论书上只提供了插入和删除操作的代码，但是因为要测试多组数据的运行时间，需要自己实现一个清空(destroy)操作。本着避免一切可能造成的内存泄漏的原则，一开始我写了完整的清空函数，也就是从根节点开始递归，回收每个结点的内存空间，其中我的结点和树定义如下。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">RBTColor</span>&#123;</span>RED, BLACK&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RBTNode</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    RBTColor color;</span><br><span class="line">    <span class="keyword">int</span> key;</span><br><span class="line">    RBTNode *lson;</span><br><span class="line">    RBTNode *rson;</span><br><span class="line">    RBTNode *parent;</span><br><span class="line">    RBTNode(RBTColor c, <span class="keyword">int</span> k) &#123;</span><br><span class="line">        color = c;</span><br><span class="line">        key = k;</span><br><span class="line">        lson = rson = parent = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RBTree</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    RBTree() &#123;</span><br><span class="line">        root = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        destroy(root);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">destroy</span><span class="params">(RBTNode *&amp;root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> ;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;lson) destroy(root-&gt;lson);</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;rson) destroy(root-&gt;rson);</span><br><span class="line">        <span class="keyword">delete</span> root;</span><br><span class="line">        root = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;rb_tree;</span><br></pre></td></tr></table></figure>
+<p>然而运行时感觉运行时间很奇怪，于是修改测试数据，测了5组规模一样的数据，发现只有第一次的运行时间是正常的，后面四次的时间明显大很多。进一步记录了一下destroy函数所占用的时间，结果如下。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">destroy time : <span class="number">0</span> ms SIZE : <span class="number">100000</span> RUNTIME : <span class="number">71</span> ms</span><br><span class="line">destroy time : <span class="number">46</span> ms SIZE : <span class="number">100000</span> RUNTIME : <span class="number">3308</span> ms</span><br><span class="line">destroy time : <span class="number">38</span> ms SIZE : <span class="number">100000</span> RUNTIME : <span class="number">2442</span> ms</span><br><span class="line">destroy time : <span class="number">38</span> ms SIZE : <span class="number">100000</span> RUNTIME : <span class="number">3415</span> ms</span><br><span class="line">destroy time : <span class="number">39</span> ms SIZE : <span class="number">100000</span> RUNTIME : <span class="number">2267</span> ms</span><br><span class="line">destroy time : <span class="number">38</span> ms</span><br></pre></td></tr></table></figure>
+<p>意识到可能是destroy的过程中的某些操作产生了这样的结果，采取控制变量法，尝试去掉了内存回收的部分之后运行时间时间恢复正常。修改后的destroy和测试结果如下，但很明显，这样写又会有内存泄漏的问题，即没有在清空红黑树前回收每个结点的内存</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// clock_t rec = clock();</span></span><br><span class="line">    <span class="comment">// destroy(root);</span></span><br><span class="line">    <span class="comment">// cout &lt;&lt; &quot;destroy time : &quot; &lt;&lt; clock() - rec &lt;&lt; &quot; ms &quot;;</span></span><br><span class="line">    root = <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SIZE : <span class="number">100000</span> RUNTIME : <span class="number">61</span> ms</span><br><span class="line">SIZE : <span class="number">100000</span> RUNTIME : <span class="number">64</span> ms</span><br><span class="line">SIZE : <span class="number">100000</span> RUNTIME : <span class="number">71</span> ms</span><br><span class="line">SIZE : <span class="number">100000</span> RUNTIME : <span class="number">67</span> ms</span><br><span class="line">SIZE : <span class="number">100000</span> RUNTIME : <span class="number">65</span> ms</span><br></pre></td></tr></table></figure>
+<p>可以确定是清空操作(destroy)造成了这一现象。此时我陷入了疑惑：RUNTIME所记录的仅仅是执行红黑树“插入”操作所消耗的时间，并没有记录清空操作的时间，与清空操作唯一的联系是对于内存的操作。但清空操作完成后，此时红黑树的根结点指针指向空结点，整个程序的执行状态和程序刚开始时几乎完全相同，但实际运行时间却差了40-50倍。</p>
+<p>一个猜想是清空时的delete操作影响到了程序所能够使用的内存空间，但delete是起到回收内存的作用的，理论上来说意味着可供使用的内存空间更大了，为什么会比不回收内存空间的写法耗时更久呢？这一猜想完全不能解释这种现象。</p>
+<p>以上就是我目前遇到的最主要的问题，对此我还做了以下尝试：</p>
+<ol>
+<li><p>修改测试数据规模大小，测试了10^6的情况，仍有这个问题</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">destroy time : <span class="number">0</span> ms SIZE : <span class="number">1000000</span> RUNTIME : <span class="number">669</span> ms</span><br><span class="line">destroy time : <span class="number">470</span> ms SIZE : <span class="number">1000000</span> RUNTIME : <span class="number">7070</span> ms</span><br><span class="line">destroy time : <span class="number">462</span> ms SIZE : <span class="number">1000000</span> RUNTIME : <span class="number">7294</span> ms</span><br><span class="line">destroy time : <span class="number">473</span> ms SIZE : <span class="number">1000000</span> RUNTIME : <span class="number">7754</span> ms</span><br><span class="line">destroy time : <span class="number">471</span> ms SIZE : <span class="number">1000000</span> RUNTIME : <span class="number">6117</span> ms</span><br><span class="line">destroy time : <span class="number">468</span> ms</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把释放内存的部分写到了RBTNode的析构函数中，并修改对应的destroy：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RBTNode</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    RBTColor color;</span><br><span class="line">    <span class="keyword">int</span> key;</span><br><span class="line">    RBTNode *lson;</span><br><span class="line">    RBTNode *rson;</span><br><span class="line">    RBTNode *parent;</span><br><span class="line">    RBTNode(RBTColor c, <span class="keyword">int</span> k) &#123;</span><br><span class="line">        color = c;</span><br><span class="line">        key = k;</span><br><span class="line">        lson = rson = parent = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~RBTNode() &#123;</span><br><span class="line">        <span class="keyword">if</span> (lson) <span class="keyword">delete</span>(lson); lson = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">if</span> (rson) <span class="keyword">delete</span>(rson); rson = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">clock_t</span> rec = clock();</span><br><span class="line">    <span class="keyword">delete</span>(root);</span><br><span class="line">    root = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;destroy time : &quot;</span> &lt;&lt; clock() - rec &lt;&lt; <span class="string">&quot; ms &quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从结果来说，和原来的没有任何区别</p>
+</li>
+<li><p>写了一个简化版的测试程序，通过最简单的数据结构（链表）进行测试，问题仍然存在，可见不是红黑树操作的问题</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> cnt;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Node(<span class="keyword">int</span> x) &#123;</span><br><span class="line">        key = x;</span><br><span class="line">        nxt = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> key;</span><br><span class="line">    Node *nxt;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">chain</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    chain() &#123;</span><br><span class="line">        head = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">clock_t</span> rec = clock();</span><br><span class="line">        Node *now = head, *pre;</span><br><span class="line">        <span class="keyword">while</span>(now !=<span class="literal">NULL</span> &amp;&amp; now-&gt;nxt != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            pre = now;</span><br><span class="line">            now = now-&gt;nxt;</span><br><span class="line">            <span class="keyword">delete</span> pre;</span><br><span class="line">            pre = <span class="literal">NULL</span>;</span><br><span class="line">            cnt++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (now) <span class="keyword">delete</span> now;</span><br><span class="line">        head = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;destroy time : &quot;</span> &lt;&lt; clock() - rec &lt;&lt; <span class="string">&quot; ms&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        Node *node = <span class="keyword">new</span> Node(x);</span><br><span class="line">        insert(head, node);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        print(head);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Node *head;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">destroy</span><span class="params">(Node *&amp;now)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!now) <span class="keyword">return</span>;</span><br><span class="line">        cnt++;</span><br><span class="line">        destroy(now-&gt;nxt);</span><br><span class="line">        <span class="keyword">delete</span> now;</span><br><span class="line">        now = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(Node *&amp;now, Node *&amp;node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (now == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            now = node;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        insert(now-&gt;nxt, node);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(Node *now)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!now) <span class="keyword">return</span>;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; now-&gt;key &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        print(now-&gt;nxt);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;L;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">clock_t</span> rec;</span><br><span class="line">    L.destroy();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= <span class="number">5</span>; j++) &#123;</span><br><span class="line">        rec = clock();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10000</span>; i++) L.insert(i);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;time : &quot;</span> &lt;&lt; clock() - rec &lt;&lt; <span class="string">&quot; ms &quot;</span> ;</span><br><span class="line">        L.destroy();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">destroy time : <span class="number">0</span> ms</span><br><span class="line">time : <span class="number">120</span> ms destroy time : <span class="number">383</span> ms</span><br><span class="line">time : <span class="number">506</span> ms destroy time : <span class="number">378</span> ms</span><br><span class="line">time : <span class="number">499</span> ms destroy time : <span class="number">375</span> ms</span><br><span class="line">time : <span class="number">498</span> ms destroy time : <span class="number">375</span> ms</span><br><span class="line">time : <span class="number">507</span> ms destroy time : <span class="number">375</span> ms</span><br></pre></td></tr></table></figure>
+<p>仍然是只有第一次运行时时间正常，后面几次时间都长很多。</p>
+<p>且去掉delete之后时间恢复正常。再次确定是delete造成的问题。</p>
+</li>
+<li><p>抄了一个网上的红黑树代码，加上delete之后自己跑了一下，还是有这个问题</p>
+</li>
+<li>建了两颗红黑树，先对第一棵树做一遍插入和清空操作，再对第二棵树做插入操作，发现第二个树的插入时间也变慢了（进一步确定了问题与内存管理的关系） </li>
+</ol>
+<p>重新简述下问题：在清空数据结构时，如果用delete回收了内存，那么会对下一次使用同样数据结构的运行时间产生非常大的影响。但原因未知，希望能找到对于这一现象的解释。</p>
+<p>加了delete之后变慢的时间：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SIZE :<span class="number">100</span> RUNTIME : <span class="number">2</span> ms</span><br><span class="line">SIZE :<span class="number">1000</span> RUNTIME : <span class="number">2</span> ms</span><br><span class="line">SIZE :<span class="number">10000</span> RUNTIME : <span class="number">13</span> ms</span><br><span class="line">SIZE :<span class="number">100000</span> RUNTIME : <span class="number">1049</span> ms</span><br><span class="line">SIZE :<span class="number">1000000</span> RUNTIME : <span class="number">4881</span> ms</span><br></pre></td></tr></table></figure><br>不加delete正常的运行时间：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SIZE :<span class="number">100</span> RUNTIME : <span class="number">9</span> ms</span><br><span class="line">SIZE :<span class="number">1000</span> RUNTIME : <span class="number">2</span> ms</span><br><span class="line">SIZE :<span class="number">10000</span> RUNTIME : <span class="number">8</span> ms</span><br><span class="line">SIZE :<span class="number">100000</span> RUNTIME : <span class="number">126</span> ms</span><br><span class="line">SIZE :<span class="number">1000000</span> RUNTIME : <span class="number">1341</span> ms</span><br></pre></td></tr></table></figure><br>（搞了好几天了没搞懂为什么，救救孩子</p>
+<p>附红黑树代码（只有插入操作）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">1e6</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> data[MAXN], height;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">RBTColor</span>&#123;</span>RED, BLACK&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RBTNode</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    RBTColor color;</span><br><span class="line">    <span class="keyword">int</span> key;</span><br><span class="line">    RBTNode *lson;</span><br><span class="line">    RBTNode *rson;</span><br><span class="line">    RBTNode *parent;</span><br><span class="line">    RBTNode(RBTColor c, <span class="keyword">int</span> k) &#123;</span><br><span class="line">        color = c;</span><br><span class="line">        key = k;</span><br><span class="line">        lson = rson = parent = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~RBTNode() &#123;</span><br><span class="line">        <span class="keyword">if</span> (lson) <span class="keyword">delete</span>(lson); lson = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">if</span> (rson) <span class="keyword">delete</span>(rson); rson = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RBTree</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    RBTree() &#123;</span><br><span class="line">        root = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~RBTree() &#123;</span><br><span class="line">        destroy();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        RBTNode *node = <span class="keyword">new</span> RBTNode(RED, key);</span><br><span class="line">        insert(root, node);</span><br><span class="line">        <span class="comment">//cout &lt;&lt; &quot;finish&quot; &lt;&lt; endl;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inOrder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;root : &quot;</span> &lt;&lt; root-&gt;key &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        inOrder(root);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">check</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        check(root, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">clock_t</span> rec = clock();</span><br><span class="line">        <span class="keyword">delete</span>(root);</span><br><span class="line">        root = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;destroy time : &quot;</span> &lt;&lt; clock() - rec &lt;&lt; <span class="string">&quot; ms &quot;</span>;</span><br><span class="line">        <span class="comment">// root = NULL;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    RBTNode *root;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">check</span><span class="params">(RBTNode *&amp;x, <span class="keyword">int</span> h)</span> </span>&#123;</span><br><span class="line">        h += x-&gt;color;</span><br><span class="line">        <span class="keyword">if</span> (x-&gt;lson) check(x-&gt;lson, h);</span><br><span class="line">        <span class="keyword">if</span> (x-&gt;rson) check(x-&gt;rson, h);</span><br><span class="line">        <span class="keyword">if</span> (x-&gt;color == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (x-&gt;lson &amp;&amp; x-&gt;lson-&gt;color == <span class="number">0</span> || x-&gt;rson &amp;&amp; x-&gt;rson-&gt;color == <span class="number">0</span>)</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;COLOR ERROR!&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!x-&gt;lson &amp;&amp; !x-&gt;rson) &#123;</span><br><span class="line">            <span class="keyword">if</span> (height == <span class="number">0</span>) height = h;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (height != h)</span><br><span class="line">                    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;HEIGHT ERROR!&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inOrder</span><span class="params">(RBTNode *&amp;x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (x-&gt;lson) inOrder(x-&gt;lson);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;color : &quot;</span> &lt;&lt; (x-&gt;color ? <span class="string">&quot;BLACK&quot;</span> : <span class="string">&quot;RED  &quot;</span>);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot; key : &quot;</span> &lt;&lt; x-&gt;key &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">if</span> (x-&gt;rson) inOrder(x-&gt;rson);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(RBTNode *&amp;root, RBTNode *&amp;node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            root = node; </span><br><span class="line">            insertFixup(root, root);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        RBTNode *x = root, *y;</span><br><span class="line">        <span class="keyword">while</span>(x != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            y = x;</span><br><span class="line">            <span class="keyword">if</span> (node-&gt;key &lt; x-&gt;key) x = x-&gt;lson;</span><br><span class="line">            <span class="keyword">else</span> x = x-&gt;rson;</span><br><span class="line">        &#125;</span><br><span class="line">        x = node;</span><br><span class="line">        x-&gt;parent = y;</span><br><span class="line">        <span class="keyword">if</span> (node-&gt;key &lt; y-&gt;key) y-&gt;lson = node;</span><br><span class="line">        <span class="keyword">else</span> y-&gt;rson = node;</span><br><span class="line">        insertFixup(root, node);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">leftRotate</span><span class="params">(RBTNode *&amp;root, RBTNode *&amp;x)</span> </span>&#123;</span><br><span class="line">        RBTNode *y = x-&gt;rson, *z = x-&gt;parent;</span><br><span class="line">        <span class="keyword">if</span> (z == <span class="literal">NULL</span>) root = y;</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">            <span class="keyword">if</span> (z-&gt;lson == x) z-&gt;lson = y;</span><br><span class="line">            <span class="keyword">else</span> z-&gt;rson = y;</span><br><span class="line">        y-&gt;parent = x-&gt;parent;</span><br><span class="line">        x-&gt;parent = y;</span><br><span class="line">        x-&gt;rson = y-&gt;lson;</span><br><span class="line">        <span class="keyword">if</span> (x-&gt;rson) &#123;</span><br><span class="line">            x-&gt;rson-&gt;parent = x;</span><br><span class="line">        &#125;</span><br><span class="line">        y-&gt;lson = x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rightRotate</span><span class="params">(RBTNode *&amp;root, RBTNode *&amp;x)</span> </span>&#123;</span><br><span class="line">        RBTNode *y = x-&gt;lson, *z = x-&gt;parent;</span><br><span class="line">        <span class="keyword">if</span> (z == <span class="literal">NULL</span>) root = y;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">if</span> (z-&gt;lson == x) z-&gt;lson = y;</span><br><span class="line">            <span class="keyword">else</span> z-&gt;rson = y;</span><br><span class="line">        y-&gt;parent = x-&gt;parent;</span><br><span class="line">        x-&gt;parent = y;</span><br><span class="line">        x-&gt;lson = y-&gt;rson;</span><br><span class="line">        <span class="keyword">if</span> (x-&gt;lson) &#123;</span><br><span class="line">            x-&gt;lson-&gt;parent = x;</span><br><span class="line">        &#125;</span><br><span class="line">        y-&gt;rson = x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertFixup</span><span class="params">(RBTNode *&amp;root, RBTNode *&amp;x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == x) &#123;</span><br><span class="line">            x-&gt;color = BLACK;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        RBTNode *y = x-&gt;parent;</span><br><span class="line">        <span class="keyword">if</span> (y-&gt;color == RED) &#123;</span><br><span class="line">            RBTNode *gparent = y-&gt;parent;</span><br><span class="line">            <span class="keyword">if</span> (gparent-&gt;lson == y) &#123;</span><br><span class="line">                RBTNode *uncle = gparent-&gt;rson;</span><br><span class="line">                <span class="keyword">if</span> (uncle &amp;&amp; uncle-&gt;color == RED) &#123;</span><br><span class="line">                    uncle-&gt;color = y-&gt;color = BLACK;</span><br><span class="line">                    gparent-&gt;color = RED;</span><br><span class="line">                    insertFixup(root, gparent);    </span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (y-&gt;rson == x) &#123;</span><br><span class="line">                        leftRotate(root, y);</span><br><span class="line">                        swap(x, y);</span><br><span class="line">                    &#125;</span><br><span class="line">                    gparent-&gt;color = RED;</span><br><span class="line">                    y-&gt;color = BLACK;</span><br><span class="line">                    rightRotate(root, gparent);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                RBTNode *uncle = gparent-&gt;lson;</span><br><span class="line">                <span class="keyword">if</span> (uncle &amp;&amp; uncle-&gt;color == RED) &#123;</span><br><span class="line">                    uncle-&gt;color = y-&gt;color = BLACK;</span><br><span class="line">                    gparent-&gt;color = RED;</span><br><span class="line">                    insertFixup(root, gparent);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (y-&gt;lson == x) &#123;</span><br><span class="line">                        rightRotate(root, y);</span><br><span class="line">                        swap(x, y);</span><br><span class="line">                    &#125;</span><br><span class="line">                    gparent-&gt;color = RED;</span><br><span class="line">                    y-&gt;color = BLACK;</span><br><span class="line">                    leftRotate(root, gparent);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">destroy</span><span class="params">(RBTNode *&amp;root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> ;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;lson) destroy(root-&gt;lson);</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;rson) destroy(root-&gt;rson);</span><br><span class="line">        <span class="keyword">delete</span> root;</span><br><span class="line">        root = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;rb_tree;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">randInt</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    randInt(<span class="keyword">int</span> n, <span class="keyword">int</span> s, <span class="keyword">int</span> t):_n(n), _s(s), <span class="keyword">_t</span>(t) &#123;</span><br><span class="line">        _r = <span class="keyword">_t</span> - _s + <span class="number">1</span>;</span><br><span class="line">        get = <span class="number">0</span>;</span><br><span class="line">        exi = <span class="keyword">new</span> <span class="keyword">bool</span>[_r];</span><br><span class="line">        number = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        <span class="built_in">memset</span>(exi, <span class="number">0</span>, <span class="keyword">sizeof</span>(<span class="keyword">bool</span>) * _r);</span><br><span class="line">        <span class="built_in">memset</span>(number, <span class="number">0</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span>) * _n);</span><br><span class="line">    &#125;</span><br><span class="line">    ~randInt() &#123;</span><br><span class="line">        <span class="keyword">delete</span>[] exi;</span><br><span class="line">        <span class="keyword">delete</span>[] number;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">generate_no_duplicate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; _n; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> res = rand() * rand() % _r + _s;</span><br><span class="line">            <span class="keyword">while</span>(exi[res - _s]) res = rand() * rand() % _r + _s;</span><br><span class="line">            exi[res - _s] = <span class="number">1</span>;</span><br><span class="line">            number[i] = res;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getNum</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> number[get++];</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> _n, _s, <span class="keyword">_t</span>, _r, get;</span><br><span class="line">    <span class="keyword">bool</span> *exi;</span><br><span class="line">    <span class="keyword">int</span> *number;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">calc_time</span><span class="params">(<span class="keyword">int</span> SIZE, <span class="keyword">int</span> s, <span class="keyword">int</span> t)</span> </span>&#123;</span><br><span class="line">    rb_tree.destroy();</span><br><span class="line">    <span class="keyword">clock_t</span> rec = clock();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; SIZE; i++) &#123;</span><br><span class="line">        rb_tree.insert(data[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;SIZE : &quot;</span> &lt;&lt; SIZE &lt;&lt; <span class="string">&quot; RUNTIME : &quot;</span> &lt;&lt; clock() - rec &lt;&lt; <span class="string">&quot; ms&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    srand(time(<span class="literal">NULL</span>));</span><br><span class="line">    <span class="keyword">int</span> n, s, t; </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; MAXN; i++) data[i] = i;</span><br><span class="line">    random_shuffle(data, data + MAXN);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">        calc_time(<span class="number">1000000</span>, s, t);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"># c++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/11/03/asdf/sdfd/csapp-datalab/" rel="next" title="csapp-datalab">
+                <i class="fa fa-chevron-left"></i> csapp-datalab
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/12/18/asdf/XCPC%E6%A8%A1%E6%9D%BF/" rel="prev" title="XCPC模板">
+                XCPC模板 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives%7C%7Carchive">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://helloat123.github.io" title="hello@123" target="_blank">hello@123</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://qwqbot.com" title="qwqbot" target="_blank">qwqbot</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yunfan Li</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+
+<!-- 不蒜字统计 -->
+<div>
+	<i class="fa fa-user-md"></i>
+	<span id="busuanzi_container_site_uv">
+	  访问人数：<span id="busuanzi_value_site_uv"></span>
+	</span>&nbsp;|&nbsp;
+	
+	<i class="fa fa-eye"></i>
+	<span id="busuanzi_container_site_pv">
+	  总访问量：<span id="busuanzi_value_site_pv"></span>
+	</span>&nbsp;|&nbsp;
+	
+	<!-- 添加博客全站总字数统计-->
+	<i class="fa fa-pencil"></i>
+	<span class="post-count">博客全站共 65.2k 字</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

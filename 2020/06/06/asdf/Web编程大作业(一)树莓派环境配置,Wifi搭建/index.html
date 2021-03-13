@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="nodejs,web,作业," />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web编程大作业(一)树莓派环境配置,Wifi搭建">
+<meta property="og:url" content="http://example.com/2020/06/06/asdf/Web%E7%BC%96%E7%A8%8B%E5%A4%A7%E4%BD%9C%E4%B8%9A(%E4%B8%80)%E6%A0%91%E8%8E%93%E6%B4%BE%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE,Wifi%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:site_name" content="MorphLing&#39;s Blog">
+<meta property="og:locale">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606142259445.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606142259325.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606142308372.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606142345806.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606142415972.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606142424720.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606142437242.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606142445274.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606142453120.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606142509942.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606142519970.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606142533641.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606142541654.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606142550399.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606142559264.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606142615281.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606142627209.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606142636423.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606142652446.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606142719872.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020060614272972.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200606142736711.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2020-06-06T06:32:42.000Z">
+<meta property="article:modified_time" content="2021-01-29T13:26:19.091Z">
+<meta property="article:author" content="Yunfan Li">
+<meta property="article:tag" content="nodejs">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="作业">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200606142259445.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2020/06/06/asdf/Web编程大作业(一)树莓派环境配置,Wifi搭建/"/>
+
+
+
+
+
+  <title>Web编程大作业(一)树莓派环境配置,Wifi搭建 | MorphLing's Blog</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MorphLing's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">存在感是自我意识的基石</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/06/06/asdf/Web%E7%BC%96%E7%A8%8B%E5%A4%A7%E4%BD%9C%E4%B8%9A(%E4%B8%80)%E6%A0%91%E8%8E%93%E6%B4%BE%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE,Wifi%E6%90%AD%E5%BB%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MorphLing's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web编程大作业(一)树莓派环境配置,Wifi搭建</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-06T14:32:42+08:00">
+                2020-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><br><br><a id="more"></a></p>
+<h2 id="1-项目要求和一点想法"><a href="#1-项目要求和一点想法" class="headerlink" title="1.项目要求和一点想法"></a>1.项目要求和一点想法</h2><p><img src="https://img-blog.csdnimg.cn/20200606142259445.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200606142259325.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>第一步当然是先把树莓派的硬件装起来<br><img src="https://img-blog.csdnimg.cn/20200606142308372.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><del>然后第二步就不知道干啥了</del></p>
+<p>简单分析一下，这个项目可以分成两个相对独立的部分，第一部分是在本地先把网站的大多数功能实现，（不同类型用户登录、即时文件共享、WebSocket下发文件、Canvas绘图、视频推流、弹幕、人脸识别签到等等），第二部分是通过树莓派热点，作为网站的服务器，使得连接热点的设备能够访问网站。</p>
+<p>这样来看其实树莓派占的比重是很小的，核心业务逻辑还是体现在网站本身（emm大概）。</p>
+<p>那么就先从可能比较简单但是非常陌生的树莓派环境配置开始吧。</p>
+<p>可能是没有现成代码可以抄的原因，第二个项目的方向感明显弱了很多。但是总归要先做些什么，才有机会让想法自己浮现出来吧。</p>
+<h2 id="2-树莓派环境配置"><a href="#2-树莓派环境配置" class="headerlink" title="2.树莓派环境配置"></a>2.树莓派环境配置</h2><h3 id="烧录Raspbian-buster系统"><a href="#烧录Raspbian-buster系统" class="headerlink" title="烧录Raspbian buster系统"></a>烧录Raspbian buster系统</h3><p>我们的硬件条件大概是这样的：<br><img src="https://img-blog.csdnimg.cn/20200606142345806.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>寄过来的时候老师已经提前把系统烧好，并且设置了固定的ip，可以直接通过VNC访问。</p>
+<p>但是因为经过我一些乱七八糟的设置（后面会提到），后来它就连不上了。于是正好自己重新装一遍系统。由于我没有合适的显示器（其实有，但是觉得太麻烦了），这里介绍的是只需要用一根网线的方法。</p>
+<p>当然，方法有很多。。就是因为方法太多，细节也太多了，所以很容易走弯路。以下是我自己这两天摸索出来的一个方法，也不一定对每个人都通用。</p>
+<ol>
+<li><p>下载Raspbian系统映像文件<br><a target="_blank" rel="noopener" href="https://www.raspberrypi.org/downloads/raspberry-pi-os/">https://www.raspberrypi.org/downloads/raspberry-pi-os/</a></p>
+</li>
+<li><p>安装etcher，通过读卡器烧录</p>
+</li>
+<li><p>在root中创建一个名为ssh（无拓展名）的空文件。（开启ssh功能，默认关闭）</p>
+</li>
+<li><p>弹出读卡器，将TF卡插入树莓派，用网线连接电脑</p>
+</li>
+</ol>
+<h3 id="通过网线连接电脑，进入VNC远程桌面"><a href="#通过网线连接电脑，进入VNC远程桌面" class="headerlink" title="通过网线连接电脑，进入VNC远程桌面"></a>通过网线连接电脑，进入VNC远程桌面</h3><ol>
+<li>首先修改电脑的原先的网络适配器，打开internet共享<br><img src="https://img-blog.csdnimg.cn/20200606142415972.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li><p>在命令行中输入arp -a，查看树莓派动态分配的ip<br><img src="https://img-blog.csdnimg.cn/20200606142424720.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>上图中192.168.137.20就是树莓派的ip，一个特征是它的物理地址肯定和其他几项不一样。</p>
+</li>
+<li><p>用putty访问该地址<br>默认名称：pi，密码：raspberry<br><img src="https://img-blog.csdnimg.cn/20200606142437242.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>进入该界面说明连接成功</p>
+</li>
+<li><p>在putty中输入sudo raspi-config进行设置</p>
+</li>
+<li>选项5.Interfacing Options中开始SSH和VNC功能</li>
+<li>选项7.Advanced Options-&gt;A5 Resolution-&gt;Mode 85设置分辨率（否则VNC中无法显示桌面）</li>
+<li>此时可以通过VNC连接桌面了（用同样的ip）<br><img src="https://img-blog.csdnimg.cn/20200606142445274.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><h3 id="设置静态ip"><a href="#设置静态ip" class="headerlink" title="设置静态ip"></a>设置静态ip</h3></li>
+<li>eth0是有线网卡的端口，要修改eth0为静态ip。这里有两种方法，最简单的是直接通过右上角的GUI设置eth0。<br><img src="https://img-blog.csdnimg.cn/20200606142453120.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>也可以修改/etc/dhcpcd.conf，在末尾加上以下几句，效果一样<br><img src="https://img-blog.csdnimg.cn/20200606142509942.png" alt="在这里插入图片描述"></li>
+<li>之后需要将以太网的ip和网关设置一样的（192.168.137.1）<br><img src="https://img-blog.csdnimg.cn/20200606142519970.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这样修改之后，就可以通过192.168.137.20的静态ip访问了，也可以设置成别的静态ip，但网关和ip地址需要在同一波段。</li>
+</ol>
+<p>ps：一开始就是因为乱改了dhcpcd.conf中的配置信息，导致静态ip和网关不匹配，于是就无法连接了。</p>
+<h2 id="3-创建Web服务器"><a href="#3-创建Web服务器" class="headerlink" title="3. 创建Web服务器"></a>3. 创建Web服务器</h2><h3 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h3><ol>
+<li>通过VNC，访问nodejs官网，选ARMv7这个<br><img src="https://img-blog.csdnimg.cn/20200606142533641.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>下载，解压，将文件名修改为node（非必要）<br><img src="https://img-blog.csdnimg.cn/20200606142541654.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>可以通过node -v，npm -v检验是否生效<br><img src="https://img-blog.csdnimg.cn/20200606142550399.png" alt="在这里插入图片描述"></li>
+<li>用ln命令创建链接文件，将node和npm命令添加到环境变量<br><img src="https://img-blog.csdnimg.cn/20200606142559264.png" alt="在这里插入图片描述"></li>
+<li>直接输入node -v检验，显示版本号则安装完成<h3 id="用express框架搭建本地web服务器"><a href="#用express框架搭建本地web服务器" class="headerlink" title="用express框架搭建本地web服务器"></a>用express框架搭建本地web服务器</h3></li>
+<li>在npm安装成功的前提下，用npm install express -g和npm install express-generator -g即可。</li>
+<li>安装后的express也需要通过链接文件添加环境变量。即<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s &#x2F;home&#x2F;pi&#x2F;node&#x2F;bin&#x2F;express &#x2F;usr&#x2F;bin&#x2F;express</span><br></pre></td></tr></table></figure>
+安装完成后，创建文件夹并用express -e生成脚手架。效果如图<br><img src="https://img-blog.csdnimg.cn/20200606142615281.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>接下来只要安装依赖项就可以了。<br>为了检验服务器能否联通，我们做一个简单的index.html放在public下。<br><img src="https://img-blog.csdnimg.cn/20200606142627209.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>终端搭建web服务器<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node &#x2F;home&#x2F;pi&#x2F;website&#x2F;bin&#x2F;www</span><br></pre></td></tr></table></figure>
+在电脑浏览器中输入树莓派ip+:3000(192.168.137.20:3000)，可以查看到该网页，同时可以看到后端的反应<br><img src="https://img-blog.csdnimg.cn/20200606142636423.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><h2 id="4-通过Wifi热点访问自建的网站"><a href="#4-通过Wifi热点访问自建的网站" class="headerlink" title="4.通过Wifi热点访问自建的网站"></a>4.通过Wifi热点访问自建的网站</h2>以上实现了树莓派本地web服务器的搭建，接下来要将树莓派作为一个Wifi热点，给连接的设备分配ip地址，并能够连接到自建的网站。</li>
+</ol>
+<p>其实看这个就好了<a target="_blank" rel="noopener" href="https://www.qter.org/portal.php?mod=view&amp;aid=5516">https://www.qter.org/portal.php?mod=view&amp;aid=5516</a></p>
+<ol>
+<li>安装hostapd（可能需要先sudo apt update)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install hostapd</span><br><span class="line">sudo systemctl stop hostapd</span><br></pre></td></tr></table></figure></li>
+<li><p>修改/etc/hostapd/hostapd.conf（没有则创建）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">interface&#x3D;wlan0</span><br><span class="line">driver&#x3D;nl80211</span><br><span class="line">ssid&#x3D;Raspberrypi</span><br><span class="line">hw_mode&#x3D;g</span><br><span class="line">channel&#x3D;7</span><br><span class="line">wmm_enabled&#x3D;0</span><br><span class="line">macaddr_acl&#x3D;0</span><br><span class="line">auth_algs&#x3D;1</span><br><span class="line">ignore_broadcast_ssid&#x3D;0</span><br><span class="line">wpa&#x3D;2</span><br><span class="line">wpa_passphrase&#x3D;12345678</span><br><span class="line">wpa_key_mgmt&#x3D;WPA-PSK</span><br><span class="line">wpa_pairwise&#x3D;TKIP</span><br><span class="line">rsn_pairwise&#x3D;CCMP</span><br></pre></td></tr></table></figure>
+<p>修改/etc/default/hostapd<br>，将DAEMON_CONF的注释去掉并修改为<br><img src="https://img-blog.csdnimg.cn/20200606142652446.png" alt="在这里插入图片描述"></p>
+</li>
+<li><p>此时wifi已经建立好，但是还不能连接，因为还没有设置分配的ip。修改wlan0端口为静态。方法类似修改eth0。应该只要改ip就可以了。值得一提，这里设置的ip不能和eth0产生冲突。（前三位不能都一样）<br><img src="https://img-blog.csdnimg.cn/20200606142719872.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+<li><p>安装dnsmasq<br>这个是用来分配ip的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install dnsmasq</span><br><span class="line">sudo systemctl stop dnsmasq</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改/etc/dnsmasq.conf，加上下面这段，其他的都注释掉</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">interface&#x3D;wlan0</span><br><span class="line">dhcp-range&#x3D;192.168.4.2,192.168.4.20,255.255.255.0,24h</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置应该就设置好了。sudo reboot重启一下，然后依次开启wifi功能和网站服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start hostapd</span><br><span class="line">node &#x2F;home&#x2F;pi&#x2F;website&#x2F;bin&#x2F;www</span><br></pre></td></tr></table></figure>
+<p>用手机测试一下Wifi，再看看能不能连接192.168.4.1:3000<br><img src="https://img-blog.csdnimg.cn/2020060614272972.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200606142736711.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>ok，可以看到树莓派给手机分配了一个ip地址，手机也能访问到我们自建的网站。那么可以说就达到预期的目标了，接下来只需要专注于制作网站本身，并将做好的网站连同框架整个发送给树莓派就可以了。</p>
+</li>
+</ol>
+<p>虽然这个过程看起来挺流畅的，其实坑很多。。有时需要通过路由器获取树莓派的ip，再远程连接控制，有时连路由器都找不到ip，只能重装系统从头搞一遍。。很多问题都要一点点排查，稍微走偏一点都会浪费很多时间。。虽然这些实质上都是因为对计算机网络本身的了解还不够充分，但是还是想说，搞硬件搞配置真的太夭寿了。。。</p>
+<p>好在暂时应该不用管树莓派的事了，后续就只要想办法把网页做好就行了。当然，因为现在没代码抄了，看来只能把之前第一个项目逃过的课补起来了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nodejs/" rel="tag"># nodejs</a>
+          
+            <a href="/tags/web/" rel="tag"># web</a>
+          
+            <a href="/tags/%E4%BD%9C%E4%B8%9A/" rel="tag"># 作业</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/01/asdf/%E4%B8%80%E4%B8%AA%E6%B5%81%E6%B0%B4%E8%B4%A6%E5%BC%8F%E7%9A%84nodejs%E7%88%AC%E8%99%AB%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D%EF%BC%88%E4%B8%8B%EF%BC%89/" rel="next" title="一个nodejs爬虫项目介绍（下）">
+                <i class="fa fa-chevron-left"></i> 一个nodejs爬虫项目介绍（下）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/18/asdf/sdfd/Web%E7%BC%96%E7%A8%8B%E5%A4%A7%E4%BD%9C%E4%B8%9A(%E4%BA%8C)%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C&%E7%99%BB%E5%BD%95%E7%B3%BB%E7%BB%9F(express+MySQL)/" rel="prev" title="Web编程大作业(二)用户注册&登录系统(express+MySQL)">
+                Web编程大作业(二)用户注册&登录系统(express+MySQL) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives%7C%7Carchive">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://helloat123.github.io" title="hello@123" target="_blank">hello@123</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://qwqbot.com" title="qwqbot" target="_blank">qwqbot</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%A1%B9%E7%9B%AE%E8%A6%81%E6%B1%82%E5%92%8C%E4%B8%80%E7%82%B9%E6%83%B3%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">1.项目要求和一点想法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%A0%91%E8%8E%93%E6%B4%BE%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">2.树莓派环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%83%A7%E5%BD%95Raspbian-buster%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.1.</span> <span class="nav-text">烧录Raspbian buster系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%BD%91%E7%BA%BF%E8%BF%9E%E6%8E%A5%E7%94%B5%E8%84%91%EF%BC%8C%E8%BF%9B%E5%85%A5VNC%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2"><span class="nav-number">2.2.</span> <span class="nav-text">通过网线连接电脑，进入VNC远程桌面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81ip"><span class="nav-number">2.3.</span> <span class="nav-text">设置静态ip</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%88%9B%E5%BB%BAWeb%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">3. 创建Web服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85nodejs"><span class="nav-number">3.1.</span> <span class="nav-text">安装nodejs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8express%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E6%9C%AC%E5%9C%B0web%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">3.2.</span> <span class="nav-text">用express框架搭建本地web服务器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%80%9A%E8%BF%87Wifi%E7%83%AD%E7%82%B9%E8%AE%BF%E9%97%AE%E8%87%AA%E5%BB%BA%E7%9A%84%E7%BD%91%E7%AB%99"><span class="nav-number">4.</span> <span class="nav-text">4.通过Wifi热点访问自建的网站</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yunfan Li</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+
+<!-- 不蒜字统计 -->
+<div>
+	<i class="fa fa-user-md"></i>
+	<span id="busuanzi_container_site_uv">
+	  访问人数：<span id="busuanzi_value_site_uv"></span>
+	</span>&nbsp;|&nbsp;
+	
+	<i class="fa fa-eye"></i>
+	<span id="busuanzi_container_site_pv">
+	  总访问量：<span id="busuanzi_value_site_pv"></span>
+	</span>&nbsp;|&nbsp;
+	
+	<!-- 添加博客全站总字数统计-->
+	<i class="fa fa-pencil"></i>
+	<span class="post-count">博客全站共 65.2k 字</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
