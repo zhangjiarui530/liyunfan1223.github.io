@@ -84,7 +84,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/image-20210314211432054.png">
 <meta property="article:published_time" content="2021-03-14T12:24:01.000Z">
-<meta property="article:modified_time" content="2021-03-14T13:16:10.199Z">
+<meta property="article:modified_time" content="2021-03-14T13:17:37.163Z">
 <meta property="article:author" content="Yunfan Li">
 <meta property="article:tag" content="XCPC">
 <meta name="twitter:card" content="summary">
@@ -324,7 +324,7 @@
 </ul>
 <p>前两种情况比较显然，第三种情况可以把这个2和较大子树中任意一个1交换，变为第二种情况</p>
 <p>有了这个性质之后可以得到一个填充策略：如果子树中还要填2，那么可以直接把这个2填在子树根上，可以保证是最优解之一，也就是优先填2，2填完了或者总和=1的情况才填1。</p>
-<p>当知道了子树之和以及子树根节点的值以后，子树的左右子树之和也分别可以确定了，对于左右子树，采取同样的策略</p>
+<p>当知道了子树之和以及子树根节点的值以后，根节点的左右子树之和也分别可以确定了，对于左右子树，采取同样的策略</p>
 <p>从根结点开始bfs，bfs过程中如果发现没东西能填了（1不够了）就直接输出-1</p>
 <h1 id="C"><a href="#C" class="headerlink" title="C"></a>C</h1><p>WD</p>
 <h1 id="D"><a href="#D" class="headerlink" title="D"></a>D</h1><p>状压dp 待补</p>
