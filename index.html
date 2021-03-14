@@ -311,27 +311,14 @@
 
       
         
-          
-            <h1 id="A"><a href="#A" class="headerlink" title="A"></a>A</h1><p>LYF &amp; WD 树、构造</p>
-<p>可以发现一个性质：只要某个子树中有2，就可以把这个2放在子树根节点</p>
-<p>证明：考虑相邻两棵子树之差和2的位置，有三种情况</p>
-<ul>
-<li>相邻两个子树和相同；</li>
-<li>相邻两棵子树和差1，且2在较大的那棵子树</li>
-<li>相邻两棵子树和差2，且2在较小的那棵子树</li>
-</ul>
-<p>前两种情况比较显然，第三种情况可以把这个2和较大子树中任意一个1交换，变为第二种情况</p>
-<p>有了这个性质之后可以得到一个填充策略：如果子树中还要填2，那么可以直接把这个2填在子树根上，可以保证是最优解之一，也就是优先填2，2填完了或者总和=1的情况才填1。</p>
-<p>当知道了子树之和以及子树根节点的值以后，子树的左右子树之和也分别可以确定了，对于左右子树，采取同样的策略</p>
-<p>从根结点开始bfs，bfs过程中如果发现没东西能填了（1不够了）就直接输出-1</p>
-<h1 id="C"><a href="#C" class="headerlink" title="C"></a>C</h1><p>WD</p>
-<h1 id="D"><a href="#D" class="headerlink" title="D"></a>D</h1><p>状压dp 待补</p>
-<h1 id="E"><a href="#E" class="headerlink" title="E"></a>E</h1><p>WD</p>
-<h1 id="K"><a href="#K" class="headerlink" title="K"></a>K</h1><p>LYF 签到</p>
-<h1 id="L"><a href="#L" class="headerlink" title="L"></a>L</h1><p>树 待补</p>
-<h1 id="M"><a href="#M" class="headerlink" title="M"></a>M</h1><p>ZRC</p>
-
-          
+          <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/image-20210314211432054.png" alt="image-20210314211432054"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/03/14/NERC2020/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
