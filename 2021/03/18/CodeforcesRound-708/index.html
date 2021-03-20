@@ -88,7 +88,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/image-20210320102818011.png">
 <meta property="article:published_time" content="2021-03-18T15:50:58.000Z">
-<meta property="article:modified_time" content="2021-03-20T02:28:33.844Z">
+<meta property="article:modified_time" content="2021-03-20T02:29:38.082Z">
 <meta property="article:author" content="Yunfan Li">
 <meta property="article:tag" content="XCPC">
 <meta property="article:tag" content="codeforces">
@@ -339,7 +339,7 @@
 <p>首先考虑什么样的两个数乘积会是完全平方数，完全平方数拆成质因数乘积后，每个质因数的幂次一定是偶数，所以对于每个数，只要质因数分解，然后记录幂次的奇偶性就可以了，用$val[x]$记录转化后的结果，然后如果两个数a,b能乘起来是完全平方数，一定有$val[a]=val[b]$</p>
 <p>对于easy只要从头到尾扫一遍，遇到冲突的就ans++然后清空就行了</p>
 <p>hard就在此基础上变成了一个dp题，可以认为一定能修改成一个不会产生任何影响的数（因为可供修改的数一定是大于n的），可以把修改看成删除操作。</p>
-<p>接着预处理一个$l[n][k]$，表示对于第n个数，在删除了k个数的情况下，包含第n个数的连续段的最左位置，这玩意可以$O(nk)$维护，因为$l[n][k]$是在$l[n-1]$的基础上，插入一个$prev[n]$（上一个和n一样的数的位置），再排序就可以得到</p>
+<p>接着预处理一个$l[n][k]$，表示对于第n个数，在删除了k个数的情况下，包含第n个数的连续段的最左位置，这玩意可以$O(nk)$维护，因为$l[n]$是在$l[n-1]$的基础上，插入一个$prev[n]$（上一个和n一样的数的位置），再排序就可以得到</p>
 <p>然后可以$O(nk^2)$维护$dp[n][k]$表示考虑前n位，修改k的数的答案，枚举最后一个连续段所修改的数的个数即可。</p>
 
       
