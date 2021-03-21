@@ -85,7 +85,7 @@
 <meta property="og:site_name" content="MorphLing&#39;s Blog">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-03-21T11:18:51.000Z">
-<meta property="article:modified_time" content="2021-03-21T14:01:23.109Z">
+<meta property="article:modified_time" content="2021-03-21T14:06:14.200Z">
 <meta property="article:author" content="Yunfan Li">
 <meta property="article:tag" content="XCPC">
 <meta name="twitter:card" content="summary">
@@ -339,7 +339,7 @@
 <li>$(r-pr)+(pr-mr)$</li>
 <li>$(r-pr)+(ml-pl)$</li>
 </ul>
-<p>其实就是第一个位置的两种选择和第二个位置的两种选择，两两组合之后的四种可能。。然后可以发现把这两个门对称摆中间是最优解之一（好像不是那么显然，可以这样考虑，放中间时前两个值能保证相等，每偏离中间1个单位长度，前两个值(pl-l)和(r-pr)的max会增加2，但这最多使后一个值(ml-pl)和(pr-mr)的max减少2，所以不管怎么偏离中间都没法使答案变得更优）</p>
+<p>其实就是第一个位置的两种选择和第二个位置的两种选择，两两组合之后的四种可能。。然后可以发现把这两个门对称摆中间是最优解之一（好像不是那么显然，可以这样考虑，放中间时前两个值能保证相等，每偏离中间1个单位长度，前两个值(pl-l)和(r-pr)的max会增加1，但这最多使后一个值(ml-pl)和(pr-mr)的max减少1，所以不管怎么偏离中间都没法使答案变得更优）</p>
 <p>然后重点来了，在此基础上可以发现，除了左右端点的值随着$r-l-len$随着$len$变大而递减，我在比赛的时候认为其他值的max会随着$len$变大而递增，然而，实际上其实其他值的max也是随$len$变大而递减的啊，因为ml，mr都定下来了，然后只要使$(pl-l)$和$(r-pr)$尽可能小就行了，那最优的方案肯定是$len$取到最大值，把传送门丢在左右两端。</p>
 <p>啊，那还要啥二分啊。</p>
 <p>所以结论就是直接把传送门丢左右两端，然后遍历所有点到左右端的最小距离的最大值，就好了（？）</p>
