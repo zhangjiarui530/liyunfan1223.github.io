@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="XCPC,exgcd," />
+  <meta name="keywords" content="XCPC," />
 
 
 
@@ -79,18 +79,17 @@
 
 
 
-<meta name="description" content="数 论 只 会 g c d但 是 也 比 不 会 好">
+<meta name="description" content="A.读不懂古神语的程序员不是一个合格的探险家二分题，要设计一个两次查询使得问题规模缩减一半的算法，然后发现整个区间可以分成上升段和下降段，就可以通过选两个点，根据不同的单调性和数值组合可以判断最高点在这两点之间还是之外，就可以二分了 比赛的时候wa了62发还没过，一开始是二分条件没写完整，应该判三种情况（左升右降、左升右升且左大于右、左降右降且左小于右，三种情况下选择区间内），后来好像是因为1这个">
 <meta property="og:type" content="article">
-<meta property="og:title" content="扩展欧几里得算法（乘法逆元、不定方程求整数解）">
-<meta property="og:url" content="http://example.com/2020/07/20/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95%EF%BC%88%E4%B9%98%E6%B3%95%E9%80%86%E5%85%83%E3%80%81%E4%B8%8D%E5%AE%9A%E6%96%B9%E7%A8%8B%E6%B1%82%E6%95%B4%E6%95%B0%E8%A7%A3%EF%BC%89/index.html">
+<meta property="og:title" content="EOJ-2021.3月赛">
+<meta property="og:url" content="http://example.com/2021/03/21/EOJ-2021-3%E6%9C%88%E8%B5%9B/index.html">
 <meta property="og:site_name" content="MorphLing&#39;s Blog">
-<meta property="og:description" content="数 论 只 会 g c d但 是 也 比 不 会 好">
+<meta property="og:description" content="A.读不懂古神语的程序员不是一个合格的探险家二分题，要设计一个两次查询使得问题规模缩减一半的算法，然后发现整个区间可以分成上升段和下降段，就可以通过选两个点，根据不同的单调性和数值组合可以判断最高点在这两点之间还是之外，就可以二分了 比赛的时候wa了62发还没过，一开始是二分条件没写完整，应该判三种情况（左升右降、左升右升且左大于右、左降右降且左小于右，三种情况下选择区间内），后来好像是因为1这个">
 <meta property="og:locale">
-<meta property="article:published_time" content="2020-07-19T16:47:42.000Z">
-<meta property="article:modified_time" content="2021-03-13T10:36:14.920Z">
+<meta property="article:published_time" content="2021-03-21T11:18:51.000Z">
+<meta property="article:modified_time" content="2021-03-21T13:52:07.474Z">
 <meta property="article:author" content="Yunfan Li">
 <meta property="article:tag" content="XCPC">
-<meta property="article:tag" content="exgcd">
 <meta name="twitter:card" content="summary">
 
 
@@ -121,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2020/07/20/扩展欧几里得算法（乘法逆元、不定方程求整数解）/"/>
+  <link rel="canonical" href="http://example.com/2021/03/21/EOJ-2021-3月赛/"/>
 
 
 
 
 
-  <title>扩展欧几里得算法（乘法逆元、不定方程求整数解） | MorphLing's Blog</title>
+  <title>EOJ-2021.3月赛 | MorphLing's Blog</title>
   
 
 
@@ -248,7 +247,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/07/20/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95%EF%BC%88%E4%B9%98%E6%B3%95%E9%80%86%E5%85%83%E3%80%81%E4%B8%8D%E5%AE%9A%E6%96%B9%E7%A8%8B%E6%B1%82%E6%95%B4%E6%95%B0%E8%A7%A3%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/21/EOJ-2021-3%E6%9C%88%E8%B5%9B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -265,7 +264,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">扩展欧几里得算法（乘法逆元、不定方程求整数解）</h1>
+          <h1 class="post-title" itemprop="name headline">EOJ-2021.3月赛</h1>
         
 
         <div class="post-meta">
@@ -277,8 +276,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-20T00:47:42+08:00">
-                2020-07-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-21T19:18:51+08:00">
+                2021-03-21
               </time>
             
 
@@ -315,33 +314,37 @@
       
 
       
-        <p>数 论 只 会 g c d<br>但 是 也 比 不 会 好<br><a id="more"></a></p>
-<h2 id="欧几里得算法（辗转相除法）"><a href="#欧几里得算法（辗转相除法）" class="headerlink" title="欧几里得算法（辗转相除法）"></a>欧几里得算法（辗转相除法）</h2><p>也就是$gcd(a,b)=gcd(b,a\%b)$</p>
-<p>知乎上看到了一个比较好的证明（证明过程不重要）：</p>
-<p>我们只需要证明a,b的公因数集等于b,a%b的公因数集，那么这两个集合里的最大值肯定也相等，即$gcd(a,b)=gcd(b,a\%b)$</p>
-<p>设$a=bq+r$，要证明：若d是a和b的公因数，当且仅当d是b和r的公因数</p>
-<p>1）设d是a和b的公因数，则d|a且d|b，于是d|(a-bq)，也就是d|r —&gt; d是b，r的公因数<br>2）设d是b和r的公因数，则d|b且d|r，于是d|(bq+r)，也就是d|a —&gt; d是a，b的公因数<br>综上，a,b的所有公因数和b,r的所有公因数是一样的。那么，d是a和b的最大公因数，当且仅当d是b和r的最大公因数，即$gcd(a,b)=d=gcd(b,a\%b)$</p>
-<h2 id="扩展欧几里得算法"><a href="#扩展欧几里得算法" class="headerlink" title="扩展欧几里得算法"></a>扩展欧几里得算法</h2><p>这个算法说到底就是用来解决：求$ax+by=c$的整数解。</p>
-<p>至于求乘法逆元之类的应用其实应该和算法本身是独立的，应该分开来讲。</p>
-<p>先讲如何求解。</p>
-<h3 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h3><p>首先根据裴蜀定理，这个方程有解，当且仅当$c\%gcd(a,b)=0$，或者说c是gcd(a,b)的整数倍。（裴蜀定理的证明放在后面，依然不重要）</p>
-<p>不妨设$ax+by=gcd(a,b)$，由欧几里得算法，$gcd(a,b)=gcd(b,a\%b)$，</p>
-<p>因此$ax+by=gcd(a,b)=gcd(b,a\%b)=bx’+(a\%b)y’$</p>
-<p>这里求x，y的解需要利用递推的思想。假设已知上一层x’和y‘，如何推导出当前x，y的值？这里需要稍微手算一下。</p>
-<p>把a%b写成a-a/b*b，于是得到$ax+by=bx’+(a-a/b*b)y’=ay’+b(x’-a/b*y’)$</p>
-<p>通过计算得到$x=y’,y=x’-a/b*y’$</p>
-<p>ok，现在已经找到了由上一层解推出当前层解的递推关系了，那么递推的出口在哪里呢？</p>
-<p>由于每递归一层，a和b的变化是：a=b,b=a%b，就相当于做了一层辗转相除法。所以最终，当a=gcd,b=0时，这个方程就变成了</p>
-<p><script type="math/tex">gcd*x+0*y=gcd</script>此时x=1，y=0就是一组特解（其实y也可以不为0，但是没必要，还可能导致爆int之类的）。找到解后就可以回溯，递推计算出每一层的x，y了。</p>
-<p>于是顺便证明一下裴蜀定理（老证明癌了）：</p>
-<p>充分性：若$c\%gcd(a,b)=0$的倍数，那么总是可以通过上面的扩欧算法求出一组整数解。<br>必要性：若$ax+by=c$存在整数解$ax_1+by_1=c$ (x1,y1为具体整数)，设d是a,b的最大公因数即d|a,d|b，于是d|(ax1+by1)，即d|c，$c\%gcd(a,b)=0$<br>证毕</p>
-<h3 id="扩欧板子"><a href="#扩欧板子" class="headerlink" title="扩欧板子"></a>扩欧板子</h3><p>非常简洁的两行代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Exgcd</span><span class="params">(ll a, ll b, ll &amp;x, ll &amp;y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!b) x = <span class="number">1</span>, y = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> Exgcd(b, a % b, y, x), y -= a / b * x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>由于$ax+by=ax+ab+by-ab=a(x+b)+b(y-a)$，也就是$x’=x+b,y’=y-a$同样是方程的解<br>所以有时对x或y取值范围有要求（比如要求为正整数）就可以通过同时修改x和y来进行调整，比如说<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Exgcd(a,b,x,y);</span><br><span class="line"><span class="keyword">while</span>(x&lt;<span class="number">0</span>) x+=b,y-=a;</span><br></pre></td></tr></table></figure><br>或者直接写成<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = (x % b + b) % b;</span><br></pre></td></tr></table></figure></p>
-<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>把扩欧算法讲清楚之后，具体怎么应用其实就要自己判断了。比如说比较常见的的通过扩欧求乘法逆元</p>
-<p>求a在mod b意义下的逆元，即求$ax\equiv1(mod\ b)$ </p>
-<p>把这个式子化一下，其实就变成求$ax+by=1$中x的整数解的问题</p>
-<p>根据裴蜀定理，这个不定方程有整数解的前提是gcd(a,b)=1，即a，b互质。（而保证互质的一个方法是令a或b为一个大质数，比如998244353或者1e9+7之类的，所以如果题目莫名给了一个大质数或者a，b互质的条件，很可能就是在保证扩欧方程有解的前提）</p>
-<p>把a，b带入方程之后算出x，并调整x的范围即可。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Exgcd</span><span class="params">(ll a, ll b, ll &amp;x, ll &amp;y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!b) x = <span class="number">1</span>, y = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> Exgcd(b, a % b, y, x), y -= a / b * x;</span><br><span class="line">&#125;</span><br><span class="line">ll x, y;</span><br><span class="line">Exgcd (a, p, x, y);</span><br><span class="line">x = (x % p + p) % p;</span><br><span class="line"><span class="built_in">printf</span> (<span class="string">&quot;%d\n&quot;</span>, x); <span class="comment">//x是a在mod p下的逆元</span></span><br></pre></td></tr></table></figure></p>
-<p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/problem/209388">Fraction Construction Problem</a><br>有时题目要求计算$ax-by=c$，这时候只需要转化成$ax+b(-y)=c$，最后y取相反数就可以了。</p>
+        <h1 id="A-读不懂古神语的程序员不是一个合格的探险家"><a href="#A-读不懂古神语的程序员不是一个合格的探险家" class="headerlink" title="A.读不懂古神语的程序员不是一个合格的探险家"></a><a target="_blank" rel="noopener" href="https://acm.ecnu.edu.cn/contest/375/problem/A/">A.读不懂古神语的程序员不是一个合格的探险家</a></h1><p>二分题，要设计一个两次查询使得问题规模缩减一半的算法，然后发现整个区间可以分成上升段和下降段，就可以通过选两个点，根据不同的单调性和数值组合可以判断最高点在这两点之间还是之外，就可以二分了</p>
+<p>比赛的时候wa了62发还没过，一开始是二分条件没写完整，应该判三种情况（左升右降、左升右升且左大于右、左降右降且左小于右，三种情况下选择区间内），后来好像是因为1这个点没判清楚，其实可以查到1就换下一个点继续查会比较保险，这样总查询次数最多就+1。</p>
+<h1 id="D-关于小方的爆款桌游还没面世就要夭折这回事"><a href="#D-关于小方的爆款桌游还没面世就要夭折这回事" class="headerlink" title="D.关于小方的爆款桌游还没面世就要夭折这回事"></a><a target="_blank" rel="noopener" href="https://acm.ecnu.edu.cn/contest/375/problem/D/">D.关于小方的爆款桌游还没面世就要夭折这回事</a></h1><p>花了好久才过的签到题，确实是sb了但是也是忘记了可以用对称思维做博弈。m为奇数时必胜，先手方可以先把中间占了，然后对称模仿后手方的操作，m为偶数则必败，后手可以模仿先手。</p>
+<h1 id="E-蟹老板的梦幻传送门真的能让宅男走出家门吗"><a href="#E-蟹老板的梦幻传送门真的能让宅男走出家门吗" class="headerlink" title="E. 蟹老板的梦幻传送门真的能让宅男走出家门吗"></a><a target="_blank" rel="noopener" href="https://acm.ecnu.edu.cn/contest/375/problem/E/">E. 蟹老板的梦幻传送门真的能让宅男走出家门吗</a></h1><p>卧槽，我本来想证明一下我那个二分答案做法的正确性，然后证着证着发现只要把两个传送门分别丢在左右两端就一定是最优的，然后交上去也真的过了，我服了。</p>
+<p>以下是原过程：</p>
+<p>这题其实可以$O(n)$，但是受到上海D题影响第一时间想到的是二分，应该也是正确的。</p>
+<p>二分想法是这样的，首先可以发现最远的路径至少一个端点是在最边上的端点的，而另一个点要么是另一个端点，要么是传送门中点左右的两个点。比如说这六个点（左端点、左门、中点左边、中点右边、右门、右端点）分别是$l, pl,ml,mr, pr, r$，其中$len=pr-pl$表示两个门之间的距离，那么对于左端点，$ans$就是以下几个值取最大</p>
+<ul>
+<li>左右端点$r-l-len$</li>
+<li>不利用传送门走的最远的点$ml-l$</li>
+<li>利用传送门然后回头走的最远的点$pl-l+pr-mr$</li>
+</ul>
+<p>右端点同理</p>
+<ul>
+<li>$r-mr$</li>
+<li>$r-pr+(ml-pl)$</li>
+</ul>
+<p>然后先证一下为什么传送门一定要对称放在正中间，因为不管怎么摆第一个值$r-l-len$都是固定的</p>
+<p>剩下四个值可以改写成</p>
+<ul>
+<li>$(pl-l)+(ml-pl)$</li>
+<li>$(pl-l)+(pr-mr)$</li>
+<li>$(r-pr)+(pr-mr)$</li>
+<li>$(r-pr)+(ml-pl)$</li>
+</ul>
+<p>其实就是第一个位置的两种选择和第二个位置的两种选择，两两组合之后的四种可能。。然后可以发现把这两个门对称摆中间是最优解之一（好像不是那么显然，可以这样考虑，放中间时前两个值能保证相等，每偏离中间1个单位长度，前两个值(pl-l)和(r-pr)的max会增加2，但这最多使后一个值(ml-pl)和(pr-mr)的max减少2，所以不管怎么偏离中间都没法使答案变得更优）</p>
+<p>然后重点来了，在此基础上可以发现，除了左右端点的值随着$r-l-len$随着$len$变大而递减，我在比赛的时候认为其他值的max会随着$len$变大而递减，然而，实际上其实其他值的max也是随$len$变大而递减的啊，因为ml，mr都定下来了，然后只要使$(pl-l)$和$(r-pr)$尽可能小就行了，那最优的方案肯定是$len$取到最大值，把传送门丢在左右两端。</p>
+<p>啊，那还要啥二分啊。</p>
+<p>所以结论就是直接把传送门丢左右两端，然后遍历所有点到左右端的最小距离的最大值，就好了（？）</p>
+<p>代码就是这样：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e6</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, a[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">    sort(a + <span class="number">1</span>, a + <span class="number">1</span> + n);</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        res = max(res, min(a[i] - a[<span class="number">1</span>], a[n] - a[i]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; res;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -361,8 +364,6 @@
           
             <a href="/tags/XCPC/" rel="tag"># XCPC</a>
           
-            <a href="/tags/exgcd/" rel="tag"># exgcd</a>
-          
         </div>
       
 
@@ -374,8 +375,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/09/CDQ%E5%88%86%E6%B2%BB%E5%92%8C%E5%A4%9A%E7%BB%B4%E5%81%8F%E5%BA%8F%E9%97%AE%E9%A2%98/" rel="next" title="CDQ分治和多维偏序问题">
-                <i class="fa fa-chevron-left"></i> CDQ分治和多维偏序问题
+              <a href="/2021/03/20/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1%E7%AC%94%E8%AE%B0-3%E6%9C%88/" rel="next" title="概率论与数理统计笔记-3月">
+                <i class="fa fa-chevron-left"></i> 概率论与数理统计笔记-3月
               </a>
             
           </div>
@@ -383,10 +384,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/10/08/%E7%82%B9%E5%88%86%E6%B2%BB(%E6%A0%91%E5%88%86%E6%B2%BB)%E4%B8%93%E9%A2%98/" rel="prev" title="点分治(树分治)专题">
-                点分治(树分治)专题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -531,7 +528,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95%EF%BC%88%E8%BE%97%E8%BD%AC%E7%9B%B8%E9%99%A4%E6%B3%95%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">欧几里得算法（辗转相除法）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">扩展欧几里得算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E8%A7%A3"><span class="nav-number">2.1.</span> <span class="nav-text">求解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E6%AC%A7%E6%9D%BF%E5%AD%90"><span class="nav-number">2.2.</span> <span class="nav-text">扩欧板子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8"><span class="nav-number">2.3.</span> <span class="nav-text">应用</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A-%E8%AF%BB%E4%B8%8D%E6%87%82%E5%8F%A4%E7%A5%9E%E8%AF%AD%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%91%98%E4%B8%8D%E6%98%AF%E4%B8%80%E4%B8%AA%E5%90%88%E6%A0%BC%E7%9A%84%E6%8E%A2%E9%99%A9%E5%AE%B6"><span class="nav-number">1.</span> <span class="nav-text">A.读不懂古神语的程序员不是一个合格的探险家</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#D-%E5%85%B3%E4%BA%8E%E5%B0%8F%E6%96%B9%E7%9A%84%E7%88%86%E6%AC%BE%E6%A1%8C%E6%B8%B8%E8%BF%98%E6%B2%A1%E9%9D%A2%E4%B8%96%E5%B0%B1%E8%A6%81%E5%A4%AD%E6%8A%98%E8%BF%99%E5%9B%9E%E4%BA%8B"><span class="nav-number">2.</span> <span class="nav-text">D.关于小方的爆款桌游还没面世就要夭折这回事</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#E-%E8%9F%B9%E8%80%81%E6%9D%BF%E7%9A%84%E6%A2%A6%E5%B9%BB%E4%BC%A0%E9%80%81%E9%97%A8%E7%9C%9F%E7%9A%84%E8%83%BD%E8%AE%A9%E5%AE%85%E7%94%B7%E8%B5%B0%E5%87%BA%E5%AE%B6%E9%97%A8%E5%90%97"><span class="nav-number">3.</span> <span class="nav-text">E. 蟹老板的梦幻传送门真的能让宅男走出家门吗</span></a></li></ol></div>
             
 
           </div>
