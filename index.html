@@ -313,40 +313,14 @@
 
       
         
-          
-            <h1 id="A-读不懂古神语的程序员不是一个合格的探险家"><a href="#A-读不懂古神语的程序员不是一个合格的探险家" class="headerlink" title="A.读不懂古神语的程序员不是一个合格的探险家"></a><a target="_blank" rel="noopener" href="https://acm.ecnu.edu.cn/contest/375/problem/A/">A.读不懂古神语的程序员不是一个合格的探险家</a></h1><p>二分题，要设计一个两次查询使得问题规模缩减一半的算法，然后发现整个区间可以分成上升段和下降段，就可以通过选两个点，根据不同的单调性和数值组合可以判断最高点在这两点之间还是之外，就可以二分了</p>
-<p>比赛的时候wa了62发还没过，一开始是二分条件没写完整，应该判三种情况（左升右降、左升右升且左大于右、左降右降且左小于右，三种情况下选择区间内），后来好像是因为1这个点没判清楚，其实可以查到1就换下一个点继续查会比较保险，这样总查询次数最多就+1。</p>
-<h1 id="D-关于小方的爆款桌游还没面世就要夭折这回事"><a href="#D-关于小方的爆款桌游还没面世就要夭折这回事" class="headerlink" title="D.关于小方的爆款桌游还没面世就要夭折这回事"></a><a target="_blank" rel="noopener" href="https://acm.ecnu.edu.cn/contest/375/problem/D/">D.关于小方的爆款桌游还没面世就要夭折这回事</a></h1><p>花了好久才过的签到题，确实是sb了但是也是忘记了可以用对称思维做博弈。m为奇数时必胜，先手方可以先把中间占了，然后对称模仿后手方的操作，m为偶数则必败，后手可以模仿先手。</p>
-<h1 id="E-蟹老板的梦幻传送门真的能让宅男走出家门吗"><a href="#E-蟹老板的梦幻传送门真的能让宅男走出家门吗" class="headerlink" title="E. 蟹老板的梦幻传送门真的能让宅男走出家门吗"></a><a target="_blank" rel="noopener" href="https://acm.ecnu.edu.cn/contest/375/problem/E/">E. 蟹老板的梦幻传送门真的能让宅男走出家门吗</a></h1><p>卧槽，我本来想证明一下我那个二分答案做法的正确性，然后证着证着发现只要把两个传送门分别丢在左右两端就一定是最优的，然后交上去也真的过了，我服了。</p>
-<p>以下是原过程：</p>
-<p>这题其实可以$O(n)$，但是受到上海D题影响第一时间想到的是二分，应该也是正确的。</p>
-<p>二分想法是这样的，首先可以发现最远的路径至少一个端点是在最边上的端点的，而另一个点要么是另一个端点，要么是传送门中点左右的两个点。比如说这六个点（左端点、左门、中点左边、中点右边、右门、右端点）分别是$l, pl,ml,mr, pr, r$，其中$len=pr-pl$表示两个门之间的距离，那么对于左端点，$ans$就是以下几个值取最大</p>
-<ul>
-<li>左右端点$r-l-len$</li>
-<li>不利用传送门走的最远的点$ml-l$</li>
-<li>利用传送门然后回头走的最远的点$pl-l+pr-mr$</li>
-</ul>
-<p>右端点同理</p>
-<ul>
-<li>$r-mr$</li>
-<li>$r-pr+(ml-pl)$</li>
-</ul>
-<p>然后先证一下为什么传送门一定要对称放在正中间，因为不管怎么摆第一个值$r-l-len$都是固定的</p>
-<p>剩下四个值可以改写成</p>
-<ul>
-<li>$(pl-l)+(ml-pl)$</li>
-<li>$(pl-l)+(pr-mr)$</li>
-<li>$(r-pr)+(pr-mr)$</li>
-<li>$(r-pr)+(ml-pl)$</li>
-</ul>
-<p>其实就是第一个位置的两种选择和第二个位置的两种选择，两两组合之后的四种可能。。然后可以发现把这两个门对称摆中间是最优解之一（好像不是那么显然，可以这样考虑，放中间时前两个值能保证相等，每偏离中间1个单位长度，前两个值(pl-l)和(r-pr)的max会增加2，但这最多使后一个值(ml-pl)和(pr-mr)的max减少2，所以不管怎么偏离中间都没法使答案变得更优）</p>
-<p>然后重点来了，在此基础上可以发现，除了左右端点的值随着$r-l-len$随着$len$变大而递减，我在比赛的时候认为其他值的max会随着$len$变大而递减，然而，实际上其实其他值的max也是随$len$变大而递减的啊，因为ml，mr都定下来了，然后只要使$(pl-l)$和$(r-pr)$尽可能小就行了，那最优的方案肯定是$len$取到最大值，把传送门丢在左右两端。</p>
-<p>啊，那还要啥二分啊。</p>
-<p>所以结论就是直接把传送门丢左右两端，然后遍历所有点到左右端的最小距离的最大值，就好了（？）</p>
-<p>代码就是这样：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e6</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, a[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">    sort(a + <span class="number">1</span>, a + <span class="number">1</span> + n);</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        res = max(res, min(a[i] - a[<span class="number">1</span>], a[n] - a[i]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; res;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
+          <p><br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/03/21/EOJ-2021-3%E6%9C%88%E8%B5%9B/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
