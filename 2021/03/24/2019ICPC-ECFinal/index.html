@@ -80,13 +80,13 @@
 
 
 <meta property="og:type" content="article">
-<meta property="og:title" content="2019ICPC ECFinal">
+<meta property="og:title" content="2019ICPC ecfinal">
 <meta property="og:url" content="http://example.com/2021/03/24/2019ICPC-ECFinal/index.html">
 <meta property="og:site_name" content="MorphLing&#39;s Blog">
 <meta property="og:locale">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/image-20210324192008283.png">
 <meta property="article:published_time" content="2021-03-24T11:19:55.000Z">
-<meta property="article:modified_time" content="2021-03-24T14:32:41.656Z">
+<meta property="article:modified_time" content="2021-03-24T14:37:16.685Z">
 <meta property="article:author" content="Yunfan Li">
 <meta property="article:tag" content="XCPC">
 <meta name="twitter:card" content="summary">
@@ -126,7 +126,7 @@
 
 
 
-  <title>2019ICPC ECFinal | MorphLing's Blog</title>
+  <title>2019ICPC ecfinal | MorphLing's Blog</title>
   
 
 
@@ -264,7 +264,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">2019ICPC ECFinal</h1>
+          <h1 class="post-title" itemprop="name headline">2019ICPC ecfinal</h1>
         
 
         <div class="post-meta">
@@ -330,7 +330,7 @@
 <h1 id="H-King"><a href="#H-King" class="headerlink" title="H.King"></a><a target="_blank" rel="noopener" href="https://codeforces.com/gym/102471/problem/H">H.King</a></h1><p>ZRC &amp; LYF</p>
 <p>找出模意义下的最长等比数列的长度，若长度$&lt;\frac{n}{2}$则只要输出-1</p>
 <p>只考虑长度$\geqslant \frac{n}{2}$的情况，可以发现很密集，随机选择一个数$a_i$，那么$a_i$与$a_{i+1}$或者$a_i$与$a_{i+2}$是等比数列上相邻的两个数这一事件的概率是很大的，对于随机数据来说应该是$\frac{3}{8}$，但是对于构造过的数据好像不太好算，但是概率还是比较高的。只要选中一次，用这个比值来$O(n)$计算这一比值下等比数列的长度，那么得到的结果就是正确答案。只要随机选择几十次，选中的概率就趋近于1了。</p>
-<p>还有一个想法是对于每个数$a_i$，记录和$a_{i+1}$和$a_{i+2}$的比值，这样记录2n个比值，可以发现，最长等比数列的比值一定会出现至少$\frac{n}{4}$次（构造一种比值出现次数最少的情况，前$\frac{n}{4}$个数每隔两个空放一个，占用$\frac{3n}{4}$个空位，后面$\frac{n}{4}$个数相邻放置）。这样的比值最多只有8个，以此验证取最大值即可。</p>
+<p>还有一个想法是对于每个数$a_i$，记录和$a_{i+1}$和$a_{i+2}$的比值，这样记录2n个比值，可以发现，最长等比数列的比值一定会出现至少$\frac{n}{4}$次（可能还不止）（构造一种比值出现次数最少的情况，前$\frac{n}{4}$个数每隔两个空放一个，占用$\frac{3n}{4}$个空位，后面$\frac{n}{4}$个数相邻放置）。这样的比值最多只有8个，以此验证取最大值即可。</p>
 <h1 id="M-Value"><a href="#M-Value" class="headerlink" title="M.Value"></a><a target="_blank" rel="noopener" href="https://codeforces.com/gym/102471/problem/M">M.Value</a></h1><p>ZRC</p>
 <p>枚举$i$，把所有$i^k$取出来，发现最多当$i=2$时有20个数，且个数随$i$增大下降的非常快，可以直接暴力枚举</p>
 
