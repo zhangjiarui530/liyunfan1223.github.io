@@ -86,7 +86,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/image-20210324192008283.png">
 <meta property="article:published_time" content="2021-03-24T11:19:55.000Z">
-<meta property="article:modified_time" content="2021-03-24T14:37:16.685Z">
+<meta property="article:modified_time" content="2021-03-24T14:37:46.069Z">
 <meta property="article:author" content="Yunfan Li">
 <meta property="article:tag" content="XCPC">
 <meta name="twitter:card" content="summary">
@@ -321,7 +321,7 @@
 <h1 id="E-Flow"><a href="#E-Flow" class="headerlink" title="E.Flow"></a><a target="_blank" rel="noopener" href="https://codeforces.com/gym/102471/problem/E">E.Flow</a></h1><p>合作 &amp; LYF写</p>
 <p>题意：给定一张网络图，边带权，1为起点n为终点，1到n的每条路径都没有交点，且每条路径长度都相同。可以进行任意次操作，每次操作使得一条边容量-1，另一条边容量+1，问使得最大流达到最大的前提下，最少的操作数。</p>
 <p>一开始读错题浪费了好多时间</p>
-<p>然后WD提供了一个贪心的思路，就是先把能跑的流全部跑掉，这时候每条路径的残余网络边的最小值一定为0，然后把路径根据边值为0的个数从小到大排序，优先从最大的边填个数小的边一定是最优的。</p>
+<p>然后WD提供了一个贪心的思路，就是先把能跑的流全部跑掉，这时候每条路径的残余网络边的最小值一定为0，然后把路径根据边值为0的个数从小到大排序，优先从填个数小的边一定是最优的。</p>
 <p>发现可以优化一下这个过程：对于每条路径和$i\in[0,len]$（$len$为路径长度）可以预处理出，有多少流量是可以通过只填$i$个值为0的边来使其产生流量的。预处理完之后把所有路径的情况累加起来，就可以从小到大贪心了。</p>
 <p>这个过程中不需要关心容量被减的是哪条边，因为可以到最后再选择那些仍然&gt;0的边来作为被减的。</p>
 <h1 id="G-Happiness"><a href="#G-Happiness" class="headerlink" title="G.Happiness"></a><a target="_blank" rel="noopener" href="https://codeforces.com/gym/102471/problem/G">G.Happiness</a></h1><p>LYF 大模拟</p>
