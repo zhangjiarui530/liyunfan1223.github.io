@@ -1838,7 +1838,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffe3b8;
+  background: #ff87dd;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3042,4 +3042,21 @@ body {
   background-color: #ffb888;
   background-clip: padding-box;
   min-height: 28px;
+}
+.site-author-image {
+  display: block;
+  margin: 0 auto;
+  padding: 2px;
+  max-width: 120px;
+  height: auto;
+  border: 1px solid #eee;
+  border-radius: 60%;
+  transition: 2.5s all;
+}
+.site-author-image:hover {
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+  -o-transform: rotate(360deg);
+  transform: rotate(360deg);
 }
