@@ -88,7 +88,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/image-20210320102818011.png">
 <meta property="article:published_time" content="2021-03-18T15:50:58.000Z">
-<meta property="article:modified_time" content="2021-03-20T02:30:22.457Z">
+<meta property="article:modified_time" content="2021-03-30T02:57:57.923Z">
 <meta property="article:author" content="MorphLing">
 <meta property="article:tag" content="XCPC">
 <meta property="article:tag" content="codeforces">
@@ -339,6 +339,7 @@
 </ul>
 <p>然后其实hard也做完了，因为只要先给k-3个1，然后对n-k+3做第一小问就做完了</p>
 <p>但是如果跳过easy直接看hard应该会困难很多</p>
+<h1 id="D-Genius"><a href="#D-Genius" class="headerlink" title="D. Genius"></a><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1497/problem/D">D. Genius</a></h1><p>把问题转化成一张图，$(i,j)$的边权为$c_i-c_j$，根据二进制理论可以发现每条边权唯一，而且每种方案的顺序一定按照边权从小到大进行，于是可以根据边权从小到大考虑问题，用$dp[i]$表示最后走到$i$这个点时最大的答案，那么按照从小到大的顺序考虑边，逐条做松弛操作就可以求解了</p>
 <h1 id="E-Square-free-division"><a href="#E-Square-free-division" class="headerlink" title="E. Square-free division"></a><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1497/problem/E2">E. Square-free division</a></h1><p>题意是这样，给出n个数，问最少分成连续的几段，使得段内任意两个数的乘积不是完全平方数</p>
 <p>一样是拆成easy和hard两道题，hard版本的区别在于可以修改k个数(k&lt;=20)</p>
 <p>首先考虑什么样的两个数乘积会是完全平方数，完全平方数拆成质因数乘积后，每个质因数的幂次一定是偶数，所以对于每个数，只要质因数分解，然后记录幂次的奇偶性就可以了，用$val[x]$记录转化后的结果，然后如果两个数a,b能乘起来是完全平方数，一定有$val[a]=val[b]$</p>
@@ -535,7 +536,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-k-LCM"><span class="nav-number">1.</span> <span class="nav-text">C. k-LCM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#E-Square-free-division"><span class="nav-number">2.</span> <span class="nav-text">E. Square-free division</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-k-LCM"><span class="nav-number">1.</span> <span class="nav-text">C. k-LCM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#D-Genius"><span class="nav-number">2.</span> <span class="nav-text">D. Genius</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#E-Square-free-division"><span class="nav-number">3.</span> <span class="nav-text">E. Square-free division</span></a></li></ol></div>
             
 
           </div>
@@ -592,7 +593,7 @@
 	
 	<!-- 添加博客全站总字数统计-->
 	<i class="fa fa-pencil"></i>
-	<span class="post-count">博客全站共 86.3k 字</span>
+	<span class="post-count">博客全站共 86.4k 字</span>
 </div>
 
 
