@@ -79,13 +79,15 @@
 
 
 
+<meta name="description" content="起因是这样的，最近算法课在上红黑树，写红黑树的时候肯定涉及一些内存管理的问题，主要是在插入结点的时候要用new分配一个新的结点，并在清空红黑树的时候把这些结点delete释放掉。 算法导论书上只提供了插入和删除操作的代码，但是因为要测试多组数据的运行时间，需要自己实现一个清空(destroy)操作。本着避免一切可能造成的内存泄漏的原则，一开始我写了完整的清空函数，也就是从根节点开始递归，回收每个结">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于c++内存回收（delete）对程序整体运行时间影响的疑问">
 <meta property="og:url" content="http://example.com/2020/11/16/%E5%85%B3%E4%BA%8Ec-%E5%86%85%E5%AD%98%E5%9B%9E%E6%94%B6%EF%BC%88delete%EF%BC%89%E5%AF%B9%E7%A8%8B%E5%BA%8F%E6%95%B4%E4%BD%93%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4%E5%BD%B1%E5%93%8D%E7%9A%84%E7%96%91%E9%97%AE/index.html">
 <meta property="og:site_name" content="MorphLing&#39;s Blog">
+<meta property="og:description" content="起因是这样的，最近算法课在上红黑树，写红黑树的时候肯定涉及一些内存管理的问题，主要是在插入结点的时候要用new分配一个新的结点，并在清空红黑树的时候把这些结点delete释放掉。 算法导论书上只提供了插入和删除操作的代码，但是因为要测试多组数据的运行时间，需要自己实现一个清空(destroy)操作。本着避免一切可能造成的内存泄漏的原则，一开始我写了完整的清空函数，也就是从根节点开始递归，回收每个结">
 <meta property="og:locale">
 <meta property="article:published_time" content="2020-11-16T15:03:53.000Z">
-<meta property="article:modified_time" content="2021-03-13T10:36:14.917Z">
+<meta property="article:modified_time" content="2021-04-06T12:39:53.454Z">
 <meta property="article:author" content="MorphLing">
 <meta property="article:tag" content="c++">
 <meta name="twitter:card" content="summary">
@@ -317,7 +319,7 @@
       
 
       
-        <p><br><br><a id="more"></a><br>起因是这样的，最近算法课在上红黑树，写红黑树的时候肯定涉及一些内存管理的问题，主要是在插入结点的时候要用new分配一个新的结点，并在清空红黑树的时候把这些结点delete释放掉。</p>
+        <p>起因是这样的，最近算法课在上红黑树，写红黑树的时候肯定涉及一些内存管理的问题，主要是在插入结点的时候要用new分配一个新的结点，并在清空红黑树的时候把这些结点delete释放掉。</p>
 <p>算法导论书上只提供了插入和删除操作的代码，但是因为要测试多组数据的运行时间，需要自己实现一个清空(destroy)操作。本着避免一切可能造成的内存泄漏的原则，一开始我写了完整的清空函数，也就是从根节点开始递归，回收每个结点的内存空间，其中我的结点和树定义如下。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">RBTColor</span>&#123;</span>RED, BLACK&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RBTNode</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    RBTColor color;</span><br><span class="line">    <span class="keyword">int</span> key;</span><br><span class="line">    RBTNode *lson;</span><br><span class="line">    RBTNode *rson;</span><br><span class="line">    RBTNode *parent;</span><br><span class="line">    RBTNode(RBTColor c, <span class="keyword">int</span> k) &#123;</span><br><span class="line">        color = c;</span><br><span class="line">        key = k;</span><br><span class="line">        lson = rson = parent = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RBTree</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    RBTree() &#123;</span><br><span class="line">        root = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        destroy(root);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">destroy</span><span class="params">(RBTNode *&amp;root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> ;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;lson) destroy(root-&gt;lson);</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;rson) destroy(root-&gt;rson);</span><br><span class="line">        <span class="keyword">delete</span> root;</span><br><span class="line">        root = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;rb_tree;</span><br></pre></td></tr></table></figure>
 <p>然而运行时感觉运行时间很奇怪，于是修改测试数据，测了5组规模一样的数据，发现只有第一次的运行时间是正常的，后面四次的时间明显大很多。进一步记录了一下destroy函数所占用的时间，结果如下。</p>
@@ -380,7 +382,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/11/03/csapp-datalab/" rel="next" title="csapp-datalab">
+              <a href="/2020/11/03/%E4%B8%93%E4%B8%9A%E8%AF%BE%E4%BD%9C%E4%B8%9A/csapp-datalab/" rel="next" title="csapp-datalab">
                 <i class="fa fa-chevron-left"></i> csapp-datalab
               </a>
             
@@ -464,7 +466,7 @@
               
                 <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -569,7 +571,7 @@
 	
 	<!-- 添加博客全站总字数统计-->
 	<i class="fa fa-pencil"></i>
-	<span class="post-count">博客全站共 90.6k 字</span>
+	<span class="post-count">博客全站共 91.1k 字</span>
 </div>
 
 
