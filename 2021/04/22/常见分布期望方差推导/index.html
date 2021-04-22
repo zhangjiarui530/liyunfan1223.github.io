@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="XCPC," />
+  <meta name="keywords" content="概率论," />
 
 
 
@@ -80,15 +80,18 @@
 
 
 <meta property="og:type" content="article">
-<meta property="og:title" content="EOJ-2021.3月赛">
-<meta property="og:url" content="http://example.com/2021/03/21/EOJ-2021-3%E6%9C%88%E8%B5%9B/index.html">
+<meta property="og:title" content="常见分布期望方差推导">
+<meta property="og:url" content="http://example.com/2021/04/22/%E5%B8%B8%E8%A7%81%E5%88%86%E5%B8%83%E6%9C%9F%E6%9C%9B%E6%96%B9%E5%B7%AE%E6%8E%A8%E5%AF%BC/index.html">
 <meta property="og:site_name" content="MorphLing&#39;s Blog">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-03-21T11:18:51.000Z">
-<meta property="article:modified_time" content="2021-04-07T13:40:23.963Z">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/image-20210328140630663.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/image-20210328140644346.png">
+<meta property="article:published_time" content="2021-04-22T15:00:09.000Z">
+<meta property="article:modified_time" content="2021-04-22T15:00:33.710Z">
 <meta property="article:author" content="MorphLing">
-<meta property="article:tag" content="XCPC">
+<meta property="article:tag" content="概率论">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/image-20210328140630663.png">
 
 
 
@@ -118,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2021/03/21/EOJ-2021-3月赛/"/>
+  <link rel="canonical" href="http://example.com/2021/04/22/常见分布期望方差推导/"/>
 
 
 
 
 
-  <title>EOJ-2021.3月赛 | MorphLing's Blog</title>
+  <title>常见分布期望方差推导 | MorphLing's Blog</title>
   
 
 
@@ -245,7 +248,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/21/EOJ-2021-3%E6%9C%88%E8%B5%9B/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/22/%E5%B8%B8%E8%A7%81%E5%88%86%E5%B8%83%E6%9C%9F%E6%9C%9B%E6%96%B9%E5%B7%AE%E6%8E%A8%E5%AF%BC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MorphLing">
@@ -262,7 +265,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">EOJ-2021.3月赛</h1>
+          <h1 class="post-title" itemprop="name headline">常见分布期望方差推导</h1>
         
 
         <div class="post-meta">
@@ -274,8 +277,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-21T19:18:51+08:00">
-                2021-03-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-22T23:00:09+08:00">
+                2021-04-22
               </time>
             
 
@@ -317,39 +320,51 @@
       
 
       
-        <p><br></p>
+        <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/image-20210328140630663.png" alt="image-20210328140630663"></p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/img/image-20210328140644346.png" alt="image-20210328140644346"></p>
 <a id="more"></a>
-<h1 id="XCPC-2021-Happy-Winter-Vacation"><a href="#XCPC-2021-Happy-Winter-Vacation" class="headerlink" title="XCPC 2021 Happy Winter Vacation"></a>XCPC 2021 Happy Winter Vacation</h1><h1 id="A-读不懂古神语的程序员不是一个合格的探险家"><a href="#A-读不懂古神语的程序员不是一个合格的探险家" class="headerlink" title="A.读不懂古神语的程序员不是一个合格的探险家"></a><a target="_blank" rel="noopener" href="https://acm.ecnu.edu.cn/contest/375/problem/A/">A.读不懂古神语的程序员不是一个合格的探险家</a></h1><p>二分题，要设计一个两次查询使得问题规模缩减一半的算法，然后发现整个区间可以分成上升段和下降段，就可以通过选两个点，根据不同的单调性和数值组合可以判断最高点在这两点之间还是之外，就可以二分了</p>
-<p>比赛的时候wa了62发还没过，一开始是二分条件没写完整，应该判三种情况（左升右降、左升右升且左大于右、左降右降且左小于右，三种情况下选择区间内），后来好像是因为1这个点没判清楚，其实可以查到1就换下一个点继续查会比较保险，这样总查询次数最多就+1。</p>
-<h1 id="D-关于小方的爆款桌游还没面世就要夭折这回事"><a href="#D-关于小方的爆款桌游还没面世就要夭折这回事" class="headerlink" title="D.关于小方的爆款桌游还没面世就要夭折这回事"></a><a target="_blank" rel="noopener" href="https://acm.ecnu.edu.cn/contest/375/problem/D/">D.关于小方的爆款桌游还没面世就要夭折这回事</a></h1><p>花了好久才过的签到题，确实是sb了但是也是忘记了可以用对称思维做博弈。m为奇数时必胜，先手方可以先把中间占了，然后对称模仿后手方的操作，m为偶数则必败，后手可以模仿先手。</p>
-<h1 id="E-蟹老板的梦幻传送门真的能让宅男走出家门吗"><a href="#E-蟹老板的梦幻传送门真的能让宅男走出家门吗" class="headerlink" title="E. 蟹老板的梦幻传送门真的能让宅男走出家门吗"></a><a target="_blank" rel="noopener" href="https://acm.ecnu.edu.cn/contest/375/problem/E/">E. 蟹老板的梦幻传送门真的能让宅男走出家门吗</a></h1><p>卧槽，我本来想证明一下我那个二分答案做法的正确性，然后证着证着发现只要把两个传送门分别丢在左右两端就一定是最优的，然后交上去也过了，我服了。</p>
-<p>以下是原过程：</p>
-<p>这题其实可以$O(n)$（哦不对因为要排序所以怎么也是$O(nlgn)$，指解决问题部分是$O(n)$），但是受到上海D题影响第一时间想到的是二分，应该也是正确的。</p>
-<p>二分想法是这样的，首先可以发现最远的路径至少一个端点是在最边上的端点的，而另一个点要么是另一个端点，要么是传送门中点左右的两个点。比如说这六个点（左端点、左门、中点左边、中点右边、右门、右端点）分别是$l, pl,ml,mr, pr, r$，其中$len=pr-pl$表示两个门之间的距离，那么对于左端点，$ans$就是以下几个值取最大</p>
-<ul>
-<li>左右端点$r-l-len$</li>
-<li>不利用传送门走的最远的点$ml-l$</li>
-<li>利用传送门然后回头走的最远的点$pl-l+pr-mr$</li>
-</ul>
-<p>右端点同理</p>
-<ul>
-<li>$r-mr$</li>
-<li>$r-pr+(ml-pl)$</li>
-</ul>
-<p>然后先证一下为什么传送门一定要对称放在正中间，因为不管怎么摆第一个值$r-l-len$都是固定的</p>
-<p>剩下四个值可以改写成</p>
-<ul>
-<li>$(pl-l)+(ml-pl)$</li>
-<li>$(pl-l)+(pr-mr)$</li>
-<li>$(r-pr)+(pr-mr)$</li>
-<li>$(r-pr)+(ml-pl)$</li>
-</ul>
-<p>其实就是第一个位置的两种选择和第二个位置的两种选择，两两组合之后的四种可能。。然后可以发现把这两个门对称摆中间是最优解之一（好像不是那么显然，可以这样考虑，放中间时前两个值能保证相等，每偏离中间1个单位长度，前两个值(pl-l)和(r-pr)的max会增加1，但这最多使后一个值(ml-pl)和(pr-mr)的max减少1，所以不管怎么偏离中间都没法使答案变得更优）</p>
-<p>然后重点来了，在此基础上可以发现，除了左右端点的值随着$r-l-len$随着$len$变大而递减，我在比赛的时候认为其他值的max会随着$len$变大而递增，然而，实际上其实其他值的max也是随$len$变大而递减的啊，因为ml，mr都定下来了，然后只要使$(pl-l)$和$(r-pr)$尽可能小就行了，那最优的方案肯定是$len$取到最大值，把传送门丢在左右两端。</p>
-<p>啊，那还要啥二分啊。</p>
-<p>所以结论就是直接把传送门丢左右两端，然后遍历所有点到左右端的最小距离的最大值，就好了（？）</p>
-<p>代码就是这样：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e6</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, a[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">    sort(a + <span class="number">1</span>, a + <span class="number">1</span> + n);</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        res = max(res, min(a[i] - a[<span class="number">1</span>], a[n] - a[i]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; res;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="0-1分布"><a href="#0-1分布" class="headerlink" title="0-1分布"></a>0-1分布</h2><p>$p_k=p^k(1-p)^{1-k},k=0,1$</p>
+<p>$E(X)=\sum\limits_{k=0}^1 kp^k(1-p)^{1-k}=p$</p>
+<p>$V(X)=E(X^2)-E(X)^2=p-p^2=p(1-p)$</p>
+<h2 id="二项分布-b-n-p"><a href="#二项分布-b-n-p" class="headerlink" title="二项分布$b(n,p)$"></a>二项分布$b(n,p)$</h2><p>$p_k=\binom{n}{k}p^k(1-p)^{n-k},k=0,1,…,n$</p>
+<p>$E(X)=\sum\limits_{k=0}^n k\binom{n}{k}p^k(1-p)^{n-k}=np\sum\limits_{k=1}^n\binom{n-1}{k-1}p^{k-1}(1-p)^{(n-1)-(k-1)}=np(p+(1-p))^n=np    $</p>
+<p>$V(X)=E(X^2)-E(X)^2=\sum\limits_{k=0}^nk^2\binom{n}{k}p^k(1-p)^{n-k}-E(X)^2\\=\sum\limits_{k=2}^nk(k-1)\binom{n}{k}p^k(1-p)^{n-k}+\sum\limits_{k=0}^nk\binom{n}{k}p^k(1-p)^{n-k}-E(X)^2=n(n-1)p^2+np-n^2p^2=np(1-p)$</p>
+<h2 id="泊松分布-P-lambda"><a href="#泊松分布-P-lambda" class="headerlink" title="泊松分布$P(\lambda)$"></a>泊松分布$P(\lambda)$</h2><p>$p_k=\frac{\lambda^k}{k!}e^{-\lambda k},k=0,1,…$</p>
+<p>$E(X)=\sum\limits_{k=0}^\infty k\frac{\lambda^k}{k!}e^{-\lambda}=\lambda e^{-\lambda}\sum\limits_{k=0}^\infty\frac{\lambda^k}{k!}=\lambda e^{-\lambda}e^\lambda=\lambda$</p>
+<p>$E(X^2)=\sum\limits_{k=0}^\infty k^2\frac{\lambda^k}{k!}e^{-\lambda}=\sum\limits_{k=0}^\infty [k(k-1)+k]\frac{\lambda^k}{k!}e^{-\lambda}=e^{-\lambda}\lambda^2\sum\limits_{k=0}^\infty \frac{\lambda^k}{k!}+\lambda=\lambda^2+\lambda$</p>
+<p>$V(X)=E(X^2)-E(X)^2=\lambda$</p>
+<h2 id="几何分布-Ge-p"><a href="#几何分布-Ge-p" class="headerlink" title="几何分布$Ge(p)$"></a>几何分布$Ge(p)$</h2><p>$p_k=(1-p)^{k-1}p,k=1,2,…$</p>
+<p>$E(X)=\sum\limits_{k=0}^\infty k(1-p)^{k-1}p=p\sum\limits_{k=0}^\infty [-(1-p)^k]’=p[\sum\limits_{k=0}^\infty -(1-p)^k]’=p(-\frac{1}{p})’=\frac{1}{p}$</p>
+<p>$E(X^2)=\sum\limits_{k=0}^\infty k^2(1-p)^{k-1}p=p\sum\limits_{k=0}^\infty <a href="1-p">k(k-1)+k</a>^{k-1}$</p>
+<p>其中$\sum\limits_{k=0}^\infty k(k-1)(1-p)^{k-1}=(1-p)\sum\limits_{k=0}^\infty [(1-p)^k]’’=(1-p)[\sum\limits_{k=0}^\infty (1-p)^k]’’=2p^{-3}(1-p)$</p>
+<p>所以$E(X^2)=2p^{-2}(1-p)+\frac{1}{p}$</p>
+<p>$V(X)=E(X^2)-E(X)^2=\frac{2(1-p)}{p^2}+\frac{1}{p}-\frac{1}{p^2}=\frac{1-p}{p^2}$</p>
+<h2 id="负二项分布-Nb-r-p"><a href="#负二项分布-Nb-r-p" class="headerlink" title="负二项分布$Nb(r,p)$"></a>负二项分布$Nb(r,p)$</h2><p>$p_k=\binom{k-1}{r-1}(1-p)^{k-r}p^r,k=r,r+1,…$</p>
+<p>$E(X)=\sum\limits_{k=r}^\infty k\binom{k-1}{r-1}p^r(1-p)^{k-r}=\frac{r}{p}\sum\limits_{k=r}^\infty \frac{k!}{(k-r)!r!}p^{r+1}(1-p)^{k-r}=\frac{r}{p}\sum\limits_{k=r+1}^\infty \binom{k-1}{r}p^{r+1}(1-p)^{k-1-r}=\frac{r}{p}$</p>
+<p>$E(X^2)=\sum\limits_{k=r}^\infty k^2\binom{k-1}{r-1}p^r(1-p)^{k-r}=\frac{r}{p}\sum\limits_{k=r+1}^\infty (k-1)\binom{k-1}{r}p^{r+1}(1-p)^{k-1-r}=\frac{r}{p}(\frac{r+1}{p}-1)=\frac{r^2+r-rp}{p^2}$</p>
+<p>$V(X)=E(X^2)-E(X)^2=\frac{r(1-p)}{p^2}$</p>
+<p>也可以把负二项分布理解成r次相互独立的几何分布，那么$E(X\sim Nb(r,p))=rE(X\sim Ge(p))=\frac{r}{p}$,$V(X\sim Nb(r,p))=rV(X\sim Ge(p))$（独立事件的期望和方差可以直接相加）</p>
+<h2 id="正态分布-N-mu-sigma-2"><a href="#正态分布-N-mu-sigma-2" class="headerlink" title="正态分布$N(\mu,\sigma^2)$"></a>正态分布$N(\mu,\sigma^2)$</h2><p>标准正态分布情况下：$p(x)=\frac{1}{\sqrt{2\pi}}\exp\{-\frac{x^2}{2}\},-\infty&lt;x&lt;\infty$</p>
+<p>$E(X)=\int_{-\infty}^\infty  xp(x)dx$，$xp(x)$为奇函数，积分为0，即$E(X)=0$</p>
+<p>$E(X^2)=\int_{-\infty}^\infty x^2\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}dx=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty xd(-e^{-\frac{x^2}{2}})=\frac{1}{\sqrt{2\pi}}[x(-e^{-\frac{x^2}{2}})|_{-\infty}^\infty-\int_{-\infty}^\infty -e^{-\frac{x^2}{2}}]=\frac{1}{\sqrt{2\pi}}\sqrt{2\pi}=1$</p>
+<p>$V(X)=E(X^2)-E(X)^2=1$</p>
+<p>若正态分布$U\sim N(\mu,\sigma^2)$，则$X=(U-\mu)/\sigma\sim N(0,1),U=\sigma X+\mu$</p>
+<p>所以</p>
+<p>$p(u)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\{-\frac{(x-\mu)^2}{2\sigma^2}\},-\infty&lt;x&lt;\infty$</p>
+<p>$E(U)=E(\sigma X+\mu)=\mu$</p>
+<p>$V(U)=V(\sigma X+\mu)=\sigma^2V(X)=\sigma^2$</p>
+<h2 id="均匀分布-U-a-b"><a href="#均匀分布-U-a-b" class="headerlink" title="均匀分布$U(a,b)$"></a>均匀分布$U(a,b)$</h2><p>$p(x)=\frac{1}{b-a},a&lt;x&lt;b$</p>
+<p>$E(X)=\int_a^b x\frac{1}{b-a}dx=\frac{1}{b-a}\frac{1}{2}(b-a)(b+a)=\frac{a+b}{2}$</p>
+<p>$E(X^2)=\int_a^bx^2\frac{1}{b-a}dx=\frac{1}{b-a}\frac{1}{3}(b^3-a^3)=\frac{1}{3(b-a)}(b-a)(b^2+ab+a^2)=\frac{a^2+ab+b^2}{3}$</p>
+<p>$V(X)=E(X^2)-E(X)^2=\frac{(b-a)^2}{12}$</p>
+<h2 id="指数分布-Exp-lambda"><a href="#指数分布-Exp-lambda" class="headerlink" title="指数分布$Exp(\lambda)$"></a>指数分布$Exp(\lambda)$</h2><p>$p(x)=\lambda e^{-\lambda x},x\geqslant 0$</p>
+<p>$E(X)=\int_0^\infty x\lambda e^{-\lambda x}dx=\lambda \int_0^\infty xd(\frac{1}{-\lambda}e^{-\lambda x})=\lambda(x\frac{1}{-\lambda}e^{-\lambda x}|_0^\infty -\int_0^\infty \frac{1}{-\lambda}e^{-\lambda x}dx)=\frac{1}{-\lambda}e^{-\lambda x}|_0^\infty=\frac{1}{\lambda}$</p>
+<p>$E(X^2)=\int_0^\infty \lambda x^2e^{-\lambda x}dx=\frac{\Gamma(3)}{\lambda^2}\{\int_0^\infty \frac{\lambda^3}{\Gamma(3)}x^2e^{-\lambda x}dx\}=\frac{2}{\lambda^2}$</p>
+<p>$Var(X)=E(X^2)-E(X)=\frac{1}{\lambda^2}$</p>
+<h2 id="伽马分布-Ga-alpha-lambda"><a href="#伽马分布-Ga-alpha-lambda" class="headerlink" title="伽马分布$Ga(\alpha, \lambda)$"></a>伽马分布$Ga(\alpha, \lambda)$</h2><p>$p(x)=\frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha - 1}e^{-\lambda x},x\geqslant 0$</p>
+<p>$E(X)=\int_0^\infty \frac{\lambda^\alpha}{\Gamma(\alpha)}x^\alpha e^{-\lambda x}dx=\{\int_0^\infty \frac{\lambda^{\alpha+1}}{\Gamma(\alpha+1)}x^\alpha e^{-\lambda x}dx\}\frac{\alpha}{\lambda}=\frac{\alpha}{\lambda}$</p>
+<p>$E(X^2)=\{\int_0^\infty \frac{\lambda^{\alpha+2}}{\Gamma(\alpha+2)}x^{\alpha+1}e^{-\lambda x}dx\}\frac{\alpha^2+\alpha}{\lambda^2}$</p>
+<p>$Var(X)=E(X^2)-E(X)^2=\frac{\alpha}{\lambda^2}$</p>
 
       
     </div>
@@ -367,7 +382,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/XCPC/" rel="tag"># XCPC</a>
+            <a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" rel="tag"># 概率论</a>
           
         </div>
       
@@ -380,8 +395,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/03/20/%E4%B8%93%E4%B8%9A%E8%AF%BE%E7%AC%94%E8%AE%B0/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1%E7%AC%94%E8%AE%B0-3%E6%9C%88/" rel="next" title="概率论与数理统计笔记 - 3月">
-                <i class="fa fa-chevron-left"></i> 概率论与数理统计笔记 - 3月
+              <a href="/2021/04/07/ICPC2021%E6%98%86%E6%98%8E/" rel="next" title="ICPC2021昆明">
+                <i class="fa fa-chevron-left"></i> ICPC2021昆明
               </a>
             
           </div>
@@ -389,10 +404,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2021/03/24/2019ICPC-ECFinal/" rel="prev" title="2019ICPC ecfinal">
-                2019ICPC ecfinal <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -537,7 +548,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#XCPC-2021-Happy-Winter-Vacation"><span class="nav-number">1.</span> <span class="nav-text">XCPC 2021 Happy Winter Vacation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#A-%E8%AF%BB%E4%B8%8D%E6%87%82%E5%8F%A4%E7%A5%9E%E8%AF%AD%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%91%98%E4%B8%8D%E6%98%AF%E4%B8%80%E4%B8%AA%E5%90%88%E6%A0%BC%E7%9A%84%E6%8E%A2%E9%99%A9%E5%AE%B6"><span class="nav-number">2.</span> <span class="nav-text">A.读不懂古神语的程序员不是一个合格的探险家</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#D-%E5%85%B3%E4%BA%8E%E5%B0%8F%E6%96%B9%E7%9A%84%E7%88%86%E6%AC%BE%E6%A1%8C%E6%B8%B8%E8%BF%98%E6%B2%A1%E9%9D%A2%E4%B8%96%E5%B0%B1%E8%A6%81%E5%A4%AD%E6%8A%98%E8%BF%99%E5%9B%9E%E4%BA%8B"><span class="nav-number">3.</span> <span class="nav-text">D.关于小方的爆款桌游还没面世就要夭折这回事</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#E-%E8%9F%B9%E8%80%81%E6%9D%BF%E7%9A%84%E6%A2%A6%E5%B9%BB%E4%BC%A0%E9%80%81%E9%97%A8%E7%9C%9F%E7%9A%84%E8%83%BD%E8%AE%A9%E5%AE%85%E7%94%B7%E8%B5%B0%E5%87%BA%E5%AE%B6%E9%97%A8%E5%90%97"><span class="nav-number">4.</span> <span class="nav-text">E. 蟹老板的梦幻传送门真的能让宅男走出家门吗</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-1%E5%88%86%E5%B8%83"><span class="nav-number">1.</span> <span class="nav-text">0-1分布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83-b-n-p"><span class="nav-number">2.</span> <span class="nav-text">二项分布$b(n,p)$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%8A%E6%9D%BE%E5%88%86%E5%B8%83-P-lambda"><span class="nav-number">3.</span> <span class="nav-text">泊松分布$P(\lambda)$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83-Ge-p"><span class="nav-number">4.</span> <span class="nav-text">几何分布$Ge(p)$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%9F%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83-Nb-r-p"><span class="nav-number">5.</span> <span class="nav-text">负二项分布$Nb(r,p)$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83-N-mu-sigma-2"><span class="nav-number">6.</span> <span class="nav-text">正态分布$N(\mu,\sigma^2)$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83-U-a-b"><span class="nav-number">7.</span> <span class="nav-text">均匀分布$U(a,b)$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83-Exp-lambda"><span class="nav-number">8.</span> <span class="nav-text">指数分布$Exp(\lambda)$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%BD%E9%A9%AC%E5%88%86%E5%B8%83-Ga-alpha-lambda"><span class="nav-number">9.</span> <span class="nav-text">伽马分布$Ga(\alpha, \lambda)$</span></a></li></ol></div>
             
 
           </div>
