@@ -1838,7 +1838,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #29260e;
+  background: #ffe34f;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3131,7 +3131,6 @@ pre .javascript .function {
 Custom styles.,
 body {
   background-image: linear-gradient(to right, #cef6f5, #e3f6ce);
-  background-color: #cef6f5;
 }
 .sidebar {
   opacity: 0.85;
