@@ -445,7 +445,7 @@ body {
 .header-inner {
   margin: 0 auto;
   padding: 100px 0 70px;
-  width: 950px;
+  width: calc(100% - 252px);
 }
 @media (min-width: 1600px) {
   .container .header-inner {
@@ -457,7 +457,7 @@ body {
 }
 .main-inner {
   margin: 0 auto;
-  width: 950px;
+  width: calc(100% - 252px);
 }
 @media (min-width: 1600px) {
   .container .main-inner {
@@ -474,7 +474,7 @@ body {
 .footer-inner {
   box-sizing: border-box;
   margin: 20px auto;
-  width: 950px;
+  width: calc(100% - 252px);
 }
 @media (min-width: 1600px) {
   .container .footer-inner {
@@ -944,7 +944,7 @@ pre .javascript .function {
   background: #fff;
   border: 2px solid #555;
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: 2px;
   transition-property: background-color;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
@@ -1112,9 +1112,9 @@ pre .javascript .function {
   position: relative;
   display: inline-block;
   padding: 0 40px;
+  color: #fff;
   background: #222;
   border-bottom: none;
-  color: #fff;
 }
 .brand:hover {
   color: #fff;
@@ -1266,21 +1266,6 @@ pre .javascript .function {
 }
 .use-motion .collection-title {
   opacity: 0;
-}
-.page-post-detail .post-title {
-  font-size: 26px;
-  text-align: center;
-  word-break: break-word;
-  font-weight: 400;
-  border-radius: 0.3em;
-  line-height: 1em;
-  padding-bottom: 0.12em;
-  padding-top: 0.12em;
-}
-@media (max-width: 767px) {
-  .page-post-detail .post-title {
-    font-size: 22px;
-  }
 }
 .posts-expand {
   padding-top: 40px;
@@ -1838,7 +1823,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffe34f;
+  background: #ffdb67;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2597,7 +2582,7 @@ pre .javascript .function {
 .header {
   position: relative;
   margin: 0 auto;
-  width: 1200px;
+  width: 75%;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .header {
@@ -2657,7 +2642,7 @@ pre .javascript .function {
   }
 }
 .container .main-inner {
-  width: 1200px;
+  width: 75%;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .container .main-inner {
@@ -2673,7 +2658,7 @@ pre .javascript .function {
   float: right;
   box-sizing: border-box;
   padding: 40px;
-  width: 950px;
+  width: calc(100% - 252px);
   background: #fff;
   min-height: 700px;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12);
@@ -2716,7 +2701,7 @@ pre .javascript .function {
   display: none;
 }
 .footer-inner {
-  width: 1200px;
+  width: 75%;
   padding-left: 260px;
 }
 @media (min-width: 768px) and (max-width: 991px) {
@@ -2752,6 +2737,7 @@ pre .javascript .function {
 .site-meta {
   padding: 20px 0;
   color: #fff;
+  background: #222;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .site-meta {
@@ -3128,9 +3114,12 @@ pre .javascript .function {
     margin: 8px 0 0;
   }
 }
-Custom styles.,
 body {
-  background-image: linear-gradient(to right, #cef6f5, #e3f6ce);
+  background-image: url("https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210531162914.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+  background-size: 100% 100%;
 }
 .sidebar {
   opacity: 0.85;
