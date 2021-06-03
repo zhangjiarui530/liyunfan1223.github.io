@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/apple-touch-icon-next.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="lab,计算机网络," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="准备Message和Packet类定义分别作为应用层和传输层的数据包 其中Packet类的generateChecksum()方法根据报文数据生成校验和，selfcheck()方法根据报文数据和校验和检查数据是否损坏">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计网lab-基于udp实现可靠传输协议(ABP&#x2F;GBN)">
+<meta property="og:url" content="http://example.com/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91lab-%E5%9F%BA%E4%BA%8Eudp%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE-ABP-GBN/index.html">
+<meta property="og:site_name" content="MorphLing&#39;s Blog">
+<meta property="og:description" content="准备Message和Packet类定义分别作为应用层和传输层的数据包 其中Packet类的generateChecksum()方法根据报文数据生成校验和，selfcheck()方法根据报文数据和校验和检查数据是否损坏">
+<meta property="og:locale">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603195457.jpg">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603195502.jpg">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603195505.jpg">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603195512.jpg">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603195519.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603195524.jpg">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603195530.jpg">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603195536.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603200904.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603195544.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603195744.png">
+<meta property="article:published_time" content="2021-06-03T11:41:39.000Z">
+<meta property="article:modified_time" content="2021-06-03T12:09:05.817Z">
+<meta property="article:author" content="MorphLing">
+<meta property="article:tag" content="lab">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603195457.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2021/06/03/计算机网络/计网lab-基于udp实现可靠传输协议-ABP-GBN/"/>
+
+
+
+
+
+  <title>计网lab-基于udp实现可靠传输协议(ABP/GBN) | MorphLing's Blog</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MorphLing's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">存在感是自我意识的基石</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91lab-%E5%9F%BA%E4%BA%8Eudp%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE-ABP-GBN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MorphLing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MorphLing's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">计网lab-基于udp实现可靠传输协议(ABP/GBN)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-03T19:41:39+08:00">
+                2021-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">访问量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><h2 id="Message和Packet类定义"><a href="#Message和Packet类定义" class="headerlink" title="Message和Packet类定义"></a>Message和Packet类定义</h2><p>分别作为应用层和传输层的数据包</p>
+<p>其中Packet类的generateChecksum()方法根据报文数据生成校验和，selfcheck()方法根据报文数据和校验和检查数据是否损坏</p>
+<a id="more"></a>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Message</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">char</span>[] data = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">20</span>];</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Message</span><span class="params">(<span class="keyword">char</span>[] str)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) data[i] = str[i];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Message</span><span class="params">(Packet pkt)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) data[i] = pkt.payload[i];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">package</span> MyClass;</span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Packet</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> seqnum;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> acknum;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> checksum;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">char</span>[] payload = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">20</span>];</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSeq</span><span class="params">(<span class="keyword">int</span> _seqnum)</span> </span>&#123; seqnum = _seqnum; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAck</span><span class="params">(<span class="keyword">int</span> _acknum)</span> </span>&#123; acknum = _acknum; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSeq</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> seqnum; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAck</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> acknum; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">generateChecksum</span><span class="params">()</span> </span>&#123;</span><br><span class="line">​    checksum += seqnum;</span><br><span class="line">​    checksum += acknum;</span><br><span class="line">​    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) checksum += payload[i];</span><br><span class="line">​    checksum = ~checksum;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">selfcheck</span><span class="params">()</span> </span>&#123;</span><br><span class="line">​    <span class="keyword">int</span> value = checksum;</span><br><span class="line">​    value += seqnum;</span><br><span class="line">​    value += acknum;</span><br><span class="line">​    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) value +=payload[i];</span><br><span class="line">​    <span class="keyword">if</span> (value != -<span class="number">1</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">​    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Packet</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Packet</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">​    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line">​      payload[i] = msg.data[i];</span><br><span class="line">​    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="序列化模块Serialization"><a href="#序列化模块Serialization" class="headerlink" title="序列化模块Serialization"></a>序列化模块Serialization</h2><p>由于udp只能传输字节数组，需要定义序列化模块实现class与字节数组的相互转换</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Message</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">char</span>[] data = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">20</span>];</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Message</span><span class="params">(<span class="keyword">char</span>[] str)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) data[i] = str[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Message</span><span class="params">(Packet pkt)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) data[i] = pkt.payload[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">package</span> MyClass;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Packet</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> seqnum;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> acknum;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> checksum;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">char</span>[] payload = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">20</span>];</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSeq</span><span class="params">(<span class="keyword">int</span> _seqnum)</span> </span>&#123; seqnum = _seqnum; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAck</span><span class="params">(<span class="keyword">int</span> _acknum)</span> </span>&#123; acknum = _acknum; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSeq</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> seqnum; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAck</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> acknum; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">generateChecksum</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        checksum += seqnum;</span><br><span class="line">        checksum += acknum;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) checksum += payload[i];</span><br><span class="line">        checksum = ~checksum;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">selfcheck</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> value = checksum;</span><br><span class="line">        value += seqnum;</span><br><span class="line">        value += acknum;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) value +=payload[i];</span><br><span class="line">        <span class="keyword">if</span> (value != -<span class="number">1</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Packet</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Packet</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line">            payload[i] = msg.data[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="超时时间计算方法"><a href="#超时时间计算方法" class="headerlink" title="超时时间计算方法"></a>超时时间计算方法</h2><p>参考书3.5.3</p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603195457.jpg" alt="img"></p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603195502.jpg" alt="img"></p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603195505.jpg" alt="img"></p>
+<p>Alpha,beta分别取0.125和0.25</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SampleRTT = receiveTime - sendTime;</span><br><span class="line">EstimatedRTT = (<span class="keyword">long</span>)(<span class="number">0.875</span> * EstimatedRTT + <span class="number">0.125</span> * SampleRTT);</span><br><span class="line">DevRTT = (<span class="keyword">long</span>)(<span class="number">0.75</span> * DevRTT + <span class="number">0.25</span> * Math.abs(SampleRTT - EstimatedRTT));</span><br><span class="line">TimeoutInterval = EstimatedRTT + <span class="number">4</span> * DevRTT;</span><br></pre></td></tr></table></figure>
+<p>将TImeoutInterval初始化为1000ms，EstimatedRTT和SampleRTT初始化为500ms</p>
+<h1 id="比特交替协议实现"><a href="#比特交替协议实现" class="headerlink" title="比特交替协议实现"></a>比特交替协议实现</h1><p>通过变量记录当前0/1状态，通过线程交互实现停等和超时重发。</p>
+<h2 id="发送方"><a href="#发送方" class="headerlink" title="发送方"></a>发送方</h2><p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603195512.jpg" alt="img"></p>
+<p>参考课本上rdt发送方的FSM进行设计。整体思路上使用三个线程分别处理上层调用、接收ACK响应包和超时重发。调用线程1将Message转化为Packet并将数据包通过A_output()发送给服务器端后，调用计时线程3并通过wait()进入等待状态，接收线程2收到响应包后，判断是否发送成功，若成功则中止计时线程3并唤醒线程1，否则线程3计时结束后通过toLayer3()重发数据包，再由线程2判断是否发送成功，直到接收到响应成功。</p>
+<p>通过变量seqNum判断当前处于FSM的哪种状态，每接收到一个成功发送响应，seqNum变量的值将0/1交替。使用对象锁的方式实现线程交互（等待和唤醒）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> rdt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.DatagramSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.DatagramPacket;</span><br><span class="line"><span class="keyword">import</span> java.net.InetAddress;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> MyClass.Message;</span><br><span class="line"><span class="keyword">import</span> MyClass.Packet;</span><br><span class="line"><span class="keyword">import</span> MyClass.Serialization;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Timer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">long</span> timeout;</span><br><span class="line">        Timer(<span class="keyword">long</span> _timeout) &#123; timeout = _timeout; &#125;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">setTimeout</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                TimeUnit.MILLISECONDS.sleep(timeout);</span><br><span class="line">                A_timerinterrupt();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">A_timerinterrupt</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException, ClassNotFoundException, IOException</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;前一个Packet发送超时，开始重发。&quot;</span>);</span><br><span class="line">        TimeoutInterval *= <span class="number">2</span>;</span><br><span class="line">        startTimer(TimeoutInterval);</span><br><span class="line">        toLayer3(lastpkt);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">startTimer</span><span class="params">(<span class="keyword">long</span> increment)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;计时器启动: &quot;</span> + increment + <span class="string">&quot;ms后重新发送。&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (timer != <span class="keyword">null</span> &amp;&amp; !timer.isInterrupted()) stopTimer();</span><br><span class="line">        timer = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Timer(increment));</span><br><span class="line">        timer.start();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">stopTimer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;计时器中止。&quot;</span>);</span><br><span class="line">        timer.interrupt();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Receiver</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                DatagramSocket datagramSocket = <span class="keyword">new</span> DatagramSocket(<span class="number">11000</span>);</span><br><span class="line">                <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">while</span> (cnt &lt; MAXSEQ) &#123;</span><br><span class="line">                    <span class="keyword">byte</span>[] buf = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">                    DatagramPacket dataPacket = <span class="keyword">new</span> DatagramPacket(buf, buf.length);</span><br><span class="line">                    datagramSocket.receive(dataPacket);</span><br><span class="line">                    Packet receivePack = Serialization.BytesToPacket(dataPacket.getData());</span><br><span class="line">                    <span class="keyword">if</span> (receivePack.selfcheck() &amp;&amp; receivePack.getAck() == seqNum) &#123;</span><br><span class="line">                        cnt++;</span><br><span class="line">                        <span class="keyword">int</span> ackNum = receivePack.getAck();</span><br><span class="line">                        <span class="keyword">long</span> receiveTime = System.currentTimeMillis();</span><br><span class="line">                        SampleRTT = receiveTime - sendTime;</span><br><span class="line">                        EstimatedRTT = (<span class="keyword">long</span>)(<span class="number">0.875</span> * EstimatedRTT + <span class="number">0.125</span> * SampleRTT);</span><br><span class="line">                        DevRTT = (<span class="keyword">long</span>)(<span class="number">0.75</span> * DevRTT + <span class="number">0.25</span> * Math.abs(SampleRTT - EstimatedRTT));</span><br><span class="line">                        TimeoutInterval = EstimatedRTT + <span class="number">4</span> * DevRTT;</span><br><span class="line">                        stopTimer();</span><br><span class="line">                        <span class="keyword">synchronized</span> (obj) &#123;</span><br><span class="line">                            obj.notify();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;响应包损坏，或前一次发送未被收到。&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> Object obj = <span class="keyword">new</span> Object();</span><br><span class="line">    <span class="keyword">static</span> Thread timer;</span><br><span class="line">    <span class="keyword">static</span> Thread thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Client());</span><br><span class="line">    Packet lastpkt;</span><br><span class="line">    <span class="keyword">int</span> MAXSEQ;</span><br><span class="line">    <span class="keyword">int</span> targetPort;</span><br><span class="line">    <span class="keyword">int</span> seqNum;</span><br><span class="line">    <span class="keyword">long</span> sendTime;</span><br><span class="line">    <span class="keyword">long</span> EstimatedRTT, SampleRTT, DevRTT, TimeoutInterval;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">A_init</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        MAXSEQ = <span class="number">50</span>;</span><br><span class="line">        seqNum = <span class="number">0</span>;</span><br><span class="line">        TimeoutInterval = <span class="number">1000</span>;</span><br><span class="line">        EstimatedRTT = SampleRTT = <span class="number">500</span>;</span><br><span class="line">        DevRTT = <span class="number">0</span>;</span><br><span class="line">        targetPort = <span class="number">12000</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">toLayer3</span><span class="params">(Packet pkt)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        DatagramSocket datagramSocket = <span class="keyword">new</span> DatagramSocket();</span><br><span class="line">        <span class="keyword">byte</span>[] sendBytes = Serialization.PacketToBytes(pkt);</span><br><span class="line">        DatagramPacket datagramPacket = <span class="keyword">new</span> DatagramPacket(</span><br><span class="line">                sendBytes,</span><br><span class="line">                sendBytes.length,</span><br><span class="line">                InetAddress.getLocalHost(),</span><br><span class="line">                targetPort</span><br><span class="line">        );</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            lastpkt = pkt;</span><br><span class="line">            sendTime = System.currentTimeMillis();</span><br><span class="line">            datagramSocket.send(datagramPacket);</span><br><span class="line">            System.out.printf(<span class="string">&quot;Packet发送成功，时间已记录。序列号：%d\n&quot;</span>, pkt.getSeq());</span><br><span class="line">            <span class="comment">// System.out.println(pkt.getSeq());</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Packet发送失败。&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">A_output</span><span class="params">(Message msg)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException, InterruptedException </span>&#123;</span><br><span class="line">        Packet pkt = <span class="keyword">new</span> Packet(msg);</span><br><span class="line">        pkt.setSeq(seqNum);</span><br><span class="line">        pkt.generateChecksum();</span><br><span class="line">        startTimer(TimeoutInterval);</span><br><span class="line">        toLayer3(pkt);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Thread receiver = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Receiver());</span><br><span class="line">        receiver.start();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            A_init();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= MAXSEQ; i++) &#123;</span><br><span class="line">                <span class="keyword">char</span>[] data = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">20</span>];</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">20</span>; j++) data[j] = (<span class="keyword">char</span>) (<span class="string">&#x27;a&#x27;</span> + (i - <span class="number">1</span>) % <span class="number">26</span>);</span><br><span class="line">                Message msg = <span class="keyword">new</span> Message(data);</span><br><span class="line">                A_output(msg);</span><br><span class="line">                <span class="keyword">synchronized</span> (obj) &#123;</span><br><span class="line">                    obj.wait();</span><br><span class="line">                &#125;</span><br><span class="line">                seqNum ^= <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        thread.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="接收方"><a href="#接收方" class="headerlink" title="接收方"></a>接收方</h2><p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603195519.png" alt="img"></p>
+<p>同样通过seqNum判断当前FSM状态。发送响应包时，通过发送与当前状态相反的状态值表示数据包发送失败。通过参数lossRate和simulatedDelay模拟真实网络中的丢包和延迟情况。</p>
+<p>lossRate = 0.2;</p>
+<p>simulatedDelay = 200;</p>
+<p>当发送相应包时，通过Math.random()生成一个0~1的随机数，若Math.random()&lt;lossRate则视作响应包发送失败，不进行发送。每次发送响应包前随机等待利用TimeUnit.MILLISECONDS.sleep 随机等待Math.random() * simulatedDelay毫秒，模拟网络延迟。</p>
+<p>由于阻塞情况只有一种（即等待用户端发送数据包），所以单线程即可实现。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> rdt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.DatagramPacket;</span><br><span class="line"><span class="keyword">import</span> java.net.DatagramSocket;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> MyClass.Message;</span><br><span class="line"><span class="keyword">import</span> MyClass.Packet;</span><br><span class="line"><span class="keyword">import</span> MyClass.Serialization;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Server</span> </span>&#123;</span><br><span class="line">    DatagramSocket datagramSocket;</span><br><span class="line">    <span class="keyword">byte</span>[] buf;</span><br><span class="line">    <span class="keyword">int</span> seqNum;</span><br><span class="line">    <span class="keyword">int</span> targetPort;</span><br><span class="line">    <span class="keyword">double</span> lossRate;</span><br><span class="line">    <span class="keyword">long</span> simulatedDelay;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">B_init</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        datagramSocket = <span class="keyword">new</span> DatagramSocket(<span class="number">12000</span>);</span><br><span class="line">        lossRate = <span class="number">0.2</span>;</span><br><span class="line">        simulatedDelay = <span class="number">200</span>;</span><br><span class="line">        buf = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">        seqNum = <span class="number">0</span>;</span><br><span class="line">        targetPort = <span class="number">11000</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">tolayer5</span><span class="params">(Packet pkt)</span> </span>&#123;</span><br><span class="line">        Message msg = <span class="keyword">new</span> Message(pkt);</span><br><span class="line">        System.out.print(<span class="string">&quot;信息接收成功。&quot;</span>);</span><br><span class="line">        msg.show();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">B_input</span><span class="params">(Packet pkt, DatagramPacket datagramPacket)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">        System.out.println(seqNum + <span class="string">&quot; &quot;</span> + pkt.getSeq() + <span class="string">&quot; &quot;</span> + pkt.selfcheck());</span><br><span class="line">        <span class="keyword">if</span> (!pkt.selfcheck() || pkt.getSeq() != seqNum) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Packet损坏或重复。&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (Math.random() &gt; lossRate) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;损坏响应已发送。&quot;</span>);</span><br><span class="line">                Packet responsePacket = <span class="keyword">new</span> Packet();</span><br><span class="line">                responsePacket.setAck(seqNum ^ <span class="number">1</span>);</span><br><span class="line">                responsePacket.generateChecksum();</span><br><span class="line">                <span class="keyword">byte</span>[] sendData = Serialization.PacketToBytes(responsePacket);</span><br><span class="line">                DatagramPacket sendPacket = <span class="keyword">new</span> DatagramPacket(</span><br><span class="line">                        sendData,</span><br><span class="line">                        sendData.length,</span><br><span class="line">                        datagramPacket.getAddress(),</span><br><span class="line">                        targetPort</span><br><span class="line">                );</span><br><span class="line">                datagramSocket.send(sendPacket);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;响应消息发送失败。&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            tolayer5(pkt);</span><br><span class="line">            <span class="keyword">if</span> (Math.random() &gt; lossRate) &#123;</span><br><span class="line">                Packet responsePacket = <span class="keyword">new</span> Packet();</span><br><span class="line">                responsePacket.setAck(seqNum);</span><br><span class="line">                responsePacket.generateChecksum();</span><br><span class="line">                <span class="keyword">byte</span>[] sendData = Serialization.PacketToBytes(responsePacket);</span><br><span class="line">                DatagramPacket sendPacket = <span class="keyword">new</span> DatagramPacket(</span><br><span class="line">                        sendData,</span><br><span class="line">                        sendData.length,</span><br><span class="line">                        datagramPacket.getAddress(),</span><br><span class="line">                        targetPort</span><br><span class="line">                );</span><br><span class="line">                datagramSocket.send(sendPacket);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;响应消息发送失败。&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            seqNum ^= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> IOException, ClassNotFoundException, InterruptedException</span>&#123;</span><br><span class="line">        B_init();</span><br><span class="line">        <span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">            DatagramPacket datagramPacket = <span class="keyword">new</span> DatagramPacket(buf, buf.length);</span><br><span class="line">            datagramSocket.receive(datagramPacket);</span><br><span class="line">            Packet pkt = Serialization.BytesToPacket(buf);</span><br><span class="line">            TimeUnit.MILLISECONDS.sleep((<span class="keyword">long</span>)(Math.random() * simulatedDelay));</span><br><span class="line">            B_input(pkt, datagramPacket);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException, InterruptedException</span>&#123;</span><br><span class="line">        Server server = <span class="keyword">new</span> Server();</span><br><span class="line">        server.run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="GBN协议实现"><a href="#GBN协议实现" class="headerlink" title="GBN协议实现"></a>GBN协议实现</h1><p>实现方式与比特交替协议类似，区别在于GBN协议不是严格的停等协议，可能会出现连续发送多个包后再连续接收多个响应包的情况，数据包发送和接收情况变得更加复杂。因此没有采用阻塞的方式控制线程，而是给上层调用加了一定的间隔（300ms），并且当上层调用时滑动窗口大小以达到上限时，将丢弃一些上层调用。同时为了简化问题，序列号没有采用循环的方式，而是由1开始编号至n。</p>
+<h2 id="发送方-1"><a href="#发送方-1" class="headerlink" title="发送方"></a>发送方</h2><p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603195524.jpg" alt="img"></p>
+<p>设置windowSize=8作为窗口最大值，通过base和nextSeqNum控制滑动窗口的大小和位置。收到上层调用时，先判断窗口大小是否已经达到上限，若还没有达到上限则发送数据包并将窗口扩大一位。由于响应包接收情况可能乱序，需要用数组的方式记录每个数据包发送的时间来计算RTT。触发超时重传时，需要循环重发base~nextSeqNum-1的所有数据包。其余类似比特交替协议。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> gbn;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.DatagramSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.DatagramPacket;</span><br><span class="line"><span class="keyword">import</span> java.net.InetAddress;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> MyClass.Message;</span><br><span class="line"><span class="keyword">import</span> MyClass.Packet;</span><br><span class="line"><span class="keyword">import</span> MyClass.Serialization;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Timer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">long</span> timeout;</span><br><span class="line">        Timer(<span class="keyword">long</span> _timeout) &#123; timeout = _timeout; &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                TimeUnit.MILLISECONDS.sleep(timeout);</span><br><span class="line">                A_timerinterrupt();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">A_timerinterrupt</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException, ClassNotFoundException, IOException</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;计时器时限到，开始重发。&quot;</span>);</span><br><span class="line">        TimeoutInterval *= <span class="number">2</span>;</span><br><span class="line">        startTimer(TimeoutInterval);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = base; i &lt; nextSeqNum; i++) &#123;</span><br><span class="line">            <span class="keyword">char</span>[] data = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">20</span>];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">20</span>; j++) data[j] = (<span class="keyword">char</span>) (<span class="string">&#x27;a&#x27;</span> + i % <span class="number">26</span>);</span><br><span class="line">            Message msg = <span class="keyword">new</span> Message(data);</span><br><span class="line">            Packet pkt = <span class="keyword">new</span> Packet(msg);</span><br><span class="line">            pkt.setSeq(i);</span><br><span class="line">            pkt.generateChecksum();</span><br><span class="line">            toLayer3(pkt);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">startTimer</span><span class="params">(<span class="keyword">long</span> increment)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;计时器启动: &quot;</span> + increment + <span class="string">&quot;ms后重新发送。&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (timer != <span class="keyword">null</span> &amp;&amp; !timer.isInterrupted()) stopTimer();</span><br><span class="line">        timer = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Timer(increment));</span><br><span class="line">        timer.start();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">stopTimer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;计时器中止。&quot;</span>);</span><br><span class="line">        timer.interrupt();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Receiver</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                DatagramSocket datagramSocket = <span class="keyword">new</span> DatagramSocket(<span class="number">11000</span>);</span><br><span class="line">                <span class="keyword">while</span> (base != MAXSEQ + <span class="number">1</span>) &#123;</span><br><span class="line">                    <span class="keyword">byte</span>[] buf = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">                    DatagramPacket dataPacket = <span class="keyword">new</span> DatagramPacket(buf, buf.length);</span><br><span class="line">                    datagramSocket.receive(dataPacket);</span><br><span class="line">                    Packet receivePack = Serialization.BytesToPacket(dataPacket.getData());</span><br><span class="line">                    <span class="keyword">if</span> (receivePack.selfcheck()) &#123;</span><br><span class="line">                        <span class="keyword">int</span> ackNum = receivePack.getAck();</span><br><span class="line">                        base = Math.max(base, ackNum);</span><br><span class="line">                        <span class="keyword">long</span> receiveTime = System.currentTimeMillis();</span><br><span class="line">                        SampleRTT = receiveTime - sendTime[ackNum - <span class="number">1</span>];</span><br><span class="line">                        EstimatedRTT = (<span class="keyword">long</span>)(<span class="number">0.875</span> * EstimatedRTT + <span class="number">0.125</span> * SampleRTT);</span><br><span class="line">                        DevRTT = (<span class="keyword">long</span>)(<span class="number">0.75</span> * DevRTT + <span class="number">0.25</span> * Math.abs(SampleRTT - EstimatedRTT));</span><br><span class="line">                        TimeoutInterval = EstimatedRTT + <span class="number">4</span> * DevRTT;</span><br><span class="line">                        <span class="comment">// System.out.println(&quot;TimeoutInterval被修改为&quot; + TimeoutInterval + &quot; ackNum为&quot; + ackNum);</span></span><br><span class="line">                        stopTimer();</span><br><span class="line">                        <span class="keyword">if</span> (base != nextSeqNum) startTimer(TimeoutInterval);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;响应包损坏。&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> Thread timer;</span><br><span class="line">    <span class="keyword">static</span> Thread thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Client());</span><br><span class="line">    <span class="keyword">int</span> MAXSEQ;</span><br><span class="line">    <span class="keyword">int</span> targetPort;</span><br><span class="line">    <span class="keyword">int</span> windowSize;</span><br><span class="line">    <span class="keyword">int</span> base;</span><br><span class="line">    <span class="keyword">int</span> nextSeqNum;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">long</span> sendTime[];</span><br><span class="line">    <span class="keyword">long</span> EstimatedRTT, SampleRTT, DevRTT, TimeoutInterval;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">A_init</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        MAXSEQ = <span class="number">50</span>;</span><br><span class="line">        base = nextSeqNum = <span class="number">1</span>;</span><br><span class="line">        windowSize = <span class="number">8</span>;</span><br><span class="line">        TimeoutInterval = <span class="number">1000</span>;</span><br><span class="line">        EstimatedRTT = SampleRTT = <span class="number">500</span>;</span><br><span class="line">        DevRTT = <span class="number">0</span>;</span><br><span class="line">        targetPort = <span class="number">12000</span>;</span><br><span class="line">        sendTime = <span class="keyword">new</span> <span class="keyword">long</span>[MAXSEQ + <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">toLayer3</span><span class="params">(Packet pkt)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        DatagramSocket datagramSocket = <span class="keyword">new</span> DatagramSocket();</span><br><span class="line">        <span class="keyword">byte</span>[] sendBytes = Serialization.PacketToBytes(pkt);</span><br><span class="line">        DatagramPacket datagramPacket = <span class="keyword">new</span> DatagramPacket(</span><br><span class="line">                sendBytes,</span><br><span class="line">                sendBytes.length,</span><br><span class="line">                InetAddress.getLocalHost(),</span><br><span class="line">                targetPort</span><br><span class="line">        );</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">            sendTime[pkt.getSeq()] = System.currentTimeMillis();</span><br><span class="line">            datagramSocket.send(datagramPacket);</span><br><span class="line">            System.out.printf(<span class="string">&quot;第 %d 个Packet发送成功，时间已记录。\n&quot;</span>, pkt.getSeq());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Packet发送失败。&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">A_output</span><span class="params">(Message msg)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException, InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (nextSeqNum &lt; base + windowSize) &#123;</span><br><span class="line">            Packet pkt = <span class="keyword">new</span> Packet(msg);</span><br><span class="line">            pkt.setSeq(nextSeqNum);</span><br><span class="line">            pkt.generateChecksum();</span><br><span class="line"></span><br><span class="line">            toLayer3(pkt);</span><br><span class="line">            <span class="keyword">if</span> (base == nextSeqNum) startTimer(TimeoutInterval);</span><br><span class="line">            nextSeqNum++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Thread receiver = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Receiver());</span><br><span class="line">        receiver.start();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            A_init();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= MAXSEQ; i++) &#123;</span><br><span class="line">                <span class="keyword">char</span>[] data = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">20</span>];</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">20</span>; j++) data[j] = (<span class="keyword">char</span>) (<span class="string">&#x27;a&#x27;</span> + (i - <span class="number">1</span>) % <span class="number">26</span>);</span><br><span class="line">                Message msg = <span class="keyword">new</span> Message(data);</span><br><span class="line">                A_output(msg);</span><br><span class="line">                TimeUnit.MILLISECONDS.sleep(<span class="number">200</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        thread.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="接收方-1"><a href="#接收方-1" class="headerlink" title="接收方"></a>接收方</h2><p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603195530.jpg" alt="img"></p>
+<p>和比特交替协议的区别在于，收到的序列号seqnum和响应包发送的acknum不再是0/1交替，而是每次自增一。GBN接收方采取累计接收方法，如果接收到的数据包有误，返回的acknum为当前已接收的最大的序列号，表示该序列号以及所有该序列号以前的包都已成功接收。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> gbn;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.DatagramPacket;</span><br><span class="line"><span class="keyword">import</span> java.net.DatagramSocket;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> MyClass.Message;</span><br><span class="line"><span class="keyword">import</span> MyClass.Packet;</span><br><span class="line"><span class="keyword">import</span> MyClass.Serialization;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Server</span> </span>&#123;</span><br><span class="line">    DatagramSocket datagramSocket;</span><br><span class="line">    <span class="keyword">byte</span>[] buf;</span><br><span class="line">    <span class="keyword">int</span> seqNum;</span><br><span class="line">    <span class="keyword">int</span> windowSize;</span><br><span class="line">    <span class="keyword">int</span> targetPort;</span><br><span class="line">    <span class="keyword">double</span> lossRate;</span><br><span class="line">    <span class="keyword">long</span> simulatedDelay;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">B_init</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        windowSize = <span class="number">8</span>;</span><br><span class="line">        datagramSocket = <span class="keyword">new</span> DatagramSocket(<span class="number">12000</span>);</span><br><span class="line">        lossRate = <span class="number">0.2</span>;</span><br><span class="line">        simulatedDelay = <span class="number">200</span>;</span><br><span class="line">        buf = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">        seqNum = <span class="number">1</span>;</span><br><span class="line">        targetPort = <span class="number">11000</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">tolayer5</span><span class="params">(Packet pkt)</span> </span>&#123;</span><br><span class="line">        Message msg = <span class="keyword">new</span> Message(pkt);</span><br><span class="line">        System.out.print(<span class="string">&quot;信息接收成功。&quot;</span>);</span><br><span class="line">        msg.show();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">B_input</span><span class="params">(Packet pkt, DatagramPacket datagramPacket)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!pkt.selfcheck() || pkt.getSeq() != seqNum) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Packet损坏或重复。&quot;</span>);</span><br><span class="line">            <span class="comment">// System.out.println(seqNum + &quot; &quot; + pkt.getSeq() + &quot; &quot; + pkt.selfcheck());</span></span><br><span class="line">            <span class="keyword">if</span> (Math.random() &gt; lossRate) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;损坏响应已发送。&quot;</span>);</span><br><span class="line">                Packet responsePacket = <span class="keyword">new</span> Packet();</span><br><span class="line">                responsePacket.setAck(seqNum);</span><br><span class="line">                responsePacket.generateChecksum();</span><br><span class="line">                <span class="keyword">byte</span>[] sendData = Serialization.PacketToBytes(responsePacket);</span><br><span class="line">                DatagramPacket sendPacket = <span class="keyword">new</span> DatagramPacket(</span><br><span class="line">                        sendData,</span><br><span class="line">                        sendData.length,</span><br><span class="line">                        datagramPacket.getAddress(),</span><br><span class="line">                        targetPort</span><br><span class="line">                );</span><br><span class="line">                datagramSocket.send(sendPacket);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;响应消息发送失败。&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            tolayer5(pkt);</span><br><span class="line">            seqNum++;</span><br><span class="line">            <span class="keyword">if</span> (Math.random() &gt; lossRate) &#123;</span><br><span class="line">                Packet responsePacket = <span class="keyword">new</span> Packet();</span><br><span class="line">                responsePacket.setAck(seqNum);</span><br><span class="line">                responsePacket.generateChecksum();</span><br><span class="line">                <span class="keyword">byte</span>[] sendData = Serialization.PacketToBytes(responsePacket);</span><br><span class="line">                <span class="comment">// 好坑</span></span><br><span class="line">                DatagramPacket sendPacket = <span class="keyword">new</span> DatagramPacket(</span><br><span class="line">                        sendData,</span><br><span class="line">                        sendData.length,</span><br><span class="line">                        datagramPacket.getAddress(),</span><br><span class="line">                        targetPort</span><br><span class="line">                );</span><br><span class="line">                datagramSocket.send(sendPacket);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;响应消息发送失败。&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> IOException, ClassNotFoundException, InterruptedException</span>&#123;</span><br><span class="line">        B_init();</span><br><span class="line">        <span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">            DatagramPacket datagramPacket = <span class="keyword">new</span> DatagramPacket(buf, buf.length);</span><br><span class="line">            datagramSocket.receive(datagramPacket);</span><br><span class="line">            Packet pkt = Serialization.BytesToPacket(buf);</span><br><span class="line">            TimeUnit.MILLISECONDS.sleep((<span class="keyword">long</span>)(Math.random() * simulatedDelay));</span><br><span class="line">            B_input(pkt, datagramPacket);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException, InterruptedException</span>&#123;</span><br><span class="line">        Server server = <span class="keyword">new</span> Server();</span><br><span class="line">        server.run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="结果和测试"><a href="#结果和测试" class="headerlink" title="结果和测试"></a>结果和测试</h1><p>可以通过参数设置响应包发送失败的概率，当丢包概率为0时，所有消息被正确接收，不会触发超时重发。（图为比特交替协议）：</p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603195536.png" alt="img"></p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603200904.png" alt="img"></p>
+<p>将丢包概率提高到30%后，服务器端频繁出现响应包发送失败的情况，客户端同时触发超时重传。（图为GBN协议）：</p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603195544.png" alt="img"></p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210603195744.png" alt="img"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>由于代码量较大，本次实验过程中对实验所需要的常用功能进行了模块化（如序列化模块实现class与字符数组相互转化、Packet校验和生成和检验等），同时加深了对java语言和多线程编程的运用和理解。</p>
+<p>实验过程中调试解决了一些问题，如：</p>
+<p>多线程编程中udp数据包发送线程和接收线程的端口号不同，这意味着服务器端不能通过receivePacket.getPort()来获取端口并作为响应包的发送端口，因为通过这方法获得的端口是发送线程而不是接收线程的。因此需要提前指定客户端的socket端口，如11000。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/lab/" rel="tag"># lab</a>
+          
+            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag"># 计算机网络</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/06/03/XCPC%E8%AE%AD%E7%BB%83%E8%AE%B0%E5%BD%95/solo/ECNU-XCPC-2021-Selection-Round-3/" rel="next" title="ECNU XCPC 2021 Selection Round 3">
+                <i class="fa fa-chevron-left"></i> ECNU XCPC 2021 Selection Round 3
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="MorphLing" />
+            
+              <p class="site-author-name" itemprop="name">MorphLing</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives%7C%7Carchive">
+              
+                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://helloat123.github.io" title="Richard" target="_blank">Richard</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://qwqbot.com" title="qwqbot" target="_blank">qwqbot</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%86%E5%A4%87"><span class="nav-text">准备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Message%E5%92%8CPacket%E7%B1%BB%E5%AE%9A%E4%B9%89"><span class="nav-text">Message和Packet类定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E6%A8%A1%E5%9D%97Serialization"><span class="nav-text">序列化模块Serialization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95"><span class="nav-text">超时时间计算方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AF%94%E7%89%B9%E4%BA%A4%E6%9B%BF%E5%8D%8F%E8%AE%AE%E5%AE%9E%E7%8E%B0"><span class="nav-text">比特交替协议实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E6%96%B9"><span class="nav-text">发送方</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E6%96%B9"><span class="nav-text">接收方</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GBN%E5%8D%8F%E8%AE%AE%E5%AE%9E%E7%8E%B0"><span class="nav-text">GBN协议实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E6%96%B9-1"><span class="nav-text">发送方</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E6%96%B9-1"><span class="nav-text">接收方</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E5%92%8C%E6%B5%8B%E8%AF%95"><span class="nav-text">结果和测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MorphLing</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+-->
+
+<!-- 不蒜字统计 -->
+<div>
+	<i class="fa fa-user-md"></i>
+	<span id="busuanzi_container_site_uv">
+	  访问人数：<span id="busuanzi_value_site_uv"></span>
+	</span>&nbsp;|&nbsp;
+	
+	<i class="fa fa-eye"></i>
+	<span id="busuanzi_container_site_pv">
+	  总访问量：<span id="busuanzi_value_site_pv"></span>
+	</span>&nbsp;|&nbsp;
+	
+	<!-- 添加博客全站总字数统计-->
+	<i class="fa fa-pencil"></i>
+	<span class="post-count">博客全站共 120.3k 字</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
