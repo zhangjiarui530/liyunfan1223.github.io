@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="目的 巩固操作系统的进程调度机制和策略  熟悉MINIX系统调用和MINIX调度器的实现   内容与设计思想在MINIX3中实现Earliest-Deadline-First近似实时调度功能：  提供设置进程执行期限的系统调度chrt (long deadline)，用于将调用该系统调用的进程设为实时进程，其执行的期限为：从调用处开始deadline秒。  在内核进程表中需要增加一个条目，用于表示">
+<meta name="description" content="内容与设计思想在MINIX3中实现Earliest-Deadline-First近似实时调度功能：  提供设置进程执行期限的系统调度chrt (long deadline)，用于将调用该系统调用的进程设为实时进程，其执行的期限为：从调用处开始deadline秒。  在内核进程表中需要增加一个条目，用于表示进程的实时属性；修改相关代码，新增一个系统调用chrt，用于设置其进程表中的实时属性。  修改">
 <meta property="og:type" content="article">
 <meta property="og:title" content="操作系统lab2-chrt">
 <meta property="og:url" content="http://example.com/2021/05/30/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Flab2-chrt/index.html">
 <meta property="og:site_name" content="MorphLing&#39;s Blog">
-<meta property="og:description" content="目的 巩固操作系统的进程调度机制和策略  熟悉MINIX系统调用和MINIX调度器的实现   内容与设计思想在MINIX3中实现Earliest-Deadline-First近似实时调度功能：  提供设置进程执行期限的系统调度chrt (long deadline)，用于将调用该系统调用的进程设为实时进程，其执行的期限为：从调用处开始deadline秒。  在内核进程表中需要增加一个条目，用于表示">
+<meta property="og:description" content="内容与设计思想在MINIX3中实现Earliest-Deadline-First近似实时调度功能：  提供设置进程执行期限的系统调度chrt (long deadline)，用于将调用该系统调用的进程设为实时进程，其执行的期限为：从调用处开始deadline秒。  在内核进程表中需要增加一个条目，用于表示进程的实时属性；修改相关代码，新增一个系统调用chrt，用于设置其进程表中的实时属性。  修改">
 <meta property="og:locale">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102628.png">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102636.png">
@@ -110,7 +110,7 @@
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102847.png">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102952.png">
 <meta property="article:published_time" content="2021-05-30T02:22:47.000Z">
-<meta property="article:modified_time" content="2021-05-30T02:30:35.358Z">
+<meta property="article:modified_time" content="2021-06-03T12:04:14.346Z">
 <meta property="article:author" content="MorphLing">
 <meta property="article:tag" content="os">
 <meta property="article:tag" content="作业">
@@ -308,7 +308,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-06-03T20:04:14+08:00">
+                2021-06-03
+              </time>
             
           </span>
 
@@ -345,13 +357,7 @@
       
 
       
-        <h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><ul>
-<li><p>巩固操作系统的进程调度机制和策略</p>
-</li>
-<li><p>熟悉MINIX系统调用和MINIX调度器的实现</p>
-</li>
-</ul>
-<h1 id="内容与设计思想"><a href="#内容与设计思想" class="headerlink" title="内容与设计思想"></a>内容与设计思想</h1><p>在MINIX3中实现Earliest-Deadline-First近似实时调度功能：</p>
+        <h1 id="内容与设计思想"><a href="#内容与设计思想" class="headerlink" title="内容与设计思想"></a>内容与设计思想</h1><p>在MINIX3中实现Earliest-Deadline-First近似实时调度功能：</p>
 <ol>
 <li><p>提供设置进程执行期限的系统调度chrt (long deadline)，用于将调用该系统调用的进程设为实时进程，其执行的期限为：从调用处开始deadline秒。</p>
 </li>
@@ -364,7 +370,6 @@
 <li><p>未调用chrt的程序将以普通的用户进程(非实时进程)在系统中运行。</p>
 </li>
 </ol>
-<h1 id="使用环境"><a href="#使用环境" class="headerlink" title="使用环境"></a>使用环境</h1><p>VirtualBox6.1.8, MINIX3.3.0, clang3.4</p>
 <h1 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h1><h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><ol>
 <li>在/usr/src/include/unistd.h 中添加chrt函数定义</li>
 </ol>
@@ -667,7 +672,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84"><span class="nav-text">目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E5%AE%B9%E4%B8%8E%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3"><span class="nav-text">内容与设计思想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%8E%AF%E5%A2%83"><span class="nav-text">使用环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B"><span class="nav-text">实验过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="nav-text">应用层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%B1%82"><span class="nav-text">服务层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E6%A0%B8%E5%B1%82"><span class="nav-text">内核层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6"><span class="nav-text">进程调度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E5%AE%B9%E4%B8%8E%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3"><span class="nav-text">内容与设计思想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B"><span class="nav-text">实验过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="nav-text">应用层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%B1%82"><span class="nav-text">服务层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E6%A0%B8%E5%B1%82"><span class="nav-text">内核层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6"><span class="nav-text">进程调度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
