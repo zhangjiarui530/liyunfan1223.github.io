@@ -1329,14 +1329,12 @@ val_i=w_i\sum\limits_{u=1}^T\sum\limits_{v=1}^T(l_{u-1}-l_u)(r_v-r_{v-1})\frac{1
 
       
         
-          
-          A签到
-C简单题
-D最短路、树相关 待补
-F数学、思维
-首先由于$n’$最终取值范围为$[1,n]$，所以枚举$n’$可以得到一个$O(n)$的做法
-然后把$[1,n]$分块为$[1,\sqrt m],[\sqrt{m}+1,\min\{n,m\}]$两部分，枚举第一部分n’取值，复杂度$O(\sq
-          ...
+          <h1 id="A"><a href="#A" class="headerlink" title="A"></a>A</h1><p>签到</p>
+<h1 id="C"><a href="#C" class="headerlink" title="C"></a>C</h1><p>简单题</p>
+<h1 id="D"><a href="#D" class="headerlink" title="D"></a>D</h1><p>最短路、树相关 待补</p>
+<h1 id="F"><a href="#F" class="headerlink" title="F"></a>F</h1><p>数学、思维</p>
+<p>首先由于$n’$最终取值范围为$[1,n]$，所以枚举$n’$可以得到一个$O(n)$的做法</p>
+<p>然后把$[1,n]$分块为$[1,\sqrt m],[\sqrt{m}+1,\min\{n,m\}]$两部分，枚举第一部分n’取值，复杂度$O(\sqrt n)$，对于第二部分，可以把式子写成$m’=n’k$，此时$k$的取值范围为$[1,\sqrt m]$，枚举k，对于每个固定的k，可以找到一个贪心方案使代价最小，所以第二部分的代价也是$O(\sqrt m)$.</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2021/04/29/XCPC%E8%AE%AD%E7%BB%83%E8%AE%B0%E5%BD%95/team/2021%E6%B5%99%E6%B1%9F%E7%9C%81%E8%B5%9B/#more" rel="contents">
