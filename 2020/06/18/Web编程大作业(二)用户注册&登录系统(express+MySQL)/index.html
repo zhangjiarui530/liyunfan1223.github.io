@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/apple-touch-icon-next.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="nodejs,web," />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web编程大作业(二)用户注册&amp;登录系统(express+MySQL)">
+<meta property="og:url" content="http://example.com/2020/06/18/Web%E7%BC%96%E7%A8%8B%E5%A4%A7%E4%BD%9C%E4%B8%9A(%E4%BA%8C)%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C&%E7%99%BB%E5%BD%95%E7%B3%BB%E7%BB%9F(express+MySQL)/index.html">
+<meta property="og:site_name" content="MorphLing&#39;s Blog">
+<meta property="og:locale">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200618102221703.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200618102228385.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200618102924809.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200618102234904.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200618102252823.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200618102258253.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200618102306354.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200618102312432.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200618102317784.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200618102324545.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200618102331561.png">
+<meta property="article:published_time" content="2020-06-18T02:25:19.000Z">
+<meta property="article:modified_time" content="2021-06-03T12:15:02.392Z">
+<meta property="article:author" content="MorphLing">
+<meta property="article:tag" content="nodejs">
+<meta property="article:tag" content="web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200618102221703.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2020/06/18/Web编程大作业(二)用户注册&登录系统(express+MySQL)/"/>
+
+
+
+
+
+  <title>Web编程大作业(二)用户注册&登录系统(express+MySQL) | MorphLing's Blog</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MorphLing's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">存在感是自我意识的基石</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/06/18/Web%E7%BC%96%E7%A8%8B%E5%A4%A7%E4%BD%9C%E4%B8%9A(%E4%BA%8C)%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C&%E7%99%BB%E5%BD%95%E7%B3%BB%E7%BB%9F(express+MySQL)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MorphLing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MorphLing's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web编程大作业(二)用户注册&登录系统(express+MySQL)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-18T10:25:19+08:00">
+                2020-06-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">访问量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><br><br><a id="more"></a></p>
+<h2 id="1-注册-amp-登录系统逻辑图"><a href="#1-注册-amp-登录系统逻辑图" class="headerlink" title="1. 注册&amp;登录系统逻辑图"></a>1. 注册&amp;登录系统逻辑图</h2><p><img src="https://img-blog.csdnimg.cn/20200618102221703.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="2-效果演示"><a href="#2-效果演示" class="headerlink" title="2. 效果演示"></a>2. 效果演示</h2><p>（啊对，因为只是演示，所以几乎没有加任何样式和美化，css样式等整个项目完成度比较高了再考虑弄）</p>
+<p>初次访问网站时，后端没有检查到cookie，于是自动跳转至登录页面<br><img src="https://img-blog.csdnimg.cn/20200618102228385.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>点击“注册账号”后跳转至注册页面<br><img src="https://img-blog.csdnimg.cn/20200618102924809.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200618102234904.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>身份选择为教师时会多出验证码一项。（此处验证码暂时是固定的）</p>
+<p>如果输入的信息有误，会根据错误信息进行对应的提示。<br><img src="https://img-blog.csdnimg.cn/20200618102252823.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200618102258253.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>如果注册信息无误则会显示注册成功，并有一个返回首页的按钮<br><img src="https://img-blog.csdnimg.cn/20200618102306354.png" alt="在这里插入图片描述"><br>返回首页后回到登陆页面，正确输入账号密码，即显示登陆成功（否则也会进行错误提示）</p>
+<p><img src="https://img-blog.csdnimg.cn/20200618102312432.png" alt="在这里插入图片描述"></p>
+<p>再点击返回首页，由于登陆时创建了cookie，首页不再跳转至登录页面，而是根据cookie信息显示了当前的用户名和身份。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200618102317784.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>点击“注销账号”后，后端清除cookie并再次访问首页，于是又跳转到了登陆页面。<br><img src="https://img-blog.csdnimg.cn/20200618102324545.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="3-代码实现"><a href="#3-代码实现" class="headerlink" title="3. 代码实现"></a>3. 代码实现</h2><p>代码上主要由三个路由和对应的三个ejs模板页面实现。<br><img src="https://img-blog.csdnimg.cn/20200618102331561.png" alt="在这里插入图片描述"><br>很明显，index，login和register分别对应了首页、登陆页面和注册页面，路由（js）实现后端逻辑，ejs实现前端页面。</p>
+<h3 id="1-首页（index）"><a href="#1-首页（index）" class="headerlink" title="1. 首页（index）"></a>1. 首页（index）</h3><p>index.js，根据有无cookie产生不同的响应，并处理“注销账号”的请求，具体看代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"></span><br><span class="line"><span class="comment">//捕获到get请求（即访问127.0.0.1:3000）</span></span><br><span class="line">router.get(<span class="string">&#x27;/&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> coo=req.cookies;</span><br><span class="line">  <span class="comment">//检查是否存在cookie，若没有则跳转至登陆页面</span></span><br><span class="line">  <span class="keyword">if</span> (coo.username==<span class="literal">undefined</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    res.redirect(<span class="string">&#x27;/login&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//若有，则将cookie信息作为参数传递给index.ejs进行渲染</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">//cookie中身份信息存放的是&#x27;0&#x27;和&#x27;1&#x27;，转化为&#x27;学生&#x27;和&#x27;教师&#x27;</span></span><br><span class="line">    <span class="keyword">var</span> loginType=<span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (coo.loginType==<span class="string">&#x27;0&#x27;</span>) loginType=<span class="string">&quot;学生&quot;</span>;</span><br><span class="line">    <span class="keyword">else</span> loginType=<span class="string">&quot;教师&quot;</span></span><br><span class="line">    res.render(<span class="string">&#x27;index&#x27;</span>,&#123;<span class="attr">username</span>:coo.username,<span class="attr">loginType</span>:loginType&#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//捕获到post请求</span></span><br><span class="line">router.post(<span class="string">&#x27;/&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res,next</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> bod=req.body;</span><br><span class="line">  <span class="comment">//“注销账号”按钮被点击时</span></span><br><span class="line">  <span class="keyword">if</span> (bod.refresh==<span class="string">&#x27;1&#x27;</span>)&#123;</span><br><span class="line">    <span class="comment">//清除所有cookie</span></span><br><span class="line">    res.clearCookie(<span class="string">&#x27;username&#x27;</span>);</span><br><span class="line">    res.clearCookie(<span class="string">&#x27;loginType&#x27;</span>);</span><br><span class="line">    <span class="comment">//重新跳转至首页</span></span><br><span class="line">    res.redirect(<span class="string">&#x27;/&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure><br>index.ejs，username和loginType是两个参数，用来显示用户信息<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>首页<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>当前的账号为：&lt;%= username%&gt;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>身份：&lt;%= loginType%&gt;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">name</span>=<span class="string">&quot;refresh&quot;</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span>&gt;</span>注销账号</span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="2-登陆页面（login）"><a href="#2-登陆页面（login）" class="headerlink" title="2. 登陆页面（login）"></a>2. 登陆页面（login）</h3><p>login.js通过MySQL验证登录是否有效，若有效则创建cookie，跳转至欢迎页面<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"><span class="keyword">var</span> mysql=<span class="built_in">require</span>(<span class="string">&#x27;../mysql.js&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//初次访问</span></span><br><span class="line">router.get(<span class="string">&#x27;/login&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//不显示错误</span></span><br><span class="line">    res.render(<span class="string">&#x27;login&#x27;</span>,&#123;<span class="attr">fail</span>:<span class="number">0</span>&#125;);</span><br><span class="line">&#125;)</span><br><span class="line">router.post(<span class="string">&#x27;/login&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> info=req.body;</span><br><span class="line">    <span class="comment">//MySQL检查账号密码正确性</span></span><br><span class="line">    <span class="keyword">var</span> fetchSql=<span class="string">&quot;SELECT username,passwords,loginType from login where username=&#x27;&quot;</span>+info.username</span><br><span class="line">    +<span class="string">&quot;&#x27; and passwords=&#x27;&quot;</span>+info.passwords+<span class="string">&quot;&#x27;;&quot;</span>;</span><br><span class="line">    mysql.query(fetchSql,<span class="function"><span class="keyword">function</span>(<span class="params">err,results,fields</span>)</span>&#123;</span><br><span class="line">        <span class="comment">//账号不存在，返回错误</span></span><br><span class="line">        <span class="keyword">if</span> (results.length==<span class="number">0</span>)&#123;</span><br><span class="line">            res.render(<span class="string">&#x27;login&#x27;</span>,&#123;<span class="attr">fail</span>:<span class="number">1</span>&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//账号存在</span></span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">//创建账号信息cookie，results[0]指向当前用户信息</span></span><br><span class="line">            <span class="keyword">let</span> now=results[<span class="number">0</span>];</span><br><span class="line">            res.cookie(<span class="string">&#x27;username&#x27;</span>,now.username);</span><br><span class="line">            res.cookie(<span class="string">&#x27;loginType&#x27;</span>,now.loginType);</span><br><span class="line">            <span class="comment">//根据用户身份，跳转至不同的欢迎界面</span></span><br><span class="line">            <span class="keyword">if</span> (now.loginType==<span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                res.sendfile(<span class="string">&#x27;public/studentLoginSuccess.html&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (now.loginType==<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                res.sendfile(<span class="string">&#x27;public/teacherLoginSuccess.html&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">module</span>.exports=router;</span><br></pre></td></tr></table></figure><br>login.ejs fail参数用于决定是否提示错误<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>登陆页面<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span>&gt;</span>用户名:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span>&gt;</span>密码:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;passwords&quot;</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">name</span>=<span class="string">&quot;login&quot;</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span>&gt;</span>登陆<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&#x27;../register&#x27;</span>&gt;</span>注册账号<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 做一个空div，用来添加错误信息--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;show&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//显示错误信息</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> fail=&lt;%= fail %&gt;;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (fail) <span class="built_in">document</span>.getElementById(<span class="string">&quot;show&quot;</span>).innerText=<span class="string">&quot;账号密码有误~&quot;</span>;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="3-注册页面（register）"><a href="#3-注册页面（register）" class="headerlink" title="3. 注册页面（register）"></a>3. 注册页面（register）</h3><p>register.js 逐条验证注册信息是否有效，有效则将数据插入MySQL数据库中，否则返回相应的错误信息<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"><span class="keyword">var</span> mysql=<span class="built_in">require</span>(<span class="string">&#x27;../mysql.js&#x27;</span>)</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">&#x27;/register&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//5个tip分别对应五种错误信息，初次访问时错误信息都为空</span></span><br><span class="line">    res.render(<span class="string">&#x27;register&#x27;</span>,&#123;<span class="attr">tip1</span>:<span class="string">&#x27;&#x27;</span>,<span class="attr">tip2</span>:<span class="string">&#x27;&#x27;</span>,<span class="attr">tip3</span>:<span class="string">&#x27;&#x27;</span>,<span class="attr">tip4</span>:<span class="string">&#x27;&#x27;</span>,<span class="attr">tip5</span>:<span class="string">&#x27;&#x27;</span>&#125;);</span><br><span class="line">&#125;);</span><br><span class="line">router.post(<span class="string">&#x27;/register&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> info=req.body;</span><br><span class="line">    <span class="comment">//正则表达式，检验字符串是否只由数字、字母和下划线组成</span></span><br><span class="line">    <span class="keyword">var</span> exp=<span class="regexp">/^\w+$/</span>;</span><br><span class="line">    <span class="keyword">var</span> tip1=<span class="string">&#x27;&#x27;</span>,tip2=<span class="string">&#x27;&#x27;</span>,tip3=<span class="string">&#x27;&#x27;</span>,tip4=<span class="string">&#x27;&#x27;</span>,tip5=<span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="comment">//检验用户名合法性</span></span><br><span class="line">    <span class="keyword">if</span> (!exp.test(info.username) || info.username.length&gt;<span class="number">15</span> || info.username.length&lt;<span class="number">6</span>) tip1=<span class="string">&quot;请输入正确的用户名~&quot;</span>;</span><br><span class="line">    <span class="comment">//检验密码合法性</span></span><br><span class="line">    <span class="keyword">if</span> (!exp.test(info.passwords) || info.passwords.length&gt;<span class="number">18</span> || info.passwords.length&lt;<span class="number">6</span>) tip2=<span class="string">&quot;请输入正确的密码~&quot;</span>;</span><br><span class="line">    <span class="comment">//检验两次密码是否一致</span></span><br><span class="line">    <span class="keyword">if</span> (info.passwords!=info.passwordsChecker) tip3=<span class="string">&quot;两次密码不一致~&quot;</span>;</span><br><span class="line">    <span class="comment">//若身份为教师，验证码是否正确</span></span><br><span class="line">    <span class="keyword">if</span> (info.loginType==<span class="string">&#x27;1&#x27;</span> &amp;&amp; info.identify!=<span class="string">&quot;lyflyf&quot;</span>) tip4=<span class="string">&quot;验证码有误~&quot;</span>;</span><br><span class="line">    <span class="comment">//检验该用户名是否已被注册</span></span><br><span class="line">    <span class="keyword">var</span> fetchSql=<span class="string">&quot;SELECT id FROM login WHERE username=&#x27;&quot;</span>+info.username+<span class="string">&quot;&#x27;;&quot;</span></span><br><span class="line">    mysql.query(fetchSql,<span class="function"><span class="keyword">function</span>(<span class="params">err,results,fields</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (results.length!=<span class="number">0</span>) tip5=<span class="string">&quot;该用户名已被注册~&quot;</span>;</span><br><span class="line">        <span class="comment">//注册信息至少有一项存在错误，返回注册页面并提示错误</span></span><br><span class="line">        <span class="keyword">if</span> (tip1 || tip2 || tip3 || tip4 ||tip5)</span><br><span class="line">            res.render(<span class="string">&#x27;register&#x27;</span>,&#123;<span class="attr">tip1</span>:tip1,<span class="attr">tip2</span>:tip2,<span class="attr">tip3</span>:tip3,<span class="attr">tip4</span>:tip4,<span class="attr">tip5</span>:tip5&#125;);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        <span class="comment">//没有错误</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//将数据写入MySQL</span></span><br><span class="line">            <span class="keyword">var</span> insertSql=<span class="string">&quot;INSERT INTO login(username,passwords,loginType)&quot;</span>+</span><br><span class="line">            <span class="string">&quot;VALUES(&#x27;&quot;</span>+info.username+<span class="string">&quot;&#x27;,&#x27;&quot;</span>+info.passwords+<span class="string">&quot;&#x27;,&quot;</span>+info.loginType+<span class="string">&quot;);&quot;</span>;</span><br><span class="line">            mysql.query(insertSql,<span class="function"><span class="keyword">function</span>(<span class="params">err,results,fields</span>)</span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (err) <span class="built_in">console</span>.log(<span class="string">&quot;插入失败~&quot;</span>);</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                <span class="comment">//注册成功，跳转至成功页面</span></span><br><span class="line">                    res.sendfile(<span class="string">&quot;public/registerSuccess.html&quot;</span>);</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure><br>register.ejs 参数tip1至tip5，分别对应五种错误信息，若无误则tip为’’<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.tip</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="selector-tag">display</span><span class="selector-pseudo">:inline</span>;</span></span><br><span class="line"><span class="css">        <span class="selector-tag">color</span><span class="selector-pseudo">:red</span>;</span></span><br><span class="line">    &#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.bootcss.com/jquery/3.4.1/jquery.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="comment">//控制“验证码”一行的可见性</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">invisible</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        $(<span class="string">&#x27;#identifier&#x27;</span>).attr(<span class="string">&#x27;style&#x27;</span>,<span class="string">&#x27;display:none&#x27;</span>);</span></span><br><span class="line">    &#125;;</span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">visible</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        $(<span class="string">&#x27;#identifier&#x27;</span>).attr(<span class="string">&#x27;style&#x27;</span>,<span class="string">&#x27;display:inline&#x27;</span>);</span></span><br><span class="line">    &#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>注册页面<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span>&gt;</span>输入账号:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span>&gt;</span>(由6-15位字母,数字和下划线组成)</span><br><span class="line">            <span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;tip&quot;</span>&gt;</span>&lt;%= tip1%&gt;<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span>&gt;</span>输入密码:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;passwords&quot;</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span>&gt;</span>(由6-18位字母,数字和下划线组成)</span><br><span class="line">            <span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;tip&quot;</span>&gt;</span>&lt;%= tip2%&gt;<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span>&gt;</span>确认密码:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;passwordsChecker&quot;</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;tip&quot;</span>&gt;</span>&lt;%= tip3%&gt;<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span>&gt;</span>选择身份:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--点击“学生”选项时隐藏验证码，点击“教师”选项时显示验证码 --&gt;</span></span><br><span class="line">            学生<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;loginType&quot;</span> <span class="attr">id</span>=<span class="string">&quot;student&quot;</span> <span class="attr">value</span>=<span class="string">&quot;0&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;invisible()&quot;</span>&gt;</span></span><br><span class="line">            教师<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;loginType&quot;</span> <span class="attr">id</span>=<span class="string">&quot;teacher&quot;</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;visible()&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&#x27;identifier&#x27;</span> <span class="attr">style</span>=<span class="string">&quot;display:none&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span>&gt;</span>输入验证码:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;identify&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;tip&quot;</span>&gt;</span>&lt;%= tip4%&gt;<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">name</span>=<span class="string">&quot;return&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;window.open(&#x27;/login&#x27;)&quot;</span>&gt;</span>返回<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">name</span>=<span class="string">&quot;register&quot;</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span>&gt;</span>提交注册<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;tip&quot;</span>&gt;</span>&lt;%= tip5%&gt;<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="4-零零散散的总结"><a href="#4-零零散散的总结" class="headerlink" title="4. 零零散散的总结"></a>4. 零零散散的总结</h2><p><strong>自我总结一下，讲的会比较乱，可以暂时不看。</strong></p>
+<p>对于express框架一个非常基础但是非常重要的理解是：app.js是代码唯一的入口。至于为什么之前都是通过运行\bin\www来创建服务器呢，大概是因为www是一个可执行文件吧，但是我们完全可以在app.js中加上以下三行代码然后删掉\bin\www<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> server = http.createServer(app);</span><br><span class="line">server.listen(<span class="number">3000</span>)</span><br></pre></td></tr></table></figure><br>这样以后直接执行app.js即可创建服务器</p>
+<p>有了以上这个认知以后，或多或少会觉得思路清楚了一些。</p>
+<p>再去看其他几个文件夹的内容</p>
+<p>node_modules存放的是安装的各种模块，无视。</p>
+<p>public存放一些静态的html或者图片资源，直接调用即可。</p>
+<p>重点来了，routers，中文是路由器，充当的也的确是路由器的作用。所有对于网页的请求都可以通过路由器来处理，为了代码结构的清晰，对于每一块相对独立的功能（比如这次做的首页、登录、注册三个功能），都可以创建一个各自的路由器。在路由器内部，我们再对post请求、get请求，以及包含在请求内的信息分类进行处理，并分别返回。其中各类请求包含的信息存放在req中，返回则通过res的各种方法。</p>
+<p>举几个栗子：req.cookies获取cookies，req.body获取参数。</p>
+<p>res.sendfile发送页面，res.download发送下载文件，res.render渲染并发送ejs，res.clearCookie清除cookie，等等等。</p>
+<p>reference：<a target="_blank" rel="noopener" href="http://www.360doc.com/content/18/0422/07/32517277_747703104.shtml">http://www.360doc.com/content/18/0422/07/32517277_747703104.shtml</a></p>
+<p>另一个重点则是ejs，可以说是一种容易理解，写起来又很方便的模板。只需要通过res.render()就可以像函数一样，将一些参数传递给前端页面。</p>
+<p>此时再回到代码的入口，即app.js,只需要用app.use引入路由(router对象)，就等同于将某个功能并入了整个网站。</p>
+<p>就像这样子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> loginRouter = <span class="built_in">require</span>(<span class="string">&#x27;./routes/login&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> registerRouter = <span class="built_in">require</span>(<span class="string">&#x27;./routes/register&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> indexRouter = <span class="built_in">require</span>(<span class="string">&#x27;./routes/index&#x27;</span>);</span><br><span class="line">app.use(<span class="string">&#x27;/&#x27;</span>,loginRouter);</span><br><span class="line">app.use(<span class="string">&#x27;/&#x27;</span>,registerRouter);</span><br><span class="line">app.use(<span class="string">&#x27;/&#x27;</span>,indexRouter);</span><br></pre></td></tr></table></figure></p>
+<p>总之router和ejs使得代码的结构相当清晰。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nodejs/" rel="tag"># nodejs</a>
+          
+            <a href="/tags/web/" rel="tag"># web</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/06/Web%E7%BC%96%E7%A8%8B%E5%A4%A7%E4%BD%9C%E4%B8%9A(%E4%B8%80)%E6%A0%91%E8%8E%93%E6%B4%BE%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE,Wifi%E6%90%AD%E5%BB%BA/" rel="next" title="Web编程大作业(一)树莓派环境配置,Wifi搭建">
+                <i class="fa fa-chevron-left"></i> Web编程大作业(一)树莓派环境配置,Wifi搭建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/21/Web%E7%BC%96%E7%A8%8B%E5%A4%A7%E4%BD%9C%E4%B8%9A(%E4%B8%89)%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9&%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB(nodejs-websocket+multer)/" rel="prev" title="Web编程大作业(三)在线聊天&文件共享(nodejs-websocket+multer)">
+                Web编程大作业(三)在线聊天&文件共享(nodejs-websocket+multer) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="MorphLing" />
+            
+              <p class="site-author-name" itemprop="name">MorphLing</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives%7C%7Carchive">
+              
+                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://helloat123.github.io" title="Richard" target="_blank">Richard</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://qwqbot.com" title="qwqbot" target="_blank">qwqbot</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%B3%A8%E5%86%8C-amp-%E7%99%BB%E5%BD%95%E7%B3%BB%E7%BB%9F%E9%80%BB%E8%BE%91%E5%9B%BE"><span class="nav-text">1. 注册&amp;登录系统逻辑图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%95%88%E6%9E%9C%E6%BC%94%E7%A4%BA"><span class="nav-text">2. 效果演示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-text">3. 代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%A6%96%E9%A1%B5%EF%BC%88index%EF%BC%89"><span class="nav-text">1. 首页（index）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%99%BB%E9%99%86%E9%A1%B5%E9%9D%A2%EF%BC%88login%EF%BC%89"><span class="nav-text">2. 登陆页面（login）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%B3%A8%E5%86%8C%E9%A1%B5%E9%9D%A2%EF%BC%88register%EF%BC%89"><span class="nav-text">3. 注册页面（register）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%9B%B6%E9%9B%B6%E6%95%A3%E6%95%A3%E7%9A%84%E6%80%BB%E7%BB%93"><span class="nav-text">4. 零零散散的总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MorphLing</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+-->
+
+<!-- 不蒜字统计 -->
+<div>
+	<i class="fa fa-user-md"></i>
+	<span id="busuanzi_container_site_uv">
+	  访问人数：<span id="busuanzi_value_site_uv"></span>
+	</span>&nbsp;|&nbsp;
+	
+	<i class="fa fa-eye"></i>
+	<span id="busuanzi_container_site_pv">
+	  总访问量：<span id="busuanzi_value_site_pv"></span>
+	</span>&nbsp;|&nbsp;
+	
+	<!-- 添加博客全站总字数统计-->
+	<i class="fa fa-pencil"></i>
+	<span class="post-count">博客全站共 120.3k 字</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/apple-touch-icon-next.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="XCPC,多校," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="G.Grid-Coloring算法标签：构造 其实感觉是比较宽松的构造题，比赛的时候没想到判n&#x3D;&#x3D;1的情况，调了一个多小时没发现，赛后加上就过了，有点伤。。我个人的思路是先用红蓝两种颜色染色，只要每行每列颜色都是交替的就肯定能满足条件了。然后再用把某一部分蓝色或者红色改变成其他颜色，因为只要保证这个颜色只从蓝色或者只从红色改变而来，改变之后肯定还是满足条件的。 对于k是偶数的情况，恰好可以一半给蓝">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2020牛客暑期多校第六场">
+<meta property="og:url" content="http://example.com/2020/08/03/Nowcoder_summer_2020/Nowcoder_summer_2020_6/index.html">
+<meta property="og:site_name" content="MorphLing&#39;s Blog">
+<meta property="og:description" content="G.Grid-Coloring算法标签：构造 其实感觉是比较宽松的构造题，比赛的时候没想到判n&#x3D;&#x3D;1的情况，调了一个多小时没发现，赛后加上就过了，有点伤。。我个人的思路是先用红蓝两种颜色染色，只要每行每列颜色都是交替的就肯定能满足条件了。然后再用把某一部分蓝色或者红色改变成其他颜色，因为只要保证这个颜色只从蓝色或者只从红色改变而来，改变之后肯定还是满足条件的。 对于k是偶数的情况，恰好可以一半给蓝">
+<meta property="og:locale">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200728021502503.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2020-08-03T15:04:39.000Z">
+<meta property="article:modified_time" content="2021-06-03T12:26:24.107Z">
+<meta property="article:author" content="MorphLing">
+<meta property="article:tag" content="XCPC">
+<meta property="article:tag" content="多校">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200728021502503.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2020/08/03/Nowcoder_summer_2020/Nowcoder_summer_2020_6/"/>
+
+
+
+
+
+  <title>2020牛客暑期多校第六场 | MorphLing's Blog</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MorphLing's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">存在感是自我意识的基石</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/03/Nowcoder_summer_2020/Nowcoder_summer_2020_6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MorphLing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MorphLing's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2020牛客暑期多校第六场</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-03T23:04:39+08:00">
+                2020-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">访问量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="G-Grid-Coloring"><a href="#G-Grid-Coloring" class="headerlink" title="G.Grid-Coloring"></a><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/5671/G">G.Grid-Coloring</a></h3><p>算法标签：构造</p>
+<p>其实感觉是比较宽松的构造题，比赛的时候没想到判n==1的情况，调了一个多小时没发现，赛后加上就过了，有点伤。。我个人的思路是先用红蓝两种颜色染色，只要每行每列颜色都是交替的就肯定能满足条件了。<br><img src="https://img-blog.csdnimg.cn/20200728021502503.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L01vcnBoTGluZ18=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后再用把某一部分蓝色或者红色改变成其他颜色，因为只要保证这个颜色只从蓝色或者只从红色改变而来，改变之后肯定还是满足条件的。</p>
+<p>对于k是偶数的情况，恰好可以一半给蓝色，一半给红色，但对于k是奇数的情况，就不可避免会有一种颜色同时从蓝色红色改变而来。此时只需要考虑怎么安排这一种颜色就可以了。。答案是一半选择水平的蓝色，一半选择竖直的红色。对于剩下的，再按照k为偶数的情况分配即可。具体证明涉及一点数学计算，主要是奇偶性方面的，其实也不难推，这里就不浪费时间了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e5</span>+<span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> col[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,k,T;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sol</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;k;</span><br><span class="line">	<span class="keyword">int</span> sum=<span class="number">2</span>*n*(n+<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=sum;i++) col[i]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (sum%k!=<span class="number">0</span> || k==<span class="number">1</span> || n==<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;-1\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> t1=<span class="number">1</span>,t2=sum/<span class="number">2</span>+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span> (k%<span class="number">2</span>==<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> tot=sum/k;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=tot/<span class="number">2</span>;i++) col[i]=k,col[i+sum/<span class="number">2</span>]=k;</span><br><span class="line">		t1+=tot/<span class="number">2</span>;</span><br><span class="line">		t2+=tot/<span class="number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=k/<span class="number">2</span>*<span class="number">2</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (t1&lt;=sum/<span class="number">2</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=sum/k;j++)</span><br><span class="line">			&#123;</span><br><span class="line">				col[t1]=i;</span><br><span class="line">				t1++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=sum/k;j++)</span><br><span class="line">			&#123;</span><br><span class="line">				col[t2]=i;</span><br><span class="line">				t2++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	t1=<span class="number">1</span>,t2=sum;</span><br><span class="line">	<span class="keyword">int</span> last=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n+<span class="number">1</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (last==<span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,col[t1]);</span><br><span class="line">				<span class="keyword">if</span> (j!=n) <span class="built_in">printf</span>(<span class="string">&quot; &quot;</span>);</span><br><span class="line">				t1++;</span><br><span class="line">				last=<span class="number">2</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,col[t2]);</span><br><span class="line">				<span class="keyword">if</span> (j!=n) <span class="built_in">printf</span>(<span class="string">&quot; &quot;</span>);</span><br><span class="line">				t2--;</span><br><span class="line">				last=<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (n%<span class="number">2</span>==<span class="number">0</span>) last=<span class="number">3</span>-last;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	last=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n+<span class="number">1</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (last==<span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,col[t1]);</span><br><span class="line">				<span class="keyword">if</span> (j!=n) <span class="built_in">printf</span>(<span class="string">&quot; &quot;</span>);</span><br><span class="line">				t1++;</span><br><span class="line">				last=<span class="number">2</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,col[t2]);</span><br><span class="line">				<span class="keyword">if</span> (j!=n) <span class="built_in">printf</span>(<span class="string">&quot; &quot;</span>);</span><br><span class="line">				t2--;</span><br><span class="line">				last=<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (n%<span class="number">2</span>==<span class="number">0</span>) last=<span class="number">3</span>-last;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--) sol();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="H-Harmony-Pairs"><a href="#H-Harmony-Pairs" class="headerlink" title="H.Harmony-Pairs"></a><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/5671/H">H.Harmony-Pairs</a></h3><p>算法标签：数位dp</p>
+<p>正好有机会学一下数位dp。<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/jk211766/article/details/81474632">数位dp总结 之 从入门到模板</a></p>
+<p>之前一直望而却步，学了一下感觉其实也不是很难理解，但是做题要能熟练用就是另一回事了。</p>
+<p>$dp[pos][del][eqb][eqa]$ pos表示当前的数位，del表示当前a和b数位和之差（避免负数取2500为零点），eqb表示当前B是否取到N的最大值，eqa表示当前A是否取到B的最大值。通过eqb和eqa决定转移时数位取值范围。这样一来最终的状态个数也是很有限的。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MOD=<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> digit[<span class="number">20</span>];</span><br><span class="line"><span class="keyword">int</span> dp[<span class="number">200</span>][<span class="number">5000</span>][<span class="number">2</span>][<span class="number">2</span>];</span><br><span class="line"><span class="keyword">char</span> n[<span class="number">200</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> pos,<span class="keyword">int</span> del,<span class="keyword">int</span> eqb,<span class="keyword">int</span> eqa)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (pos==<span class="number">-1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (del&gt;<span class="number">2500</span>)</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (dp[pos][del][eqb][eqa]!=<span class="number">-1</span>) <span class="keyword">return</span> dp[pos][del][eqb][eqa];</span><br><span class="line">	<span class="keyword">int</span> upb=eqb?n[pos]:<span class="number">9</span>;</span><br><span class="line">	<span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> b=<span class="number">0</span>;b&lt;=upb;b++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> a=<span class="number">0</span>;a&lt;=(eqa?b:<span class="number">9</span>);a++)</span><br><span class="line">		&#123;</span><br><span class="line">			sum=(sum+dfs(pos<span class="number">-1</span>,del+a-b,eqb&amp;&amp;(b==n[pos]),eqa&amp;&amp;(a==b)))%MOD;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	dp[pos][del][eqb][eqa]=sum;</span><br><span class="line">	<span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,n);</span><br><span class="line">	<span class="keyword">int</span> len=<span class="built_in">strlen</span>(n);</span><br><span class="line">	reverse(n,n+len);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++) n[i]-=<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">	<span class="built_in">memset</span>(dp,<span class="number">-1</span>,<span class="keyword">sizeof</span>(dp));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,dfs(len<span class="number">-1</span>,<span class="number">2500</span>,<span class="number">1</span>,<span class="number">1</span>));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/XCPC/" rel="tag"># XCPC</a>
+          
+            <a href="/tags/%E5%A4%9A%E6%A0%A1/" rel="tag"># 多校</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/08/02/Nowcoder_summer_2020/Nowcoder_summer_2020_5/" rel="next" title="2020牛客暑期多校第五场">
+                <i class="fa fa-chevron-left"></i> 2020牛客暑期多校第五场
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/08/07/Nowcoder_summer_2020/Nowcoder_summer_2020_7/" rel="prev" title="2020牛客暑期多校第七场">
+                2020牛客暑期多校第七场 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="MorphLing" />
+            
+              <p class="site-author-name" itemprop="name">MorphLing</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives%7C%7Carchive">
+              
+                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://helloat123.github.io" title="Richard" target="_blank">Richard</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://qwqbot.com" title="qwqbot" target="_blank">qwqbot</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#G-Grid-Coloring"><span class="nav-text">G.Grid-Coloring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#H-Harmony-Pairs"><span class="nav-text">H.Harmony-Pairs</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MorphLing</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+-->
+
+<!-- 不蒜字统计 -->
+<div>
+	<i class="fa fa-user-md"></i>
+	<span id="busuanzi_container_site_uv">
+	  访问人数：<span id="busuanzi_value_site_uv"></span>
+	</span>&nbsp;|&nbsp;
+	
+	<i class="fa fa-eye"></i>
+	<span id="busuanzi_container_site_pv">
+	  总访问量：<span id="busuanzi_value_site_pv"></span>
+	</span>&nbsp;|&nbsp;
+	
+	<!-- 添加博客全站总字数统计-->
+	<i class="fa fa-pencil"></i>
+	<span class="post-count">博客全站共 120.3k 字</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
