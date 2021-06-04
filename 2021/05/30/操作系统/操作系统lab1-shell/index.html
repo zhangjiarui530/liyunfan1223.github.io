@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="内容与设计思想实现一个基本的Shell，能够实现以下功能： 1.    带参数的程序运行功能。 2.    重定向功能，将文件作为程序的输入&#x2F;输出。 3.    管道符号“|”，在程序间传递数据。 4.    后台符号&amp; ,表示此命令将以后台运行的方式执行。 5.    工作路径移动命令cd。 6.    程序运行统计mytop。 7.    shell退出命令exit。 8.    hi">
+<meta name="description" content="内容与设计思想实现一个基本的Shell，能够实现以下功能： ​    1. 带参数的程序运行功能。 ​    2. 重定向功能，将文件作为程序的输入&#x2F;输出。 ​    3. 管道符号“|”，在程序间传递数据。 ​    4. 后台符号&amp; ,表示此命令将以后台运行的方式执行。 ​    5. 工作路径移动命令cd。 ​    6. 程序运行统计mytop。 ​    7. shell退出命令">
 <meta property="og:type" content="article">
 <meta property="og:title" content="操作系统lab1-shell">
 <meta property="og:url" content="http://example.com/2021/05/30/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Flab1-shell/index.html">
 <meta property="og:site_name" content="MorphLing&#39;s Blog">
-<meta property="og:description" content="内容与设计思想实现一个基本的Shell，能够实现以下功能： 1.    带参数的程序运行功能。 2.    重定向功能，将文件作为程序的输入&#x2F;输出。 3.    管道符号“|”，在程序间传递数据。 4.    后台符号&amp; ,表示此命令将以后台运行的方式执行。 5.    工作路径移动命令cd。 6.    程序运行统计mytop。 7.    shell退出命令exit。 8.    hi">
+<meta property="og:description" content="内容与设计思想实现一个基本的Shell，能够实现以下功能： ​    1. 带参数的程序运行功能。 ​    2. 重定向功能，将文件作为程序的输入&#x2F;输出。 ​    3. 管道符号“|”，在程序间传递数据。 ​    4. 后台符号&amp; ,表示此命令将以后台运行的方式执行。 ​    5. 工作路径移动命令cd。 ​    6. 程序运行统计mytop。 ​    7. shell退出命令">
 <meta property="og:locale">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530101536.png">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530101541.png">
@@ -113,7 +113,7 @@
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530101734.png">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530101738.png">
 <meta property="article:published_time" content="2021-05-30T02:12:23.000Z">
-<meta property="article:modified_time" content="2021-06-03T12:17:57.452Z">
+<meta property="article:modified_time" content="2021-06-03T23:58:36.950Z">
 <meta property="article:author" content="MorphLing">
 <meta property="article:tag" content="os">
 <meta property="article:tag" content="lab">
@@ -348,14 +348,14 @@
 
       
         <h1 id="内容与设计思想"><a href="#内容与设计思想" class="headerlink" title="内容与设计思想"></a>内容与设计思想</h1><p>实现一个基本的Shell，能够实现以下功能：</p>
-<p><strong>1.</strong>    带参数的程序运行功能。</p>
-<p><strong>2.</strong>    重定向功能，将文件作为程序的输入/输出。</p>
-<p><strong>3.</strong>    管道符号“|”，在程序间传递数据。</p>
-<p><strong>4.</strong>    后台符号&amp; ,表示此命令将以后台运行的方式执行。</p>
-<p><strong>5.</strong>    工作路径移动命令cd。</p>
-<p><strong>6.</strong>    程序运行统计mytop。</p>
-<p><strong>7.</strong>    shell退出命令exit。</p>
-<p><strong>8.</strong>    history n显示最近执行的n条指令</p>
+<p>​    1. 带参数的程序运行功能。</p>
+<p>​    2. 重定向功能，将文件作为程序的输入/输出。</p>
+<p>​    3. 管道符号“|”，在程序间传递数据。</p>
+<p>​    4. 后台符号&amp; ,表示此命令将以后台运行的方式执行。</p>
+<p>​    5. 工作路径移动命令cd。</p>
+<p>​    6. 程序运行统计mytop。</p>
+<p>​    7. shell退出命令exit。</p>
+<p>​    8. history n显示最近执行的n条指令</p>
 <a id="more"></a>
 <h1 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h1><h2 id="常用函数封装"><a href="#常用函数封装" class="headerlink" title="常用函数封装"></a>常用函数封装</h2><p>封装了带有错误处理的open(),fopen(),execvp()函数，make64()函数合并高低周期，sleep_ms()通过select()函数实现毫秒级的sleep()</p>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530101536.png" alt="img"></p>
@@ -648,7 +648,7 @@
 	
 	<!-- 添加博客全站总字数统计-->
 	<i class="fa fa-pencil"></i>
-	<span class="post-count">博客全站共 120.3k 字</span>
+	<span class="post-count">博客全站共 120.4k 字</span>
 </div>
 
 
