@@ -110,7 +110,7 @@
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102847.png">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102952.png">
 <meta property="article:published_time" content="2021-05-30T02:22:47.000Z">
-<meta property="article:modified_time" content="2021-06-03T12:17:49.702Z">
+<meta property="article:modified_time" content="2021-06-04T08:26:15.328Z">
 <meta property="article:author" content="MorphLing">
 <meta property="article:tag" content="os">
 <meta property="article:tag" content="lab">
@@ -353,91 +353,91 @@
 <li>未调用chrt的程序将以普通的用户进程(非实时进程)在系统中运行。</li>
 </ol>
 <a id="more"></a>
-<h1 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h1><h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><ol>
+<h1 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h1><h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><ul>
 <li>在/usr/src/include/unistd.h 中添加chrt函数定义</li>
-</ol>
+</ul>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102628.png" alt="img"></p>
-<ol>
+<ul>
 <li>在/usr/src/minix/lib/libc/sys/chrt.c中添加chrt函数实现。</li>
-</ol>
+</ul>
 <p>此处修改deadline值，将当前时间戳+deadline，即进程结束的绝对时间作为新的deadline值向下传递，作为进程调度决策的参数。</p>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102636.png" alt="img"></p>
-<ol>
+<ul>
 <li>在/usr/src/minix/lib/libc/sys中Makefile.inc文件添加chrt.c条目</li>
-</ol>
+</ul>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102641.png" alt="img"></p>
-<h2 id="服务层"><a href="#服务层" class="headerlink" title="服务层"></a>服务层</h2><ol>
+<h2 id="服务层"><a href="#服务层" class="headerlink" title="服务层"></a>服务层</h2><ul>
 <li>在/usr/src/minix/servers/pm/proto.h中添加chrt函数定义</li>
-</ol>
+</ul>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102653.png" alt="img"></p>
-<ol>
+<ul>
 <li>在/usr/src/minix/servers/pm/chrt.c中添加chrt函数实现，调用sys_chrt()。</li>
-</ol>
+</ul>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102658.png" alt="img"></p>
-<ol>
+<ul>
 <li>在/usr/src/minix/include/minix/callnr.h中定义PM_CHRT编号。</li>
-</ol>
+</ul>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102704.png" alt="img"></p>
-<ol>
+<ul>
 <li>在/usr/src/minix/servers/pm/Makefile中添加chrt.c条目。</li>
-</ol>
+</ul>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102713.png" alt="img"></p>
-<ol>
+<ul>
 <li>在/usr/src/minix/servers/pm/table.c 中调用映射表。</li>
-</ol>
+</ul>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102721.png" alt="img"></p>
-<ol>
+<ul>
 <li>在/usr/src/minix/include/minix/syslib.h 中添加sys_ chrt () 定义。</li>
-</ol>
+</ul>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102728.png" alt="img"></p>
-<ol>
+<ul>
 <li>在/usr/src/minix/lib/libsys/sys_chrt.c 中添加sys_chrt () 实现。可参照该文件夹下的sys_fork文件，在实现中通过_kernel_call (调用号)向内核传递。</li>
-</ol>
+</ul>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102735.png" alt="img"></p>
-<ol>
+<ul>
 <li>在/usr/src/minix/lib/libsys 中的Makefile中添加sys_chrt.c条目。</li>
-</ol>
+</ul>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102741.png" alt="img"></p>
-<h2 id="内核层"><a href="#内核层" class="headerlink" title="内核层"></a>内核层</h2><ol>
+<h2 id="内核层"><a href="#内核层" class="headerlink" title="内核层"></a>内核层</h2><ul>
 <li>在/usr/src/minix/kernel/system.h中添加do_chrt函数定义。</li>
-</ol>
+</ul>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102749.png" alt="img"></p>
-<ol>
+<ul>
 <li>在/usr/src/minix/kernel/system/do_chrt.c中添加do_chrt函数实现。</li>
-</ol>
+</ul>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102756.png" alt="img"></p>
-<ol>
+<ul>
 <li>在/usr/src/minix/kernel/config.h 中添加USE_FORK。</li>
-</ol>
+</ul>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102803.png" alt="img"></p>
-<ol>
+<ul>
 <li>在/usr/src/minix/kernel/system/ 中Makefile.inc文件添加do_chrt.c条目。</li>
-</ol>
+</ul>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102808.png" alt="img"></p>
-<ol>
+<ul>
 <li>在/usr/src/minix/include/minix/com.h中定义SYS_CHRT编号。</li>
-</ol>
+</ul>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102813.png" alt="img"></p>
-<ol>
+<ul>
 <li>在/usr/src/minix/kernel/system.c 中添加SYS_CHRT编号到do_chrt的映射。</li>
-</ol>
+</ul>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102819.png" alt="img"></p>
-<ol>
+<ul>
 <li>在/usr/src/minix/commands/service/parse.c的system_tab中添加名称编号对。</li>
-</ol>
+</ul>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102825.png" alt="img"></p>
-<h2 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h2><ol>
+<h2 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h2><ul>
 <li>修改/usr/src/minix/kernel/proc.h在struct proc中添加p_deadline成员。</li>
-</ol>
+</ul>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102833.png" alt="img"></p>
-<ol>
+<ul>
 <li>修改/usr/src/minix/kernel/proc.c中enqueue_head()和enqueue()函数，在实时进程入队时设置优先级为5。</li>
-</ol>
+</ul>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102839.png" alt="img"></p>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102842.png" alt="img"></p>
-<ol>
+<ul>
 <li>修改/usr/src/minix/kernel/proc.c中pick_proc()函数，选择进程时遍历队列，优先选择最先中止运行的进程</li>
-</ol>
+</ul>
 <p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210530102847.png" alt="img"></p>
 <h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>测试程序：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;signal.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">proc</span><span class="params">(<span class="keyword">int</span> id)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">​    <span class="keyword">if</span> (fork() == <span class="number">0</span>) &#123;</span><br><span class="line">​      proc(i + <span class="number">1</span>);</span><br><span class="line">​    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">proc</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> loop;</span><br><span class="line">  <span class="keyword">switch</span>(id) &#123;</span><br><span class="line">​    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">​      chrt(<span class="number">20</span>);</span><br><span class="line">​      <span class="built_in">printf</span>(<span class="string">&quot;proc1 set success\n&quot;</span>);</span><br><span class="line">​      sleep(<span class="number">1</span>);</span><br><span class="line">​      <span class="keyword">break</span>;</span><br><span class="line">​    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">​      chrt(<span class="number">15</span>);</span><br><span class="line">​      <span class="built_in">printf</span>(<span class="string">&quot;proc2 set success\n&quot;</span>);</span><br><span class="line">​      sleep(<span class="number">1</span>);</span><br><span class="line">​      <span class="keyword">break</span>;</span><br><span class="line">​    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">​      chrt(<span class="number">0</span>);</span><br><span class="line">​      <span class="built_in">printf</span>(<span class="string">&quot;proc3 set success\n&quot;</span>);</span><br><span class="line">​      sleep(<span class="number">1</span>);</span><br><span class="line">​      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (loop = <span class="number">1</span>; loop &lt; <span class="number">30</span>; loop++) &#123;</span><br><span class="line">​    <span class="keyword">if</span> (id == <span class="number">1</span> &amp;&amp; loop == <span class="number">5</span>) &#123;</span><br><span class="line">​      chrt(<span class="number">5</span>);</span><br><span class="line">​      <span class="built_in">printf</span>(<span class="string">&quot;Change proc1 deadline to 5s\n&quot;</span>);</span><br><span class="line">​    &#125;</span><br><span class="line">​    <span class="keyword">if</span> (id == <span class="number">3</span> &amp;&amp; loop == <span class="number">10</span>) &#123;</span><br><span class="line">​      chrt(<span class="number">3</span>);</span><br><span class="line">​      <span class="built_in">printf</span>(<span class="string">&quot;Change proc3 deadline to 3s\n&quot;</span>);</span><br><span class="line">​    &#125;</span><br><span class="line">​    sleep(<span class="number">1</span>);</span><br><span class="line">​    <span class="built_in">printf</span>(<span class="string">&quot;prc%d heart beat %d\n&quot;</span>, id, loop);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -448,22 +448,22 @@
 <p>第三阶段P1进程结束，P2、P3为实时进程，优先级P3&gt;P2，符合预期</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>MINIX系统调用机制包含三层：应用层、服务层和内核层，层与层之间通过message传递消息。该实验本质上是将进程的deadline通过message逐层传递至内核层，并用deadline值进行进程调度决策。</p>
 <p>在修改MINIX3内核过程中遇到了一些问题并分别尝试解决如下：</p>
-<ol>
+<ul>
 <li><p>git clone在不同操作系统下不同的换行符（CRLF或LF）</p>
-<p>我采用的编写方式是先将原来的MINIX3源码clone到windows10系统下，在本地修改后再将修改后的文件通过ssh传输到虚拟机。</p>
-<p>但是git clone在windows系统和MINIX系统下文件的换行符有区别，windows下为CRLF，MINIX下为LF，这导致两边的文件不一致，编译时会报错。</p>
-<p>参考解决方案：<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/5834014/lf-will-be-replaced-by-crlf-in-git-what-is-that-and-is-it-important">https://stackoverflow.com/questions/5834014/lf-will-be-replaced-by-crlf-in-git-what-is-that-and-is-it-important</a></p>
-<p>在windows系统git中设置后使得windows系统下换行符也为LF。</p>
-<p>设置命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.autocrlf false</span><br></pre></td></tr></table></figure>
+<p> 我采用的编写方式是先将原来的MINIX3源码clone到windows10系统下，在本地修改后再将修改后的文件通过ssh传输到虚拟机。</p>
+<p> 但是git clone在windows系统和MINIX系统下文件的换行符有区别，windows下为CRLF，MINIX下为LF，这导致两边的文件不一致，编译时会报错。</p>
+<p> 参考解决方案：<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/5834014/lf-will-be-replaced-by-crlf-in-git-what-is-that-and-is-it-important">https://stackoverflow.com/questions/5834014/lf-will-be-replaced-by-crlf-in-git-what-is-that-and-is-it-important</a></p>
+<p> 在windows系统git中设置后使得windows系统下换行符也为LF。</p>
+<p> 设置命令：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.autocrlf false</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>编译过程中遇到permission denied问题</p>
-<p>通过chmod修改文件权限后解决</p>
+<p> 通过chmod修改文件权限后解决</p>
 </li>
 <li><p>进程调度时，实时进程的优先级设置范围问题</p>
-<p>实时进程的优先级设置不能过高，也不能过低。小于等于3时，可能会被视作系统进程和内核进程；大于等于7时，优先级可能会小于非实时进程。这些情况都会导致调度不能正确实现。经过了解和测试后选择实时进程优先级为5时可以正确实现。</p>
+<p> 实时进程的优先级设置不能过高，也不能过低。小于等于3时，可能会被视作系统进程和内核进程；大于等于7时，优先级可能会小于非实时进程。这些情况都会导致调度不能正确实现。经过了解和测试后选择实时进程优先级为5时可以正确实现。</p>
 </li>
-</ol>
+</ul>
 
       
     </div>
