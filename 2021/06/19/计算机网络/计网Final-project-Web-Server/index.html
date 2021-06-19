@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/apple-touch-icon-next.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="计算机网络,java," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="实验目的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计网Final project-Web Server">
+<meta property="og:url" content="http://example.com/2021/06/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91Final-project-Web-Server/index.html">
+<meta property="og:site_name" content="MorphLing&#39;s Blog">
+<meta property="og:description" content="实验目的">
+<meta property="og:locale">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619122616.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619122619.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619122624.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619122628.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619122632.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619123449.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619122801.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619122812.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619122820.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619122824.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619123435.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619122916.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619123026.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619123034.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619123041.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619123045.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619123049.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619123055.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619123100.png">
+<meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619123103.png">
+<meta property="article:published_time" content="2021-06-19T04:25:06.000Z">
+<meta property="article:modified_time" content="2021-06-19T04:35:10.588Z">
+<meta property="article:author" content="MorphLing">
+<meta property="article:tag" content="计算机网络">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619122616.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2021/06/19/计算机网络/计网Final-project-Web-Server/"/>
+
+
+
+
+
+  <title>计网Final project-Web Server | MorphLing's Blog</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MorphLing's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">存在感是自我意识的基石</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91Final-project-Web-Server/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MorphLing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MorphLing's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">计网Final project-Web Server</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-19T12:25:06+08:00">
+                2021-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">访问量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h1><p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619122616.png" alt="img"></p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619122619.png" alt="img"></p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619122624.png" alt="img"></p>
+<a id="more"></a>
+<h1 id="实验任务"><a href="#实验任务" class="headerlink" title="实验任务"></a>实验任务</h1><p><strong><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619122628.png" alt="img"></strong></p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619122632.png" alt="img"></p>
+<h1 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h1><h2 id="用java语言开发一个简单的web服务器，仅能处理一个请求，通过ServerSocket和Socket进行代码实现"><a href="#用java语言开发一个简单的web服务器，仅能处理一个请求，通过ServerSocket和Socket进行代码实现" class="headerlink" title="用java语言开发一个简单的web服务器，仅能处理一个请求，通过ServerSocket和Socket进行代码实现"></a>用java语言开发一个简单的web服务器，仅能处理一个请求，通过ServerSocket和Socket进行代码实现</h2><h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3><p>ServerSocket通过accept()方法阻塞等待请求，每次收到一个请求将socket传递给一个新的线程进行接管。由于accept(),read(),write()方法都是阻塞的，可以采用多线程接管连接来提高并行效率。服务器需要从输入流中解析出url，读取url对应的文件内容，将文件内容和http首部打包后写入输出流，当url为”/shutdown”时，关闭serversocket来关闭服务器。</p>
+<h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> IO;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.net.ServerSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Server</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> ServerSocket serverSocket;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> String <span class="title">messageWrapper</span><span class="params">(<span class="keyword">int</span> statusCode, String message)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;HTTP/1.1 &quot;</span> + statusCode + <span class="string">&quot;\r\n&quot;</span> +</span><br><span class="line">                <span class="string">&quot;Content-Type:text/html;charset=utf-8&quot;</span> +<span class="string">&quot;\r\n&quot;</span> +</span><br><span class="line">                <span class="string">&quot;\r\n&quot;</span> +</span><br><span class="line">                message;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> String <span class="title">parseURL</span><span class="params">(String mess)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> idx1, idx2;</span><br><span class="line">        idx1 = mess.indexOf(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span> (idx1 != -<span class="number">1</span>) &#123;</span><br><span class="line">            idx2 = mess.indexOf(<span class="string">&#x27; &#x27;</span>, idx1 + <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (idx2 != -<span class="number">1</span>) <span class="keyword">return</span> mess.substring(idx1 + <span class="number">1</span>, idx2);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Socket socket;</span><br><span class="line">    Server(Socket socket_) &#123;</span><br><span class="line">        socket = socket_;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;客户端:&quot;</span> + socket.getInetAddress().getLocalHost() + <span class="string">&quot;已连接到服务器&quot;</span>);</span><br><span class="line">            InputStream is = socket.getInputStream();</span><br><span class="line">            OutputStream os = socket.getOutputStream();</span><br><span class="line">            InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(is);</span><br><span class="line">            OutputStreamWriter osw = <span class="keyword">new</span> OutputStreamWriter(os);</span><br><span class="line">            BufferedReader br = <span class="keyword">new</span> BufferedReader(isr);</span><br><span class="line">            BufferedWriter bw = <span class="keyword">new</span> BufferedWriter(osw);</span><br><span class="line">            <span class="comment">//读取客户端发送来的消息</span></span><br><span class="line">            String mess = br.readLine();</span><br><span class="line">            System.out.println(<span class="string">&quot;客户端：&quot;</span> + mess);</span><br><span class="line">            String url = parseURL(mess);</span><br><span class="line">            <span class="keyword">if</span> (url == <span class="keyword">null</span> || url.equals(<span class="string">&quot;/&quot;</span>)) url = <span class="string">&quot;/null&quot;</span>;</span><br><span class="line">            System.out.println(<span class="string">&quot;URL :&quot;</span> + url);</span><br><span class="line">            <span class="keyword">if</span> (url.equals(<span class="string">&quot;/shutdown&quot;</span>)) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;关闭服务器...&quot;</span>);</span><br><span class="line">                socket.close();</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                File file = <span class="keyword">new</span> File(<span class="string">&quot;src&quot;</span> + url);</span><br><span class="line">                <span class="keyword">if</span> (file.exists()) &#123;</span><br><span class="line">                    Long fileLength = file.length();</span><br><span class="line">                    <span class="keyword">byte</span>[] fileContent = <span class="keyword">new</span> <span class="keyword">byte</span>[fileLength.intValue()];</span><br><span class="line">                    FileInputStream fis = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">                    fis.read(fileContent);</span><br><span class="line">                    fis.close();</span><br><span class="line">                    String page = <span class="keyword">new</span> String(fileContent);</span><br><span class="line">                    bw.write(messageWrapper(<span class="number">200</span>, page));</span><br><span class="line">                &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">                    bw.write(messageWrapper(<span class="number">404</span>, <span class="string">&quot;404 Not Found.&quot;</span>));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            bw.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="comment">// e.printStackTrace();</span></span><br><span class="line">            System.out.println(<span class="string">&quot;线程关闭...&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        serverSocket = <span class="keyword">new</span> ServerSocket(<span class="number">8081</span>);</span><br><span class="line">        <span class="keyword">int</span> poolSize = <span class="number">10</span>;</span><br><span class="line">        ThreadPoolExecutor pool = <span class="keyword">new</span> ThreadPoolExecutor(poolSize, poolSize,</span><br><span class="line">                <span class="number">60L</span>, TimeUnit.SECONDS,</span><br><span class="line">                <span class="keyword">new</span> ArrayBlockingQueue(poolSize),</span><br><span class="line">                <span class="keyword">new</span> ThreadPoolExecutor.DiscardPolicy());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;线程等待连接...&quot;</span>);</span><br><span class="line">            Socket s = serverSocket.accept();</span><br><span class="line">            pool.execute(<span class="keyword">new</span> Server(s));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>访问/index.html</p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619123449.png" alt="image-20210619123448917"></p>
+<p>访问无效地址：</p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619122801.png" alt="img"></p>
+<p>访问/shutdown：</p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619122812.png" alt="img"></p>
+<p>Postman测试：</p>
+<p>Get方法：</p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619122820.png" alt="img"></p>
+<p>Post方法：</p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619122824.png" alt="img"></p>
+<h2 id="用java语言实现一个web代理服务器"><a href="#用java语言实现一个web代理服务器" class="headerlink" title="用java语言实现一个web代理服务器"></a>用java语言实现一个web代理服务器</h2><h3 id="实现思路-1"><a href="#实现思路-1" class="headerlink" title="实现思路"></a>实现思路</h3><p>代理服务器既作为服务器接收浏览器的请求，也作为客户端向web服务器发送请求。在转发时，代理服务器不会将接收到的所有内容发送给服务器，而是只发送包含请求url的第一行内容，减少web服务器处理压力。类似于web服务器，由于阻塞方法较多，采用多线程方式提高并发效率，并用线程池管理线程，线程池拒绝策略为DiscardPolicy()，即对于超过线程上限的请求直接丢弃。</p>
+<h3 id="实现代码-1"><a href="#实现代码-1" class="headerlink" title="实现代码"></a>实现代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> IO;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.net.ServerSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Proxy</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> ServerSocket ss_client;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> String <span class="title">messageWrapper</span><span class="params">(<span class="keyword">int</span> statusCode, String message)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;HTTP/1.1 &quot;</span> + statusCode + <span class="string">&quot;\r\n&quot;</span> +</span><br><span class="line">                <span class="string">&quot;Content-Type:text/html;charset=utf-8&quot;</span> +<span class="string">&quot;\r\n&quot;</span> +</span><br><span class="line">                <span class="string">&quot;\r\n&quot;</span> +</span><br><span class="line">                message;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> String <span class="title">parseURL</span><span class="params">(String mess)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> idx1, idx2;</span><br><span class="line">        idx1 = mess.indexOf(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span> (idx1 != -<span class="number">1</span>) &#123;</span><br><span class="line">            idx2 = mess.indexOf(<span class="string">&#x27; &#x27;</span>, idx1 + <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (idx2 != -<span class="number">1</span>) <span class="keyword">return</span> mess.substring(idx1 + <span class="number">1</span>, idx2);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Socket s_client;</span><br><span class="line">    Proxy(Socket s_) &#123;</span><br><span class="line">        s_client = s_;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Socket s_server = <span class="keyword">new</span> Socket(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">8081</span>);</span><br><span class="line">            <span class="comment">// System.out.println(&quot;客户端:&quot; + s_client.getInetAddress().getLocalHost() + &quot;:&quot; +  s_client.getPort() + &quot;已连接到服务器&quot;);</span></span><br><span class="line">            <span class="comment">// System.out.println(&quot;服务端:&quot; + s_server.getInetAddress().getLocalHost() + &quot;:&quot; +  s_server.getPort() + &quot;已连接到服务器&quot;);</span></span><br><span class="line"></span><br><span class="line">            InputStream is_client = s_client.getInputStream();</span><br><span class="line">            OutputStream os_client = s_client.getOutputStream();</span><br><span class="line">            InputStream is_server = s_server.getInputStream();</span><br><span class="line">            OutputStream os_server = s_server.getOutputStream();</span><br><span class="line">            InputStreamReader isr_client = <span class="keyword">new</span> InputStreamReader(is_client);</span><br><span class="line">            OutputStreamWriter osw_client = <span class="keyword">new</span> OutputStreamWriter(os_client);</span><br><span class="line">            InputStreamReader isr_server = <span class="keyword">new</span> InputStreamReader(is_server);</span><br><span class="line">            OutputStreamWriter osw_server = <span class="keyword">new</span> OutputStreamWriter(os_server);</span><br><span class="line"></span><br><span class="line">            BufferedReader br_client = <span class="keyword">new</span> BufferedReader(isr_client);</span><br><span class="line">            BufferedWriter bw_client = <span class="keyword">new</span> BufferedWriter(osw_client);</span><br><span class="line">            BufferedReader br_server = <span class="keyword">new</span> BufferedReader(isr_server);</span><br><span class="line">            BufferedWriter bw_server = <span class="keyword">new</span> BufferedWriter(osw_server);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//读取客户端发送来的消息</span></span><br><span class="line">            String mess_client = br_client.readLine();</span><br><span class="line">            <span class="comment">// System.out.println(mess_client);</span></span><br><span class="line">            <span class="comment">//bw_server.write(mess_client);</span></span><br><span class="line">            bw_server.write(mess_client + <span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">            <span class="comment">// bw_server.flush();</span></span><br><span class="line">            bw_server.flush();</span><br><span class="line">            <span class="comment">// bw_server.close(); // 不能关 输出流关闭会造成socket被关闭 输入输出流都不可用</span></span><br><span class="line">            String mess_server;</span><br><span class="line">            String mess = <span class="string">&quot;&quot;</span>;</span><br><span class="line">            <span class="keyword">while</span>((mess_server = br_server.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">                mess += mess_server +<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            bw_client.write(mess);</span><br><span class="line"></span><br><span class="line">            bw_client.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="comment">// e.printStackTrace();</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        ss_client = <span class="keyword">new</span> ServerSocket(<span class="number">8082</span>);</span><br><span class="line">        <span class="keyword">int</span> poolSize = <span class="number">30</span>;</span><br><span class="line">        ThreadPoolExecutor pool = <span class="keyword">new</span> ThreadPoolExecutor(poolSize, poolSize,</span><br><span class="line">                <span class="number">60L</span>, TimeUnit.SECONDS,</span><br><span class="line">                <span class="keyword">new</span> ArrayBlockingQueue(poolSize),</span><br><span class="line">                <span class="keyword">new</span> ThreadPoolExecutor.DiscardPolicy());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="comment">// System.out.println(&quot;线程等待连接...&quot;);</span></span><br><span class="line">            Socket s = ss_client.accept();</span><br><span class="line">            pool.execute(<span class="keyword">new</span> Proxy(s));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="测试-1"><a href="#测试-1" class="headerlink" title="测试"></a>测试</h3><p>浏览器：</p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619123435.png" alt="image-20210619123435771"></p>
+<p>Postman：</p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619122916.png" alt="img"></p>
+<h2 id="附加：分析现有能支持同时连接的最大数，修改代码使服务器使其能支持一千个连接"><a href="#附加：分析现有能支持同时连接的最大数，修改代码使服务器使其能支持一千个连接" class="headerlink" title="附加：分析现有能支持同时连接的最大数，修改代码使服务器使其能支持一千个连接"></a>附加：分析现有能支持同时连接的最大数，修改代码使服务器使其能支持一千个连接</h2><h3 id="实现思路-2"><a href="#实现思路-2" class="headerlink" title="实现思路"></a>实现思路</h3><p>使用NIO实现web服务器，通过非阻塞的方式实现IO。NIO实现中，阻塞方法只有selector.select() 一种，因此不需要显式的多线程就能达到较高的并发效率，而是通过selector管理多线程。</p>
+<h3 id="实现代码-2"><a href="#实现代码-2" class="headerlink" title="实现代码"></a>实现代码</h3><p>Server.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> NIO;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.InetSocketAddress;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.SelectionKey;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.Selector;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.ServerSocketChannel;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.SocketChannel;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Server</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> ServerSocketChannel serverSocketChannel;</span><br><span class="line">    <span class="keyword">static</span> Selector selector;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PORT = <span class="number">8081</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> String HOST = <span class="string">&quot;127.0.0.1&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Server());</span><br><span class="line">        thread.start();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            createServer();</span><br><span class="line">            <span class="keyword">while</span>(serverSocketChannel.isOpen()) &#123;</span><br><span class="line">                selector.select();</span><br><span class="line">                Set&lt;SelectionKey&gt; sets = selector.selectedKeys();</span><br><span class="line">                Iterator&lt;SelectionKey&gt; iterator = sets.iterator();</span><br><span class="line">                <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">                    SelectionKey selectionKey = iterator.next();</span><br><span class="line">                    doHandleInteresting(selectionKey);</span><br><span class="line">                    iterator.remove();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;  <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">doHandleInteresting</span><span class="params">(SelectionKey selectionKey)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (selectionKey.isAcceptable()) &#123;</span><br><span class="line">            SocketChannel socketChannel = serverSocketChannel.accept();</span><br><span class="line">            socketChannel.configureBlocking(<span class="keyword">false</span>);</span><br><span class="line">            socketChannel.register(selector, SelectionKey.OP_READ);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (selectionKey.isReadable()) &#123;</span><br><span class="line">            SocketChannel socketChannel = (SocketChannel) selectionKey.channel();</span><br><span class="line">            Request request = <span class="keyword">new</span> Request(socketChannel);</span><br><span class="line">            request.handle();</span><br><span class="line">            Response response = <span class="keyword">new</span> Response(request, socketChannel, serverSocketChannel);</span><br><span class="line">            response.handle();</span><br><span class="line">            socketChannel.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">createServer</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        serverSocketChannel = ServerSocketChannel.open();</span><br><span class="line">        serverSocketChannel.socket().bind(<span class="keyword">new</span> InetSocketAddress(HOST, PORT));</span><br><span class="line">        serverSocketChannel.configureBlocking(<span class="keyword">false</span>);</span><br><span class="line">        createSelector();</span><br><span class="line">        serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">createSelector</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        selector=Selector.open();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Response.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> NIO;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.nio.ByteBuffer;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.FileChannel;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.ServerSocketChannel;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.SocketChannel;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Response</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Request request;</span><br><span class="line">    <span class="keyword">private</span> SocketChannel socketChannel;</span><br><span class="line">    <span class="keyword">private</span> ServerSocketChannel serverSocketChannel;</span><br><span class="line">    Response(Request request_, SocketChannel socketChannel_, ServerSocketChannel serverSocketChannel_) &#123;</span><br><span class="line">        request = request_;</span><br><span class="line">        socketChannel = socketChannel_;</span><br><span class="line">        serverSocketChannel = serverSocketChannel_;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> String <span class="title">messageWrapper</span><span class="params">(<span class="keyword">int</span> statusCode, String message)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;HTTP/1.1 &quot;</span> + statusCode + <span class="string">&quot;\r\n&quot;</span> +</span><br><span class="line">                <span class="string">&quot;Content-Type:text/html;charset=utf-8&quot;</span> +<span class="string">&quot;\r\n&quot;</span> +</span><br><span class="line">                <span class="string">&quot;\r\n&quot;</span> +</span><br><span class="line">                message;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (request.getUrl().equals(<span class="string">&quot;/shutdown&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;服务器关闭...&quot;</span>);</span><br><span class="line">            serverSocketChannel.close();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ByteBuffer byteBuffer=ByteBuffer.allocate(<span class="number">64</span>);</span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">&quot;src/&quot;</span>, request.getUrl());</span><br><span class="line">        <span class="keyword">if</span> (file.exists()) &#123;</span><br><span class="line">            FileInputStream fileInputStream = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">            FileChannel fileChannel = fileInputStream.getChannel();</span><br><span class="line">            String message = messageWrapper(<span class="number">200</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">            byteBuffer.put(message.getBytes());</span><br><span class="line">            byteBuffer.flip();</span><br><span class="line">            socketChannel.write(byteBuffer);</span><br><span class="line">            fileChannel.transferTo(<span class="number">0</span>, fileChannel.size(), socketChannel);</span><br><span class="line">            fileInputStream.close();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            String message = messageWrapper(<span class="number">200</span>, <span class="string">&quot;404 NOT FOUND!&quot;</span>);</span><br><span class="line">            byteBuffer.put(message.getBytes());</span><br><span class="line">            byteBuffer.flip();</span><br><span class="line">            socketChannel.write(byteBuffer);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Request.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> NIO;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.nio.ByteBuffer;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.SocketChannel;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Request</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String requestContext;</span><br><span class="line">    <span class="keyword">private</span> SocketChannel socketChannel;</span><br><span class="line">    <span class="keyword">private</span> String url;</span><br><span class="line">    Request(SocketChannel socketChannel_) &#123;</span><br><span class="line">        socketChannel = socketChannel_;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        parseRequestContext();</span><br><span class="line">        parseRequestUrl();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getContext</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> requestContext; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUrl</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> url; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">parseRequestContext</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        ByteBuffer byteBuffer = ByteBuffer.allocate(<span class="number">64</span>);</span><br><span class="line">        StringBuilder stringBuilder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line"><span class="comment">//        int length;</span></span><br><span class="line"><span class="comment">//        while ((length = socketChannel.read(byteBuffer)) &gt; 0) &#123;</span></span><br><span class="line"><span class="comment">//            stringBuilder.append(new String(byteBuffer.array(), 0, length));</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">        <span class="keyword">int</span> length = socketChannel.read(byteBuffer);</span><br><span class="line">        stringBuilder.append(<span class="keyword">new</span> String(byteBuffer.array(), <span class="number">0</span>, length));</span><br><span class="line">        requestContext = stringBuilder.toString();</span><br><span class="line">        <span class="comment">// System.out.println(requestContext + &quot;?&quot;);</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">parseRequestUrl</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> idx1, idx2;</span><br><span class="line">        idx1 = requestContext.indexOf(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line">        url = <span class="string">&quot;/null&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (idx1 != -<span class="number">1</span>) &#123;</span><br><span class="line">            idx2 = requestContext.indexOf(<span class="string">&#x27; &#x27;</span>, idx1 + <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (idx2 != -<span class="number">1</span>) url = requestContext.substring(idx1 + <span class="number">1</span>, idx2);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="并发测试"><a href="#并发测试" class="headerlink" title="并发测试"></a>并发测试</h2><p>利用jmeter进行并发测试，时间为20，总请求数为1000、5000、10000、20000</p>
+<ul>
+<li>IO实现：</li>
+</ul>
+<p>请求数1000：</p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619123026.png" alt="img"></p>
+<p>请求数5000：</p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619123034.png" alt="img"></p>
+<p>请求数10000：</p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619123041.png" alt="img"></p>
+<p>请求数20000：</p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619123045.png" alt="img"></p>
+<ul>
+<li>NIO实现</li>
+</ul>
+<p>请求数1000：</p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619123049.png" alt="img"></p>
+<p>请求数5000：</p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619123055.png" alt="img"></p>
+<p>请求数10000：</p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619123100.png" alt="img"></p>
+<p>请求数20000：    </p>
+<p><img src="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210619123103.png" alt="img"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>可以发现，当吞吐量<500/s时，IO实现的web服务器和NIO实现的web服务器都能响应所有请求，不会发生error，当吞吐量>=500/s时，开始发生error，NIO实现的web服务器error率明显低于IO实现的web服务器。NIO实现的web服务器可以处理1000/s吞吐量的服务，error率为0.07%。</p>
+<p>对于IO实现的web服务器，由于IO方法是阻塞的，每个线程同时只能处理一个请求，于是同时处理的请求数取决于线程数的上限，而线程数很难达到一千个，NIO实现的web服务器是非阻塞的，因此可以同时处理大量请求。</p>
+<p>实现过程中加深了对java网络编程的认识，并了解了哪些方法是阻塞的，哪些是非阻塞的，以及这些方法对并发处理效率的影响。对于web代理服务器采用了线程池管理线程，了解了线程池的创建和使用。也了解了如postman，jmeter之类的发包软件用于测试。</p>
+<p>在高并发压力测试中，由于并发数较大，一些调试信息被反复输出也会导致对测试结果产生影响，应注释掉大多数调式信息来提高测试准确度。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag"># 计算机网络</a>
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/06/18/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/%E6%A6%82%E7%BB%9F%E7%AC%AC%E5%85%AD%E7%AB%A0-%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1%E7%AC%94%E8%AE%B0/" rel="next" title="概统第六章 参数估计笔记">
+                <i class="fa fa-chevron-left"></i> 概统第六章 参数估计笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="MorphLing" />
+            
+              <p class="site-author-name" itemprop="name">MorphLing</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives%7C%7Carchive">
+              
+                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://helloat123.github.io" title="Richard" target="_blank">Richard</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://qwqbot.com" title="qwqbot" target="_blank">qwqbot</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84"><span class="nav-text">实验目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%BB%BB%E5%8A%A1"><span class="nav-text">实验任务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B"><span class="nav-text">实验过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8java%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84web%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E4%BB%85%E8%83%BD%E5%A4%84%E7%90%86%E4%B8%80%E4%B8%AA%E8%AF%B7%E6%B1%82%EF%BC%8C%E9%80%9A%E8%BF%87ServerSocket%E5%92%8CSocket%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-text">用java语言开发一个简单的web服务器，仅能处理一个请求，通过ServerSocket和Socket进行代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF"><span class="nav-text">实现思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81"><span class="nav-text">实现代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8java%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AAweb%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">用java语言实现一个web代理服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF-1"><span class="nav-text">实现思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81-1"><span class="nav-text">实现代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95-1"><span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%E5%8A%A0%EF%BC%9A%E5%88%86%E6%9E%90%E7%8E%B0%E6%9C%89%E8%83%BD%E6%94%AF%E6%8C%81%E5%90%8C%E6%97%B6%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%EF%BC%8C%E4%BF%AE%E6%94%B9%E4%BB%A3%E7%A0%81%E4%BD%BF%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E5%85%B6%E8%83%BD%E6%94%AF%E6%8C%81%E4%B8%80%E5%8D%83%E4%B8%AA%E8%BF%9E%E6%8E%A5"><span class="nav-text">附加：分析现有能支持同时连接的最大数，修改代码使服务器使其能支持一千个连接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF-2"><span class="nav-text">实现思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81-2"><span class="nav-text">实现代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%B5%8B%E8%AF%95"><span class="nav-text">并发测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MorphLing</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+-->
+
+<!-- 不蒜字统计 -->
+<div>
+	<i class="fa fa-user-md"></i>
+	<span id="busuanzi_container_site_uv">
+	  访问人数：<span id="busuanzi_value_site_uv"></span>
+	</span>&nbsp;|&nbsp;
+	
+	<i class="fa fa-eye"></i>
+	<span id="busuanzi_container_site_pv">
+	  总访问量：<span id="busuanzi_value_site_pv"></span>
+	</span>&nbsp;|&nbsp;
+	
+	<!-- 添加博客全站总字数统计-->
+	<i class="fa fa-pencil"></i>
+	<span class="post-count">博客全站共 141.7k 字</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
