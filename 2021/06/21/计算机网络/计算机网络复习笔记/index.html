@@ -135,7 +135,7 @@
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210623183941.png">
 <meta property="og:image" content="https://morphling-picgo.oss-cn-shanghai.aliyuncs.com/20210623184036.png">
 <meta property="article:published_time" content="2021-06-21T11:34:20.000Z">
-<meta property="article:modified_time" content="2021-06-23T11:15:26.633Z">
+<meta property="article:modified_time" content="2021-06-23T11:30:15.604Z">
 <meta property="article:author" content="MorphLing">
 <meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary">
@@ -896,9 +896,34 @@
 </ol>
 </li>
 <li><p>LS与DV算法的比较</p>
-<p>|      | 消息复杂度                         | 收敛速度                                           | 鲁棒性                                                 |<br>| —— | ————————————————— | ————————————————————————— | ——————————————————————————— |<br>| DV   | $O(nE)$                            | $O(n^2)/O(nlgn)$+$O(nE)$(消息传递)，但可能发生震荡 | 每个点计算自己的转发表                                 |<br>| LS   | 只在邻居间交换消息，取决于收敛次数 | 收敛次数不同，可能由无穷计数问题                   | 每个点的转发表被邻居使用，错误的连接代价会随着网络传播 |</p>
 </li>
 </ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>消息复杂度</th>
+<th>收敛速度</th>
+<th>鲁棒性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DV</td>
+<td>$O(nE)$</td>
+<td>$O(n^2)/O(nlgn)$+$O(nE)$(消息传递)，但可能发生震荡</td>
+<td>每个点计算自己的转发表</td>
+</tr>
+<tr>
+<td>LS</td>
+<td>只在邻居间交换消息，取决于收敛次数</td>
+<td>收敛次数不同，可能由无穷计数问题</td>
+<td>每个点的转发表被邻居使用，错误的连接代价会随着网络传播</td>
+</tr>
+</tbody>
+</table>
+</div>
 <h2 id="因特网中自治系统"><a href="#因特网中自治系统" class="headerlink" title="因特网中自治系统"></a>因特网中自治系统</h2><ul>
 <li>自治系统AS(autonomous systems)/domains</li>
 <li>IGP</li>
