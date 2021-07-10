@@ -79,16 +79,16 @@
 
 
 
-<meta name="description" content="参考：插头dp从入门到不会  插头dp是一种类似于状压dp的，用一维状态记录轮廓线上状态来解决格点图上问题的方式 Mondriaan’s Dream求用$1\times 2$或$2\times 1$的骨牌覆盖$m\times n$棋盘的方案数 用一维记录轮廓线下方的格子是否已被覆盖 上一个状态只需要考虑当前格子是否已被填上，若已被填上则不能再填，轮廓线状态1-&gt;0，若未填，则有竖着填0-&amp;g">
+<meta name="description" content="参考：插头dp从入门到不会">
 <meta property="og:type" content="article">
 <meta property="og:title" content="插头dp">
 <meta property="og:url" content="http://example.com/2021/07/05/%E6%8F%92%E5%A4%B4dp/index.html">
 <meta property="og:site_name" content="MorphLing&#39;s Blog">
-<meta property="og:description" content="参考：插头dp从入门到不会  插头dp是一种类似于状压dp的，用一维状态记录轮廓线上状态来解决格点图上问题的方式 Mondriaan’s Dream求用$1\times 2$或$2\times 1$的骨牌覆盖$m\times n$棋盘的方案数 用一维记录轮廓线下方的格子是否已被覆盖 上一个状态只需要考虑当前格子是否已被填上，若已被填上则不能再填，轮廓线状态1-&gt;0，若未填，则有竖着填0-&amp;g">
+<meta property="og:description" content="参考：插头dp从入门到不会">
 <meta property="og:locale">
 <meta property="og:image" content="https://njzwj.github.io/2017/06/28/plug-dp-101/plug-dp-01.png">
 <meta property="article:published_time" content="2021-07-04T20:44:49.000Z">
-<meta property="article:modified_time" content="2021-07-10T11:30:32.705Z">
+<meta property="article:modified_time" content="2021-07-10T11:36:23.949Z">
 <meta property="article:author" content="MorphLing">
 <meta property="article:tag" content="dp">
 <meta property="article:tag" content="插头dp">
@@ -324,6 +324,7 @@
       
         <p>参考：<a target="_blank" rel="noopener" href="https://njzwj.github.io/2017/06/28/plug-dp-101/">插头dp从入门到不会</a></p>
 <p><img src="https://njzwj.github.io/2017/06/28/plug-dp-101/plug-dp-01.png" alt="img"></p>
+<a id="more"></a>
 <p>插头dp是一种类似于状压dp的，用一维状态记录轮廓线上状态来解决格点图上问题的方式</p>
 <h1 id="Mondriaan’s-Dream"><a href="#Mondriaan’s-Dream" class="headerlink" title="Mondriaan’s Dream"></a><a target="_blank" rel="noopener" href="https://vjudge.net/problem/HDU-1400">Mondriaan’s Dream</a></h1><p>求用$1\times 2$或$2\times 1$的骨牌覆盖$m\times n$棋盘的方案数</p>
 <p>用一维记录轮廓线下方的格子是否已被覆盖</p>
