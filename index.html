@@ -313,10 +313,9 @@
 
       
         
-          
-          LGV引理给出网格图上两个起点$a_1,a_2$和两个终点$b_1,b_2$，每次只能往右或往上走一步，问$a_1\rightarrow b_1$和$a_2\rightarrow b_2$的所有路径方案中，两条路径没有相交点的方案数
-用$e(a,b)$表示从a走到b的方案总数，则$ans=e(a_1
-          ...
+          <h1 id="LGV引理"><a href="#LGV引理" class="headerlink" title="LGV引理"></a>LGV引理</h1><p>给出网格图上两个起点$a_1,a_2$和两个终点$b_1,b_2$，每次只能往右或往上走一步，问$a_1\rightarrow b_1$和$a_2\rightarrow b_2$的所有路径方案中，两条路径没有相交点的方案数</p>
+<p>用$e(a,b)$表示从a走到b的方案总数，则$ans=e(a_1,b_1)e(a_2,b_2)-e(a_1,b_2)e(a_2,b_1)$</p>
+<p>理解：利用容斥，从$e(a_1,b_1)e(a_2,b_2)$中减去那些存在相交的方案。已知$e(a_1,b_2)e(a_2,b_1)$中每种方案的路径一定相交，对于每个交点，两条路径交点要么在交点处交换位置，要么像是“在交点处反弹了”一样没有交换位置（如下图）</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2021/08/15/LGV%E5%BC%95%E7%90%86-NTT%E6%A8%A1%E6%9D%BF/#more" rel="contents">
