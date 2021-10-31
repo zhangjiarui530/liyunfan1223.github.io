@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/apple-touch-icon-next.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据科学与工程算法基础1-7章">
+<meta property="og:url" content="http://example.com/2021/10/31/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%801-7%E7%AB%A0/index.html">
+<meta property="og:site_name" content="MorphLing&#39;s Blog">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-10-31T11:00:24.000Z">
+<meta property="article:modified_time" content="2021-10-31T11:04:56.954Z">
+<meta property="article:author" content="MorphLing">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2021/10/31/数据科学与工程算法基础1-7章/"/>
+
+
+
+
+
+  <title>数据科学与工程算法基础1-7章 | MorphLing's Blog</title>
+  
+
+
+
+
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MorphLing's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">存在感是自我意识的基石</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/31/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%801-7%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MorphLing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MorphLing's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据科学与工程算法基础1-7章</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-10-31T19:00:24+08:00">
+                2021-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">访问量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><br></p>
+<a id="more"></a>
+<h2 id="1-绪论"><a href="#1-绪论" class="headerlink" title="1 绪论"></a>1 绪论</h2><h3 id="混淆矩阵"><a href="#混淆矩阵" class="headerlink" title="混淆矩阵"></a>混淆矩阵</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>预测\真实</th>
+<th>正例</th>
+<th>负例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正例</td>
+<td>TP</td>
+<td>FP</td>
+</tr>
+<tr>
+<td>负例</td>
+<td>FN</td>
+<td>TN</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>召回率$R=\frac{TP}{TP+FN}$</p>
+<p>准确率$P=\frac{TP}{TP+FP}$</p>
+<p>$F_\beta=\frac{(\beta^2+1)PR}{\beta^2P+R}$</p>
+<h3 id="回归问题"><a href="#回归问题" class="headerlink" title="回归问题"></a>回归问题</h3><p>平均绝对误差$MAE$</p>
+<p>均方误差$MSE$</p>
+<p>均方根误差$RMSE$</p>
+<h2 id="2-抽样算法"><a href="#2-抽样算法" class="headerlink" title="2 抽样算法"></a>2 抽样算法</h2><h3 id="系统抽样"><a href="#系统抽样" class="headerlink" title="系统抽样"></a>系统抽样</h3><ul>
+<li>直线等距抽样</li>
+<li>圆形等距抽样</li>
+</ul>
+<p>特点：简便、均匀、 潜在分层，但会有偏差，误差计算复杂</p>
+<h3 id="分层抽样"><a href="#分层抽样" class="headerlink" title="分层抽样"></a>分层抽样</h3><p>样本量分配方法：</p>
+<ul>
+<li>等额样本法</li>
+<li>按比例分配法</li>
+</ul>
+<h3 id="水库抽样"><a href="#水库抽样" class="headerlink" title="水库抽样"></a>水库抽样</h3><ul>
+<li>分布是水库抽样算法</li>
+</ul>
+<h2 id="3-尾概率不等式"><a href="#3-尾概率不等式" class="headerlink" title="3 尾概率不等式"></a>3 尾概率不等式</h2><h3 id="Markov"><a href="#Markov" class="headerlink" title="Markov"></a>Markov</h3><p>$P(X\geqslant a)\leqslant\frac{E(X)}{a}$</p>
+<h3 id="Chebyshev"><a href="#Chebyshev" class="headerlink" title="Chebyshev"></a>Chebyshev</h3><p>$P(|X-E(X)|\geqslant \epsilon)\leqslant \frac{Var(X)}{\epsilon^2}$</p>
+<h3 id="Chernoff"><a href="#Chernoff" class="headerlink" title="Chernoff"></a>Chernoff</h3><p>$P(X&lt;(1-\delta)\mu)&lt;(\frac{e^{-\delta}}{(1-\delta)^{1-\delta}})^\mu$</p>
+<p>$P(X&gt;(1+\delta)\mu)&lt;(\frac{e^\delta}{(1+\delta)^{1+\delta}})^\mu$</p>
+<p>推论</p>
+<p>$P(X&lt;(1-\delta)\mu)&lt;e^{-\frac{\mu\delta^2}{2}}$</p>
+<p>$P(X&gt;(1+\delta)\mu)&lt;e^{-\frac{\mu\delta^2}{3}}$</p>
+<h3 id="Moris"><a href="#Moris" class="headerlink" title="Moris"></a>Moris</h3><p>以$1/2^X$的概率更新X的值为X+1，返回近似估计值$2^X-1$</p>
+<p>是无偏估计（归纳法证明）</p>
+<p>方差$Var(2^{X_N}-1)\simeq \frac{1}{2}N^2$</p>
+<h3 id="Moris-1"><a href="#Moris-1" class="headerlink" title="Moris+"></a>Moris+</h3><p>对多次Moris算法取平均值</p>
+<p>对n个数取均值，方差被减小到$O(N^2/n)$</p>
+<p>当$n\geqslant O(1/(\delta\epsilon^2))$，$P(|\hat N-N|&gt;\epsilon N)&lt;\delta$（由Chebyshev不等式证）</p>
+<h3 id="Moris-2"><a href="#Moris-2" class="headerlink" title="Moris++"></a>Moris++</h3><p>运行$t=ln(1/\delta)$次Moris+算法，每个Moris+算法由$n=1/\epsilon^2$构成，取n次Moris+算法结果的中位数</p>
+<p>当$n=O(1/\epsilon^2)$，$P(|\hat{N_i}-N|&gt;\epsilon N)&lt;\frac{1}{2n\epsilon^2}&lt;\frac{1}{3}$（Chebyshev）</p>
+<p>指示变量$Y_i=1$表示Moris+算法失败，则$E(Y_i)=P(Y_i=1)&lt;\frac{1}{3}$</p>
+<p>算法至少失败t/2次时Moris++算法失败，$P(\sum Y_i&gt;\frac{t}{2})= P(\sum Y_i&gt;(1+\frac{1}{2})\frac{t}{3})\leqslant P(\sum Y_i&gt;(1+\frac{1}{2})\mu)\leqslant exp(-\mu(\frac{1}{2})^2/4)&lt;\delta$（Chernoff）</p>
+<p>即$\mu\geqslant 16\ln\frac{1}{\delta}$，$\frac{t}{3}\geqslant \mu\geqslant 16\ln\frac{1}{\delta}$</p>
+<p>有$t=O(\ln(1/\delta))$</p>
+<h2 id="4-哈希算法"><a href="#4-哈希算法" class="headerlink" title="4 哈希算法"></a>4 哈希算法</h2><h3 id="布隆过滤器"><a href="#布隆过滤器" class="headerlink" title="布隆过滤器"></a>布隆过滤器</h3><p>参数m（数组位数），k（哈希函数个数）</p>
+<p>误判率分析：</p>
+<ul>
+<li>任意一次哈希没有选中某位的概率$1-\frac{1}{m}$</li>
+<li>插入一个元素需要被哈希k次，k次哈希后某位置没有被置为1的概率$(1-\frac{1}{m})^k$</li>
+<li>插入n个元素后，某位仍然为0的概率$(1-\frac{1}{m})^{kn}\simeq e^{-\frac{kn}{m}}$</li>
+<li>某个元素经过k个哈希函数哈希后，对应的k个位置恰好都被置为1才会发生误判，则误判率为$(1-e^{-\frac{kn}{m}})^k$</li>
+<li>令$\rho=e^{-\frac{kn}{m}}=\frac{1}{2}$时误判率最小，此时$k=\ln2\cdot \frac{m}{n}$</li>
+</ul>
+<h3 id="局部敏感哈希"><a href="#局部敏感哈希" class="headerlink" title="局部敏感哈希"></a>局部敏感哈希</h3><ul>
+<li><p>Jaccard相似度</p>
+</li>
+<li><p>最小哈希</p>
+<p>基于最小哈希签名矩阵的相似度（最小哈希值相同的比例即为相似度）</p>
+</li>
+<li><p>局部敏感哈希</p>
+<p>两个元素被映射到同一个桶的概率是$(1-s^r)^b$，s：Jaccard相似度，r：行数，b：组数</p>
+</li>
+</ul>
+<h2 id="5-Sketch算法"><a href="#5-Sketch算法" class="headerlink" title="5 Sketch算法"></a>5 Sketch算法</h2><h3 id="Misra-Gries"><a href="#Misra-Gries" class="headerlink" title="Misra Gries"></a>Misra Gries</h3><p>可能会出现误报，但不会漏报，且无法知晓每个元素的频数</p>
+<h3 id="Count-Sketch"><a href="#Count-Sketch" class="headerlink" title="Count Sketch"></a>Count Sketch</h3><ul>
+<li><p>简单抽样算法</p>
+<p>数据流大小m，抽样后的数据流大小为M，$p=M/m$，元素到达时以p概率更新$c_i$，估计频数为$c_i/p$</p>
+</li>
+<li><p>Basic Count Sketch</p>
+<p>哈希函数$h(\cdot)$将元素均匀映射到k个位置，哈希函数$g(\cdot)$将n个元素映射为-1或+1，对于信道大的元素，将其位置上计数+1或-1，元素a的估计频数为$g(a)C[h(a)]$</p>
+<p>$E(\hat{f_a})=0,Var(\hat{f_a})=\frac{1}{k}(\sum_if_i^2-f_a^2)=\frac{||f_{-a}||_2^2}{k}$（用$Var(X)=E(X^2)-E(X)^2$算，最后用了个很奇怪的符号）</p>
+<p>$P(|\hat{f_a}-f_a|\geqslant \epsilon||f||_2)\leqslant P(|\hat{f_a}-f_a|\geqslant\epsilon||f_{-a}||_2)\leqslant \frac{Var(\hat{f_a})}{\epsilon^2||f_{-a}||_2^2}=\frac{1}{k\epsilon^2}&lt;\delta$</p>
+<p>因此，需要$k=O(1/\epsilon^2\delta)$，使得偏离值超过$\epsilon||f||_2$的概率小于$\delta$</p>
+</li>
+<li><p>Count Sketch</p>
+<p>t次Basic Count Sketch算法取中位数，运用Tug of War</p>
+<p>$k=O(\ln(1/\delta)/\epsilon^2)$，证明类似Moris++</p>
+</li>
+<li><p>Count-Min Sketch</p>
+<p>CM Sketch算法中$c_i$严格为正，估计频率返回d个哈希表中的最小值</p>
+<p>分析得计数器个数$M=O(\frac{\ln(1/\delta)}{\epsilon})$</p>
+</li>
+</ul>
+<h2 id="6-EM算法"><a href="#6-EM算法" class="headerlink" title="6 EM算法"></a>6 EM算法</h2><h3 id="最大似然估计"><a href="#最大似然估计" class="headerlink" title="最大似然估计"></a>最大似然估计</h3><p>概统学过了不看了</p>
+<h3 id="EM算法"><a href="#EM算法" class="headerlink" title="EM算法"></a>EM算法</h3><p>不考 不看了</p>
+<h2 id="7-随机游走"><a href="#7-随机游走" class="headerlink" title="7 随机游走"></a>7 随机游走</h2><h3 id="随机过程"><a href="#随机过程" class="headerlink" title="随机过程"></a>随机过程</h3><p>与时间t有关的一个随机变量序列</p>
+<h3 id="马尔可夫过程"><a href="#马尔可夫过程" class="headerlink" title="马尔可夫过程"></a>马尔可夫过程</h3><p>已知时刻t=n所处状态得条件下，过程在t=n+1时刻得状态与t&lt;n之前的状态无关</p>
+<p>若时间集合和状态空间离散，则称为马尔科夫链</p>
+<h3 id="转移概率矩阵"><a href="#转移概率矩阵" class="headerlink" title="转移概率矩阵"></a>转移概率矩阵</h3><p>矩阵行和为1，列和不一定为1，每个位置上的值[0,1]</p>
+<h3 id="平稳分布"><a href="#平稳分布" class="headerlink" title="平稳分布"></a>平稳分布</h3><p>存在条件：满足不可约和反周期性质</p>
+<h2 id="不可约"><a href="#不可约" class="headerlink" title="不可约"></a>不可约</h2><p>若马氏链中任意两个状态都是连通的，则称该马氏链不可约</p>
+<h3 id="反周期"><a href="#反周期" class="headerlink" title="反周期"></a>反周期</h3><p>若所有状态的周期均为1，则称该马氏链是反周期的</p>
+<p>状态x的周期是经过该状态所有环的长度的最大公约数</p>
+<h3 id="PageRank"><a href="#PageRank" class="headerlink" title="PageRank"></a>PageRank</h3>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/10/21/Ubuntu20-04%E6%9C%AC%E5%9C%B0%E9%85%8D%E7%BD%AEHadoop%E7%8E%AF%E5%A2%83/" rel="next" title="Ubuntu20.04本地配置Hadoop环境">
+                <i class="fa fa-chevron-left"></i> Ubuntu20.04本地配置Hadoop环境
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/10/31/Ubuntu20-04-gcc%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-qemu%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85arm64%E6%9E%B6%E6%9E%84%E7%B3%BB%E7%BB%9F/" rel="prev" title="Ubuntu20.04 gcc交叉编译 & qemu虚拟机安装arm64架构系统">
+                Ubuntu20.04 gcc交叉编译 & qemu虚拟机安装arm64架构系统 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="MorphLing" />
+            
+              <p class="site-author-name" itemprop="name">MorphLing</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives%7C%7Carchive">
+              
+                  <span class="site-state-item-count">83</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://helloat123.github.io" title="Richard" target="_blank">Richard</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://qwqbot.com" title="qwqbot" target="_blank">qwqbot</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%BB%AA%E8%AE%BA"><span class="nav-text">1 绪论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B7%E6%B7%86%E7%9F%A9%E9%98%B5"><span class="nav-text">混淆矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E5%BD%92%E9%97%AE%E9%A2%98"><span class="nav-text">回归问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%8A%BD%E6%A0%B7%E7%AE%97%E6%B3%95"><span class="nav-text">2 抽样算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%8A%BD%E6%A0%B7"><span class="nav-text">系统抽样</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B1%82%E6%8A%BD%E6%A0%B7"><span class="nav-text">分层抽样</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B0%B4%E5%BA%93%E6%8A%BD%E6%A0%B7"><span class="nav-text">水库抽样</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%B0%BE%E6%A6%82%E7%8E%87%E4%B8%8D%E7%AD%89%E5%BC%8F"><span class="nav-text">3 尾概率不等式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Markov"><span class="nav-text">Markov</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chebyshev"><span class="nav-text">Chebyshev</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chernoff"><span class="nav-text">Chernoff</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Moris"><span class="nav-text">Moris</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Moris-1"><span class="nav-text">Moris+</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Moris-2"><span class="nav-text">Moris++</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95"><span class="nav-text">4 哈希算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-text">布隆过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C"><span class="nav-text">局部敏感哈希</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Sketch%E7%AE%97%E6%B3%95"><span class="nav-text">5 Sketch算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Misra-Gries"><span class="nav-text">Misra Gries</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Count-Sketch"><span class="nav-text">Count Sketch</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-EM%E7%AE%97%E6%B3%95"><span class="nav-text">6 EM算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1"><span class="nav-text">最大似然估计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EM%E7%AE%97%E6%B3%95"><span class="nav-text">EM算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E9%9A%8F%E6%9C%BA%E6%B8%B8%E8%B5%B0"><span class="nav-text">7 随机游走</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B"><span class="nav-text">随机过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E8%BF%87%E7%A8%8B"><span class="nav-text">马尔可夫过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AC%E7%A7%BB%E6%A6%82%E7%8E%87%E7%9F%A9%E9%98%B5"><span class="nav-text">转移概率矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E7%A8%B3%E5%88%86%E5%B8%83"><span class="nav-text">平稳分布</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E7%BA%A6"><span class="nav-text">不可约</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%91%A8%E6%9C%9F"><span class="nav-text">反周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PageRank"><span class="nav-text">PageRank</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MorphLing</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+-->
+
+<!-- 不蒜字统计 -->
+<div>
+	<i class="fa fa-user-md"></i>
+	<span id="busuanzi_container_site_uv">
+	  访问人数：<span id="busuanzi_value_site_uv"></span>
+	</span>&nbsp;|&nbsp;
+	
+	<i class="fa fa-eye"></i>
+	<span id="busuanzi_container_site_pv">
+	  总访问量：<span id="busuanzi_value_site_pv"></span>
+	</span>&nbsp;|&nbsp;
+	
+	<!-- 添加博客全站总字数统计-->
+	<i class="fa fa-pencil"></i>
+	<span class="post-count">博客全站共 178.4k 字</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
