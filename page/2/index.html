@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/10/ECNU-XCPC-2021-Selection-Round-4/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/28/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E5%9B%9B%E5%9C%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MorphLing">
@@ -262,7 +262,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/06/10/ECNU-XCPC-2021-Selection-Round-4/" itemprop="url">ECNU XCPC 2021 Selection Round - 4</a></h1>
+                <a class="post-title-link" href="/2021/07/28/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E5%9B%9B%E5%9C%BA/" itemprop="url">2021牛客多校第四场</a></h1>
         
 
         <div class="post-meta">
@@ -274,8 +274,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-10T13:18:10+08:00">
-                2021-06-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-28T15:48:29+08:00">
+                2021-07-28
               </time>
             
 
@@ -313,15 +313,14 @@
 
       
         
-          <h1 id="F-Nice-Positions"><a href="#F-Nice-Positions" class="headerlink" title="F. Nice Positions"></a><a target="_blank" rel="noopener" href="https://acm.ecnu.edu.cn/contest/424/problem/F/">F. Nice Positions</a></h1><p>观察：对于一个序列，任意相邻两个数至少有一个是好的，即不存在两个连续的坏点</p>
-<p>简单套个容斥就是</p>
-<p>好点&gt;=k的方案 &lt;==&gt; 坏点&lt;=n-k的方案</p>
-<p>然后从小到大把每个数插入排列，发现如果插入的数在一个坏点两侧，那么坏点数量不变，否则坏点数量+1</p>
-<p>主要是一直在考虑，确定前i个点后再确定第i+1个点，从左往右依次确定的线性推法</p>
-<p>但是如果从把最后一个数插入排列的任意位置的角度考虑就会简单很多</p>
+          <h1 id="B-Sample-Game"><a href="#B-Sample-Game" class="headerlink" title="B. Sample Game"></a><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11255/BB">B. Sample Game</a></h1><p>题意：有一个随机数生成器，每个数生成的概率为$p_i$，不断生成直到最后一个数小于先前的任意一个数时停止，共生成x个数，问$x^2$的期望</p>
+<p>首先可以把$x^2$分解为$1+3+\cdots+(2x+1)$，即从每一步的增量考虑转移方法，若当前长度为x，则增量为2x+1，考虑增量的期望$E(2x+1)=2E(x)+1$，于是只要借助$E(x)$就能进行转移了</p>
+<p>因此可以先处理出$f[i]$表示第一个数为$i$时的期望长度$E(x)$，$f[i]=(\sum\limits_{j=i+1}^nf[j]p_j+p_if[i]+\sum\limits_{j=1}^{i-1}p_j)+1$</p>
+<p>再通过$f[i]$计算$f2[i]$，表示第一个数为$i$时长度平方的期望$E(x^2)$，$f2[i]=\sum\limits_{j=i+1}^n p_j(f2[j]+2f[j]+1)+p_i(f2[i]+2f[i]+1)+4\sum\limits_{j=1}^{i-1}p_j$</p>
+<p>答案为$ans=\sum\limits_{i=1}^nf2[i]p_i$</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2021/06/10/ECNU-XCPC-2021-Selection-Round-4/#more" rel="contents">
+            <a class="btn" href="/2021/07/28/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E5%9B%9B%E5%9C%BA/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -372,7 +371,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/06/%E6%9D%82%E8%AE%B0/%E6%9D%82%E8%AE%B04/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/25/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%B8%89%E5%9C%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MorphLing">
@@ -391,7 +390,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/06/06/%E6%9D%82%E8%AE%B0/%E6%9D%82%E8%AE%B04/" itemprop="url">杂记4</a></h1>
+                <a class="post-title-link" href="/2021/07/25/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%B8%89%E5%9C%BA/" itemprop="url">2021牛客多校第三场</a></h1>
         
 
         <div class="post-meta">
@@ -403,8 +402,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-06T10:48:45+08:00">
-                2021-06-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-25T15:48:29+08:00">
+                2021-07-25
               </time>
             
 
@@ -442,644 +441,17 @@
 
       
         
-          <p>我也不知道我现在到底是什么状态。不过，就算是逞强也比摆烂好。</p>
-<p>最近两个礼拜发生了好多事，但若从旁观者视角去看也不过稀松平常，不算离奇也不算狗血，只能算是平静水面上的一点波纹。作为当事人的我，有一些情绪上的波动倒也合理，当为了弥补缺失感而诉诸外界的时候，结果却出乎意料的好。某种程度上，失去的关系反而让我意识到更多其他关系的存在与重要性。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2021/06/06/%E6%9D%82%E8%AE%B0/%E6%9D%82%E8%AE%B04/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/04/matplotlib%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="MorphLing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MorphLing's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/06/04/matplotlib%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/" itemprop="url">数据可视化、matplotlib使用小结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-04T14:34:02+08:00">
-                2021-06-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib.ticker <span class="keyword">as</span> mtick</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax.set_title() <span class="comment"># 设置图表标题</span></span><br><span class="line">plt.savefig() <span class="comment"># 以图片形式保存至本地目录</span></span><br></pre></td></tr></table></figure>
-<h2 id="设置坐标轴属性"><a href="#设置坐标轴属性" class="headerlink" title="设置坐标轴属性"></a>设置坐标轴属性</h2><h3 id="设置坐标位置和标签"><a href="#设置坐标位置和标签" class="headerlink" title="设置坐标位置和标签"></a>设置坐标位置和标签</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ax.set_xlabel() <span class="comment"># 设置坐标轴名称</span></span><br><span class="line">ax.set_xticks() <span class="comment"># 控制标签位置</span></span><br><span class="line">ax.set_xlim() <span class="comment"># 设置坐标轴范围</span></span><br><span class="line">ax.set_xticklabels() <span class="comment"># 控制标签内容 </span></span><br><span class="line"><span class="built_in">format</span>=<span class="string">&#x27;%d ms&#x27;</span></span><br><span class="line">ticks = mtick.FormatStrFormatter(<span class="built_in">format</span>)</span><br><span class="line">ax.xaxis.set_major_formatter(ticks) <span class="comment"># 格式化标签内容</span></span><br><span class="line">ax.xaxis.set_tick_params() <span class="comment"># 设置标签参数</span></span><br><span class="line">ax.yaxis.tick_right() <span class="comment"># 改变坐标轴位置</span></span><br><span class="line">ax.minorticks_on() <span class="comment"># 显示坐标轴小格</span></span><br><span class="line">ax.set_xscale(<span class="string">&#x27;log&#x27;</span>) <span class="comment"># 设置对数坐标</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2021/06/04/matplotlib%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91lab-%E5%9F%BA%E4%BA%8Eudp%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE-ABP-GBN/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="MorphLing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MorphLing's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91lab-%E5%9F%BA%E4%BA%8Eudp%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE-ABP-GBN/" itemprop="url">计网lab-基于udp实现可靠传输协议(ABP/GBN)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-03T19:41:39+08:00">
-                2021-06-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><h2 id="Message和Packet类定义"><a href="#Message和Packet类定义" class="headerlink" title="Message和Packet类定义"></a>Message和Packet类定义</h2><p>分别作为应用层和传输层的数据包</p>
-<p>其中Packet类的generateChecksum()方法根据报文数据生成校验和，selfcheck()方法根据报文数据和校验和检查数据是否损坏</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2021/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91lab-%E5%9F%BA%E4%BA%8Eudp%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE-ABP-GBN/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/03/XCPC%E8%AE%AD%E7%BB%83%E8%AE%B0%E5%BD%95/solo/ECNU-XCPC-2021-Selection-Round-3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="MorphLing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MorphLing's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/06/03/XCPC%E8%AE%AD%E7%BB%83%E8%AE%B0%E5%BD%95/solo/ECNU-XCPC-2021-Selection-Round-3/" itemprop="url">ECNU XCPC 2021 Selection Round 3</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-03T18:17:22+08:00">
-                2021-06-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="E-Drinking"><a href="#E-Drinking" class="headerlink" title="E. Drinking"></a>E. Drinking</h1><p>观察一下不难发现，任意一端区间$g(l,r)=\sum\limits_{i=1}^nx_{(i)}\frac{1}{2^i},x(i)$表示区间内第$i$大的值，由于误差要求$&lt;10^{-6}$，所以估一下只要取区间最大的T=50个数</p>
-<p>自然想到单独计算每个数对答案的贡献。设第$i$个数左边比它大的数从右到左为$l_1,l_2,\cdots,l_T$，右边比它大的数从左往右为$r_1,r_2,\cdots,r_T$，那么每个数的贡献为</p>
-<script type="math/tex; mode=display">
-val_i=w_i\sum\limits_{u=1}^T\sum\limits_{v=1}^T(l_{u-1}-l_u)(r_v-r_{v-1})\frac{1}{2^{u+v-1}}</script>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2021/06/03/XCPC%E8%AE%AD%E7%BB%83%E8%AE%B0%E5%BD%95/solo/ECNU-XCPC-2021-Selection-Round-3/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/30/blog%E5%AE%A2%E5%88%B6%E5%8C%96%E8%B8%A9%E5%9D%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="MorphLing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MorphLing's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/05/30/blog%E5%AE%A2%E5%88%B6%E5%8C%96%E8%B8%A9%E5%9D%91/" itemprop="url">blog客制化踩坑</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-30T10:50:27+08:00">
-                2021-05-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="中文目录锚点失效"><a href="#中文目录锚点失效" class="headerlink" title="中文目录锚点失效"></a>中文目录锚点失效</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42009500/article/details/116129303">Hexo Next主题中文锚点失效-Hexo采坑(一)</a></p>
-<h1 id="mathjax下划线冲突"><a href="#mathjax下划线冲突" class="headerlink" title="mathjax下划线冲突"></a>mathjax下划线冲突</h1><p><a target="_blank" rel="noopener" href="https://murphypei.github.io/blog/2019/03/hexo-render-mathjax.html">解决hexo-next主题和mathjax下划线冲突问题</a></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2021/05/30/blog%E5%AE%A2%E5%88%B6%E5%8C%96%E8%B8%A9%E5%9D%91/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/30/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Flab2-chrt/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="MorphLing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MorphLing's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/05/30/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Flab2-chrt/" itemprop="url">操作系统lab2-chrt</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-30T10:22:47+08:00">
-                2021-05-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="内容与设计思想"><a href="#内容与设计思想" class="headerlink" title="内容与设计思想"></a>内容与设计思想</h1><p>在MINIX3中实现Earliest-Deadline-First近似实时调度功能：</p>
+          <p>自闭场，题都没读几道</p>
+<h1 id="B-Black-and-white"><a href="#B-Black-and-white" class="headerlink" title="B. Black and white"></a><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11254/B">B. Black and white</a></h1><p>题意：给定一个n*m的棋盘，起初全白，将一个格子染黑需要代价$a[i][j]$，若某个矩形的四个角里有三个已经是黑色，则将第四个角染黑不需要任何代价，问将整个棋盘染黑的最小代价</p>
+<p>转化为一个联通性问题，点1~n代表1~n行，点n+1~n+m代表1~m列，i和j+n之间连一条边权为$a[i][j]$用的边。$(i,j+n)$联通代表$(i,j)$​这个格子已被染黑，于是将整个棋盘染黑等价于整张图联通，即求该图的最小生成树</p>
+<p>为啥问题等价呢，考虑$(i,j)$联通的两种可能性：</p>
 <ol>
-<li>提供设置进程执行期限的系统调度chrt (long deadline)，用于将调用该系统调用的进程设为实时进程，其执行的期限为：从调用处开始deadline秒。</li>
-<li>在内核进程表中需要增加一个条目，用于表示进程的实时属性；修改相关代码，新增一个系统调用chrt，用于设置其进程表中的实时属性。</li>
-<li>修改proc.c和proc.h中相关的调度代码，实现最早deadline的用户进程相对于其它用户进程具有更高的优先级，从而被优先调度运行。</li>
-<li>在用户程序中，可以在不同位置调用多次chrt系统调用，在未到deadline之前，调用chrt将会改变该程序的deadline。</li>
-<li>未调用chrt的程序将以普通的用户进程(非实时进程)在系统中运行。</li>
+<li>$(i,j+n)$​​连了一条边，说明直接染黑</li>
+<li>$(i_1,j_2)$​通过一些中间边如$(i_1,j_1),(i_2,j_1),(i_2,j_2)$​联通，意味着$(i_1,j_1),(i_2,j_1),(i_2,j_2)$已被染黑，显然这四个点构成矩形的四个角，$(i_1,j_2)$可以不花费代价染黑</li>
 </ol>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2021/05/30/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Flab2-chrt/#more" rel="contents">
+            <a class="btn" href="/2021/07/25/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%B8%89%E5%9C%BA/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1130,7 +502,7 @@ val_i=w_i\sum\limits_{u=1}^T\sum\limits_{v=1}^T(l_{u-1}-l_u)(r_v-r_{v-1})\frac{1
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/30/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Flab1-shell/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/24/2021%E6%9D%AD%E7%94%B5%E5%A4%9A%E6%A0%A1/2021%E6%9D%AD%E7%94%B5%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%8C%E5%9C%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MorphLing">
@@ -1149,7 +521,7 @@ val_i=w_i\sum\limits_{u=1}^T\sum\limits_{v=1}^T(l_{u-1}-l_u)(r_v-r_{v-1})\frac{1
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/05/30/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Flab1-shell/" itemprop="url">操作系统lab1-shell</a></h1>
+                <a class="post-title-link" href="/2021/07/24/2021%E6%9D%AD%E7%94%B5%E5%A4%9A%E6%A0%A1/2021%E6%9D%AD%E7%94%B5%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%8C%E5%9C%BA/" itemprop="url">2021杭电多校第二场</a></h1>
         
 
         <div class="post-meta">
@@ -1161,8 +533,8 @@ val_i=w_i\sum\limits_{u=1}^T\sum\limits_{v=1}^T(l_{u-1}-l_u)(r_v-r_{v-1})\frac{1
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-30T10:12:23+08:00">
-                2021-05-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-24T23:48:29+08:00">
+                2021-07-24
               </time>
             
 
@@ -1200,18 +572,14 @@ val_i=w_i\sum\limits_{u=1}^T\sum\limits_{v=1}^T(l_{u-1}-l_u)(r_v-r_{v-1})\frac{1
 
       
         
-          <h1 id="内容与设计思想"><a href="#内容与设计思想" class="headerlink" title="内容与设计思想"></a>内容与设计思想</h1><p>实现一个基本的Shell，能够实现以下功能：</p>
-<p>​    1. 带参数的程序运行功能。</p>
-<p>​    2. 重定向功能，将文件作为程序的输入/输出。</p>
-<p>​    3. 管道符号“|”，在程序间传递数据。</p>
-<p>​    4. 后台符号&amp; ,表示此命令将以后台运行的方式执行。</p>
-<p>​    5. 工作路径移动命令cd。</p>
-<p>​    6. 程序运行统计mytop。</p>
-<p>​    7. shell退出命令exit。</p>
-<p>​    8. history n显示最近执行的n条指令</p>
+          <h1 id="I-love-tree"><a href="#I-love-tree" class="headerlink" title="I love tree"></a><a target="_blank" rel="noopener" href="https://acm.hdu.edu.cn/showproblem.php?pid=6962">I love tree</a></h1><p>题意：给一棵树，每次操作选择一条链，从起点到终点点权依次增加$1^2,2^2,…n^2$，单点询问当前点权​</p>
+<p>容易想到树剖，然后考虑在线段树上维护这个问题</p>
+<p>发现可以转化成选择一段区间$[l,r]$，对于每个点$x$，该位置增加的值为$(x-h)^2$​​，把平方项展开后得到$x^2+h^2-2xh$​，对这三项分别线段树维护即可（分别维护$x^2,-2x$​出现的次数和$h^2$的和）</p>
+<p>有时候dfs序和修改顺序是反的，就是对于区间$[l,r]$​，每个点增加量分别是$n^2,(n-1)^2,…,1^2$​，实际上就是每个位置增加量变为$(h-x)^2$​​，h为r+1，而显然$(x-h)^2=(h-x)^2$​，因此这种情况下线段树不需要进行任何修改，只要调整传入的h参数即可</p>
+<p>树剖时还需要稍微注意的是，这里对链的修改存在先后顺序，常规的树剖对于两个端点x,y是一起往上跳的，那么这里只在x往上跳时修改，y往上跳时先用vector记录哪些点需要修改，等x修改完再去修改y</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2021/05/30/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Flab1-shell/#more" rel="contents">
+            <a class="btn" href="/2021/07/24/2021%E6%9D%AD%E7%94%B5%E5%A4%9A%E6%A0%A1/2021%E6%9D%AD%E7%94%B5%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%8C%E5%9C%BA/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1262,7 +630,7 @@ val_i=w_i\sum\limits_{u=1}^T\sum\limits_{v=1}^T(l_{u-1}-l_u)(r_v-r_{v-1})\frac{1
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/27/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/%E6%A6%82%E7%BB%9F4-5%E7%AB%A0%E7%AC%94%E8%AE%B0%E4%B9%A0%E9%A2%98%E6%95%B4%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/20/2021%E6%9D%AD%E7%94%B5%E5%A4%9A%E6%A0%A1/2021%E6%9D%AD%E7%94%B5%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%B8%80%E5%9C%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MorphLing">
@@ -1281,7 +649,7 @@ val_i=w_i\sum\limits_{u=1}^T\sum\limits_{v=1}^T(l_{u-1}-l_u)(r_v-r_{v-1})\frac{1
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/05/27/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/%E6%A6%82%E7%BB%9F4-5%E7%AB%A0%E7%AC%94%E8%AE%B0%E4%B9%A0%E9%A2%98%E6%95%B4%E7%90%86/" itemprop="url">概统4-5章笔记习题整理</a></h1>
+                <a class="post-title-link" href="/2021/07/20/2021%E6%9D%AD%E7%94%B5%E5%A4%9A%E6%A0%A1/2021%E6%9D%AD%E7%94%B5%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%B8%80%E5%9C%BA/" itemprop="url">2021杭电多校第一场</a></h1>
         
 
         <div class="post-meta">
@@ -1293,8 +661,8 @@ val_i=w_i\sum\limits_{u=1}^T\sum\limits_{v=1}^T(l_{u-1}-l_u)(r_v-r_{v-1})\frac{1
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-27T16:42:22+08:00">
-                2021-05-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-20T22:48:29+08:00">
+                2021-07-20
               </time>
             
 
@@ -1332,10 +700,13 @@ val_i=w_i\sum\limits_{u=1}^T\sum\limits_{v=1}^T(l_{u-1}-l_u)(r_v-r_{v-1})\frac{1
 
       
         
-          <h1 id="4-1-随机变量序列的两种收敛性"><a href="#4-1-随机变量序列的两种收敛性" class="headerlink" title="4.1 随机变量序列的两种收敛性"></a>4.1 随机变量序列的两种收敛性</h1>
+          <h1 id="06-Xor-sum"><a href="#06-Xor-sum" class="headerlink" title="06. Xor sum"></a><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/contests/contest_showproblem.php?pid=1006&amp;cid=984">06. Xor sum</a></h1><h1 id="07-Pass"><a href="#07-Pass" class="headerlink" title="07. Pass!"></a><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/contests/contest_showproblem.php?pid=1007&amp;cid=984">07. Pass!</a></h1><h1 id="09-KD-Graph"><a href="#09-KD-Graph" class="headerlink" title="09. KD-Graph"></a><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/contests/contest_showproblem.php?pid=1009&amp;cid=984">09. KD-Graph</a></h1><h1 id="10-zoto"><a href="#10-zoto" class="headerlink" title="10. zoto"></a><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/contests/contest_showproblem.php?pid=1010&amp;cid=984">10. zoto</a></h1><p>题意：给出一个序列，离线查询m个区间$[l_i,r_i]$中，在数值区间$[d_i,u_i]$中有多少个不同的数，n=1e5</p>
+<p>首先考虑在数值区间上维护问题，也就是维护一个支持单点修改和区间查询的数据结构，很容易想到用线段树之类的方法实现$O(\log n)$的修改和查询</p>
+<p>离线查询若干个区间，可以再想到莫队算法，每次修改复杂度$O(\sqrt n)$​，查询$O(1)$​，将上述两种结构合并后发现，修改复杂度达到了$O(\sqrt n\log n)$​，显然超时</p>
+<p>于是为了使总复杂度限制在$O(n\sqrt n)$​，需要在数值区间上维护一个$O(1)$​修改，$O(\sqrt n)$​查询的做法，这个方法就是分块，维护$num[i]$记录数i出现的次数，$sum[i]$​记录第i个块中不同数的个数，两者合并起来刚好是$O(n\sqrt n)$</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2021/05/27/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/%E6%A6%82%E7%BB%9F4-5%E7%AB%A0%E7%AC%94%E8%AE%B0%E4%B9%A0%E9%A2%98%E6%95%B4%E7%90%86/#more" rel="contents">
+            <a class="btn" href="/2021/07/20/2021%E6%9D%AD%E7%94%B5%E5%A4%9A%E6%A0%A1/2021%E6%9D%AD%E7%94%B5%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%B8%80%E5%9C%BA/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1386,7 +757,7 @@ val_i=w_i\sum\limits_{u=1}^T\sum\limits_{v=1}^T(l_{u-1}-l_u)(r_v-r_{v-1})\frac{1
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/29/XCPC%E8%AE%AD%E7%BB%83%E8%AE%B0%E5%BD%95/team/2021%E6%B5%99%E6%B1%9F%E7%9C%81%E8%B5%9B/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/20/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%8C%E5%9C%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MorphLing">
@@ -1405,7 +776,7 @@ val_i=w_i\sum\limits_{u=1}^T\sum\limits_{v=1}^T(l_{u-1}-l_u)(r_v-r_{v-1})\frac{1
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/04/29/XCPC%E8%AE%AD%E7%BB%83%E8%AE%B0%E5%BD%95/team/2021%E6%B5%99%E6%B1%9F%E7%9C%81%E8%B5%9B/" itemprop="url">2021浙江省赛</a></h1>
+                <a class="post-title-link" href="/2021/07/20/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%8C%E5%9C%BA/" itemprop="url">2021牛客多校第二场</a></h1>
         
 
         <div class="post-meta">
@@ -1417,8 +788,8 @@ val_i=w_i\sum\limits_{u=1}^T\sum\limits_{v=1}^T(l_{u-1}-l_u)(r_v-r_{v-1})\frac{1
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-29T12:47:32+08:00">
-                2021-04-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-20T21:48:29+08:00">
+                2021-07-20
               </time>
             
 
@@ -1456,15 +827,638 @@ val_i=w_i\sum\limits_{u=1}^T\sum\limits_{v=1}^T(l_{u-1}-l_u)(r_v-r_{v-1})\frac{1
 
       
         
-          <h1 id="A"><a href="#A" class="headerlink" title="A"></a>A</h1><p>签到</p>
-<h1 id="C"><a href="#C" class="headerlink" title="C"></a>C</h1><p>简单题</p>
-<h1 id="D"><a href="#D" class="headerlink" title="D"></a>D</h1><p>最短路、树相关 待补</p>
-<h1 id="F"><a href="#F" class="headerlink" title="F"></a>F</h1><p>数学、思维</p>
-<p>首先由于$n’$最终取值范围为$[1,n]$，所以枚举$n’$可以得到一个$O(n)$的做法</p>
-<p>然后把$[1,n]$分块为$[1,\sqrt m],[\sqrt{m}+1,\min\{n,m\}]$两部分，枚举第一部分n’取值，复杂度$O(\sqrt n)$，对于第二部分，可以把式子写成$m’=n’k$，此时$k$的取值范围为$[1,\sqrt m]$，枚举k，对于每个固定的k，可以找到一个贪心方案使代价最小，所以第二部分的代价也是$O(\sqrt m)$.</p>
+          <h1 id="B-Cannon"><a href="#B-Cannon" class="headerlink" title="B. Cannon"></a><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11253/B">B. Cannon</a></h1><h1 id="G-League-of-Legends"><a href="#G-League-of-Legends" class="headerlink" title="G. League of Legends"></a><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11253/G">G. League of Legends</a></h1><p>题意：给定n个区间，要求将它们分成k组，每组之间有交，最大化每组交长度之和</p>
+<p>简化问题，对于如果一个大区间能够完整包含某个小区间，则该大区间只有两种最优决策：</p>
+<ol>
+<li>单独归为一组，贡献r-l</li>
+<li>与任意一个其包含的小区间归为一组，不对结果产生影响</li>
+</ol>
+<p>可以用反证法证明结论，假如大区间和其他区间归为一组，那么将该大区间移出该组，该组的交一定不下降，再放入其包含的小区间组中，小区间所在的组的交也不下降，即大小区间在同一组的决策一定最优</p>
+<p>于是可以把所有大区间取出来，单独讨论所有小区间，可以发现，若将剩下的区间按照左端点从小到大排序，其右端点也一定是有序的，接着考虑dp，$f[i][j]$​表示考虑前i个区间，分成j组的最优答案，而一组的贡献只与最左和最右两个区间相关，显然有转移$f[k][j+1]=\max\limits_{r[i+1]-l[k]&gt;0} \{f[i][j]+r[i+1]-l[k]\}$</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2021/04/29/XCPC%E8%AE%AD%E7%BB%83%E8%AE%B0%E5%BD%95/team/2021%E6%B5%99%E6%B1%9F%E7%9C%81%E8%B5%9B/#more" rel="contents">
+            <a class="btn" href="/2021/07/20/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%8C%E5%9C%BA/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/18/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%B8%80%E5%9C%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MorphLing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MorphLing's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/07/18/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%B8%80%E5%9C%BA/" itemprop="url">2021牛客多校第一场</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-18T23:43:29+08:00">
+                2021-07-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="A-Alice-and-Bob"><a href="#A-Alice-and-Bob" class="headerlink" title="A. Alice and Bob"></a><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11166/A">A. Alice and Bob</a></h1><p>题意：给出两堆石子a、b，两名玩家轮流取石子，取法是在一堆石子里取k个，并在另一堆石子里取$s\times k$个$(s\ge 0)$，给定a、b，问先后手谁必胜</p>
+<p>观察得到，对于一堆石子为i个，那么只有最多一个对应的j，使得两堆石子为i、j时为必败态，于是必败态总数不超过n。对于每一个必败态，先枚举k，再枚举s，得到所有能一步达到该状态的必胜态，复杂度为调和级数$O(n\log n)$</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/07/18/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1/2021%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%B8%80%E5%9C%BA/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/15/AC%E8%87%AA%E5%8A%A8%E6%9C%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MorphLing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MorphLing's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/07/15/AC%E8%87%AA%E5%8A%A8%E6%9C%BA/" itemprop="url">AC自动机</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-15T22:43:29+08:00">
+                2021-07-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="P3808-【模板】AC自动机（简单版）"><a href="#P3808-【模板】AC自动机（简单版）" class="headerlink" title="P3808 【模板】AC自动机（简单版）"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3808">P3808 【模板】AC自动机（简单版）</a></h1>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/07/15/AC%E8%87%AA%E5%8A%A8%E6%9C%BA/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/15/Manacher/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MorphLing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MorphLing's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/07/15/Manacher/" itemprop="url">Manacher</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-15T22:43:20+08:00">
+                2021-07-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="P3805-【模板】manacher-算法"><a href="#P3805-【模板】manacher-算法" class="headerlink" title="P3805 【模板】manacher 算法"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3805">P3805 【模板】manacher 算法</a></h1>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/07/15/Manacher/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/10/FFT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MorphLing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MorphLing's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/07/10/FFT/" itemprop="url">FFT</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-10T19:33:21+08:00">
+                2021-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="【模板】多项式乘法（FFT）"><a href="#【模板】多项式乘法（FFT）" class="headerlink" title="【模板】多项式乘法（FFT）"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3803">【模板】多项式乘法（FFT）</a></h1>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/07/10/FFT/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/10/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E7%BA%BF%E6%AE%B5%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MorphLing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MorphLing's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/07/10/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E7%BA%BF%E6%AE%B5%E6%A0%91/" itemprop="url">可持久化线段树</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-10T19:30:43+08:00">
+                2021-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="【模板】可持久化线段树-2（主席树）"><a href="#【模板】可持久化线段树-2（主席树）" class="headerlink" title="【模板】可持久化线段树 2（主席树）"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3834">【模板】可持久化线段树 2（主席树）</a></h1>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/07/10/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E7%BA%BF%E6%AE%B5%E6%A0%91/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1506,7 +1500,7 @@ val_i=w_i\sum\limits_{u=1}^T\sum\limits_{v=1}^T(l_{u-1}-l_u)(r_v-r_{v-1})\frac{1
 
   
  <nav class="pagination">
-   <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
+   <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
  </nav>
 
           </div>
@@ -1554,7 +1548,7 @@ val_i=w_i\sum\limits_{u=1}^T\sum\limits_{v=1}^T(l_{u-1}-l_u)(r_v-r_{v-1})\frac{1
               
                 <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-count">85</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1567,7 +1561,7 @@ val_i=w_i\sum\limits_{u=1}^T\sum\limits_{v=1}^T(l_{u-1}-l_u)(r_v-r_{v-1})\frac{1
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1659,7 +1653,7 @@ val_i=w_i\sum\limits_{u=1}^T\sum\limits_{v=1}^T(l_{u-1}-l_u)(r_v-r_{v-1})\frac{1
 	
 	<!-- 添加博客全站总字数统计-->
 	<i class="fa fa-pencil"></i>
-	<span class="post-count">博客全站共 161.9k 字</span>
+	<span class="post-count">博客全站共 183.4k 字</span>
 </div>
 
 
